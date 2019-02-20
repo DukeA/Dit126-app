@@ -23,6 +23,7 @@ public class UserRepository {
     }
 
     @GET
+    @Secured
     public JsonObject toJson() {
         JsonBuilderFactory factory = Json.createBuilderFactory(null);
         JsonArrayBuilder userArray = factory.createArrayBuilder();
