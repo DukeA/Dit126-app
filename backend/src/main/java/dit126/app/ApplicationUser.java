@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class ApplicationUser {
 
     @Id
     @GeneratedValue
@@ -20,20 +20,25 @@ public class User {
     private String name;
 
     @Getter
+    @Setter
     private String username;
     @Getter
+    @Setter
     private String password;
 
-    public User() {
+    public ApplicationUser() {
 
     }
 
-    public User(String name) {
+    public ApplicationUser(String name) {
         this.name = name;
     }
 
-    public User(String username, String password) {
+    public ApplicationUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
+
+
+
 }
