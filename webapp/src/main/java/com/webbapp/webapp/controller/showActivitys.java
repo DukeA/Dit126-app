@@ -1,6 +1,7 @@
 package com.webbapp.webapp.controller;
 
 
+import com.webbapp.webapp.model.showActivity;
 import com.webbapp.webapp.model.showActivityFacade;
 
 import javax.faces.view.ViewScoped;
@@ -10,11 +11,13 @@ import java.io.Serializable;
 
 /**
  * @author Adam Grandén
+ *
+ *
  */
 
 @Named(value = "showAct")
 @ViewScoped
-public class showActivity implements Serializable {
+public class showActivitys implements Serializable {
 
     private  String title;
     private  String type;
@@ -28,12 +31,12 @@ public class showActivity implements Serializable {
 
 
     public String activity (){
-        activity = activityFacade.findActivity()
+        activity = activityFacade.findActivity();
     }
 
 
     public void SetActivity(String act) {
-        activityFacade.
+        activityFacade
     }
 
     public String getTitle() {
