@@ -14,11 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name ="SHOWACT")
 @XmlRootElement
-@NamedQuery(name = "showActivity.findAll",query = "SELECT u from showActivity u")
-, @NamedQuery(name = "showActivty.findTitle", query ="SELECT  u from showActivity")
-, @NamedQuery(name = "showActivity.findType" ,query = "SELECT u from showActivty")
-, @NamedQuery(name= "showActivity.findDescription",query = "SELECT u from showActivity")
-,@NamedQuery(name ="showActivity.findlat" ,query = "SELECT u from showActivity")
+
 
 public class showActivity implements Serializable {
 

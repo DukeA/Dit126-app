@@ -24,16 +24,18 @@ public class showActivityFacade extends AbstractFacade {
 
     @Override
     protected EntityManager getEntityManager() {
-        return null;
+        return em;
     }
+
     public  showActivity findActivity(String title, String type){
-        Query query = em.createQuery("");
+        Query query = em.createQuery("showActivity.");
 
         try{
 
         } catch (Exception e) {
 
         }
+        return null;
     }
 
 

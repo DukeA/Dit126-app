@@ -31,12 +31,12 @@ public class showActivitys implements Serializable {
 
 
     public String activity (){
-        activity = activityFacade.findActivity();
+        return null;
     }
 
 
     public void SetActivity(String act) {
-        activityFacade
+
     }
 
     public String getTitle() {
