@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui"
+>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Activity Search</title>
+    </h:head>
+
+    <h:body style="padding-top: 70px">
+
+        <c:set var="root" value="#{request.contextPath}" />
+
+        <b:navBar brand="DIT126" brandHref="${root}" fixed="top">
+            <b:navbarLinks>
+                <b:navLink value="Map"></b:navLink>
+                <b:navLink value="Activities"></b:navLink>
+            </b:navbarLinks>
+            <b:form horizontal="true" style="padding-top:10px">
+                <b:column span="3">
+                    <b:inputText placeholder="Search..."
+                                 value="#{searchBean.text}">
+                    </b:inputText>
+                </b:column>
+                <b:column span="3">
+                    <b:commandButton value="Search" look="primary"
+                                     actionListener="#{searchBean.search}"/>
+                </b:column>
+            </b:form>
+        </b:navBar>
+
+        <b:container>
+            <ui:insert name="content"/>
+        </b:container>
+
+    </h:body>
+</html>
