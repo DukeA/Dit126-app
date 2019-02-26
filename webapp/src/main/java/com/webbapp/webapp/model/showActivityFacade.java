@@ -9,7 +9,7 @@ import javax.persistence.Query;
  * @ author Adam
  */
 @Stateless
-public class showActivityFacade extends AbstractFacade {
+public class showActivityFacade extends AbstractFacade<Actvity> {
 
     @PersistenceContext(unitName = "projectPU")
     private  EntityManager em;
