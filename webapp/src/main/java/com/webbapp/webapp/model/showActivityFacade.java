@@ -14,9 +14,6 @@ public class showActivityFacade extends AbstractFacade<Actvity> {
     @PersistenceContext(unitName = "projectPU")
     private  EntityManager em;
 
-    public showActivityFacade(){
-        super(showActivity.class);
-    }
 
     public showActivityFacade(Class entityClass) {
         super(entityClass);
@@ -28,7 +25,6 @@ public class showActivityFacade extends AbstractFacade<Actvity> {
     }
 
     public  showActivity findActivity(String title, String type){
-        Query query = em.createQuery("showActivity.");
 
         try{
 
