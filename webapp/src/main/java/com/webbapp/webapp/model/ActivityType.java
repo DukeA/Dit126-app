@@ -11,7 +11,5 @@ package com.webbapp.webapp.model;
 public enum ActivityType {
 
 
-    public ACTIVITY_TYPE
-
 
 }

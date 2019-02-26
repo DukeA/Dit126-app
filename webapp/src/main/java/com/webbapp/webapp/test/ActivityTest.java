@@ -31,8 +31,6 @@ public class ActivityTest {
         Double lat = 55.0;
         Double lng = 14.0;
         Actvity actvity = new Actvity(title,type,description,lat,lng);
-        Assert.assertArrayEquals();
-
     }
     @Test
     @DisplayName("Testing the Setting values")
