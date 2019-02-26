@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="ACTIVITY")
+@Table(name = "ACTIVITY")
 @XmlRootElement
 
 public class Actvity {
@@ -26,15 +26,22 @@ public class Actvity {
     @Basic(optional = false)
     @Column(name = "LNG")
     private Double lng;
-    @Basic(optional =false)
+    @Basic(optional = false)
     @Column(name = "USER")
     @OneToOne
     private Users username;
 
+    public Actvity(String title, String type,
+                   String description, Double lat, Double lng) {
+        this.title = title;
+        this.type = type;
+        this.description = description;
+        this.lat = lat;
+        this.lng = lng;
+    }
 
-
-    public Actvity (String title,String type, String description,
-                    Double lat , Double lng,Users username ) {
+    public Actvity(String title, String type, String description,
+                   Double lat, Double lng, Users username) {
         this.title = title;
         this.type = type;
         this.description = description;
@@ -43,8 +50,8 @@ public class Actvity {
         this.username = username;
     }
 
-    public Actvity( String title , String type,
-                    Double lat, Double lng, Users username) {
+    public Actvity(String title, String type,
+                   Double lat, Double lng, Users username) {
         this.title = title;
         this.type = type;
         this.lat = lat;
@@ -106,6 +113,7 @@ public class Actvity {
         hash += (title != null ? title.hashCode() : 0);
         return hash;
     }
+
     @Override
     public boolean equals(Object object) {
 
@@ -114,7 +122,7 @@ public class Actvity {
         }
         Actvity actvity = (Actvity) object;
         if ((this.title == null && actvity.title != null)
-        ||(this.title!= null && !this.title.equals(actvity.title))) {
+                || (this.title != null && !this.title.equals(actvity.title))) {
             return false;
         }
         return true;
@@ -122,6 +130,7 @@ public class Actvity {
 
     @Override
     public String toString() {
-         return "model.Activity[ Title =" + title + "]" ;}
+        return "model.Activity[ Title =" + title + "]";
     }
 }
+
