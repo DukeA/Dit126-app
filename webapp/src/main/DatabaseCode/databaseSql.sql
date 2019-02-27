@@ -23,3 +23,12 @@ CREATE TABLE ACTIVITY
   user_id     integer references APP_USERS (user_id),
   primary key (ACTIVITY_id)
 );
+
+INSERT  INTO LOCATION (latitude, longitude, city, location_id)
+VALUES (57.6877304,11.9788552,'Gothenburg',1);
+
+INSERT  INTO  APP_USERS(user_id, user_password, user_name)
+VALUES (1,'qwerty','DukeA');
+
+INSERT  INTO ACTIVITY (ACTIVITY_id, Title, Activity, Description, location_id, user_id)
+VALUES (1,'Monaden','Jogging','Nice jogging experiance',1,1);
