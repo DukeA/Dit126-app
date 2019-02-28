@@ -9,4 +9,9 @@
         <view-id value="/index.xhtml" />
     </url-mapping>
 
+    <url-mapping id="list-activities">
+        <pattern value="/list-activities" />
+        <view-id value="/list-activities.xhtml" />
+    </url-mapping>
+
 </pretty-config>

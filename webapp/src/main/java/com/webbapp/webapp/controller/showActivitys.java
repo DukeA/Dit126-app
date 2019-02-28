@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
 
-import com.webbapp.webapp.model.showActivity;
+//import com.webbapp.webapp.model.showActivity;
 import com.webbapp.webapp.model.showActivityFacade;
 
 import javax.faces.view.ViewScoped;
@@ -27,7 +27,7 @@ public class showActivitys implements Serializable {
     @Inject
     showActivityFacade activityFacade;
 
-    private showActivity activity;
+    // private showActivity activity;
 
 
     public String activity (){
