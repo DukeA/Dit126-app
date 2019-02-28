@@ -30,7 +30,9 @@
         <name>java:app/JPAExampleDataSource</name>
         <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
 
-        <url>jdbc:postgresql://localhost:5432/postgres</url>
+        <url>jdbc:postgresql://localhost:5432/dit126</url>
+        <user>admin</user>
+        <password>3wYTiwSN112M</password>
 
         <property>
             <name>fish.payara.slow-query-threshold-in-seconds</name>
