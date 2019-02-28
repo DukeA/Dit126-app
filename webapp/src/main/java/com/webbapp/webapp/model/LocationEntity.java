@@ -3,7 +3,7 @@ package com.webbapp.webapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "location", schema = "public", catalog = "postgres")
+@Table(name = "location", schema = "public", catalog = "dit126")
 public class LocationEntity {
     private double latitude;
     private double longitude;

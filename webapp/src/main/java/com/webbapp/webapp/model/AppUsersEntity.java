@@ -3,7 +3,7 @@ package com.webbapp.webapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_users", schema = "public", catalog = "postgres")
+@Table(name = "app_users", schema = "public", catalog = "dit126")
 public class AppUsersEntity {
 
     @Id
