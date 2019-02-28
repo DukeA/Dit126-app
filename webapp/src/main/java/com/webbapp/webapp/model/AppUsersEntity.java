@@ -1,13 +1,12 @@
 package com.webbapp.webapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "app_users", schema = "public", catalog = "postgres")
 public class AppUsersEntity {
+
+    @Id
     private int userId;
     private String userPassword;
     private String userName;

@@ -11,7 +11,7 @@ import javax.persistence.Query;
 @Stateless
 public class showActivityFacade extends AbstractFacade<ActivityEntity> {
 
-    @PersistenceContext(unitName = "projectPU")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private  EntityManager em;
 
 

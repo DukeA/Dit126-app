@@ -25,4 +25,32 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+
+    <data-source>
+        <name>java:app/JPAExampleDataSource</name>
+        <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
+
+        <url>jdbc:postgresql://localhost:5432/postgres</url>
+
+        <property>
+            <name>fish.payara.slow-query-threshold-in-seconds</name>
+            <value>5</value>
+        </property>
+        <property>
+            <name>fish.payara.log-jdbc-calls</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>fish.payara.is-connection-validation-required</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>fish.payara.connection-validation-method</name>
+            <value>custom-validation</value>
+        </property>
+        <property>
+            <name>fish.payara.validation-classname</name>
+            <value>org.glassfish.api.jdbc.validation.PostgresConnectionValidation</value>
+        </property>
+    </data-source>
 </web-app>
