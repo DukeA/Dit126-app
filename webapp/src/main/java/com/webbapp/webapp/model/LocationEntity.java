@@ -1,16 +1,15 @@
 package com.webbapp.webapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "location", schema = "public", catalog = "postgres")
+@Table(name = "location", schema = "public", catalog = "dit126")
 public class LocationEntity {
     private double latitude;
     private double longitude;
     private String city;
+
+    @Id
     private int locationId;
 
     @Basic
@@ -43,7 +42,7 @@ public class LocationEntity {
         this.city = city;
     }
 
-    @Basic
+    @Id
     @Column(name = "location_id")
     public int getLocationId() {
         return locationId;

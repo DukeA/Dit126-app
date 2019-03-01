@@ -9,14 +9,14 @@ import javax.persistence.Query;
  * @ author Adam
  */
 @Stateless
-public class showActivityFacade extends AbstractFacade<Actvity> {
+public class showActivityFacade extends AbstractFacade<ActivityEntity> {
 
-    @PersistenceContext(unitName = "projectPU")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private  EntityManager em;
 
 
-    public showActivityFacade(Class entityClass) {
-        super(entityClass);
+    public showActivityFacade() {
+        super(ActivityEntity.class);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class showActivityFacade extends AbstractFacade<Actvity> {
         return em;
     }
 
-    public  showActivity findActivity(String title, String type){
+    /*public  showActivity findActivity(String title, String type){
 
         try{
 
@@ -32,7 +32,7 @@ public class showActivityFacade extends AbstractFacade<Actvity> {
 
         }
         return null;
-    }
+    }*/
 
 
 }

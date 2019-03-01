@@ -1,13 +1,19 @@
 package com.webbapp.webapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name = "activity", schema = "public", catalog = "postgres")
+@Table(name = "activity", schema = "public", catalog = "dit126")
 public class ActivityEntity {
+
+    @Getter @Setter
+    @Id
+    @Column(name = "activity_id")
+    private String id;
+
     private String title;
     private String activity;
     private String description;

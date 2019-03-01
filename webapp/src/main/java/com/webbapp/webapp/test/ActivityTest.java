@@ -1,6 +1,6 @@
 package com.webbapp.webapp.test;
 
-import com.webbapp.webapp.model.Actvity;
+//import com.webbapp.webapp.model.Actvity;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +13,7 @@ import org.junit.Assert;
  */
 public class ActivityTest {
 
-    Actvity actvity;
+    /*ActvityEntity actvity;
 
     @BeforeAll
     static  void init() {
@@ -62,6 +62,6 @@ public class ActivityTest {
         Assert.assertEquals("Check the set longitude",
                 new_long,actvity.getLng());
 
-    }
+    }*/
 
 }
