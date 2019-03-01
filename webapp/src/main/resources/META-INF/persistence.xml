@@ -3,5 +3,12 @@
 
     <persistence-unit name="NewPersistenceUnit">
         <jta-data-source>java:app/JPAExampleDataSource</jta-data-source>
+        <class>com.webbapp.webapp.model.ActivityEntity</class>
+        <class>com.webbapp.webapp.model.AppUsersEntity</class>
+        <class>com.webbapp.webapp.model.LocationEntity</class>
+        <properties>
+            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+        </properties>
     </persistence-unit>
 </persistence>

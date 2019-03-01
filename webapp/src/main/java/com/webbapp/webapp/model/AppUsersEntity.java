@@ -1,17 +1,17 @@
 package com.webbapp.webapp.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "app_users", schema = "public", catalog = "dit126")
 public class AppUsersEntity {
-
-    @Id
     private int userId;
     private String userPassword;
     private String userName;
+    private Collection<ActivityEntity> activitiesByUserId;
 
-    @Basic
+    @Id
     @Column(name = "user_id")
     public int getUserId() {
         return userId;
@@ -61,5 +61,14 @@ public class AppUsersEntity {
         result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "appUsersByUserId")
+    public Collection<ActivityEntity> getActivitiesByUserId() {
+        return activitiesByUserId;
+    }
+
+    public void setActivitiesByUserId(Collection<ActivityEntity> activitiesByUserId) {
+        this.activitiesByUserId = activitiesByUserId;
     }
 }

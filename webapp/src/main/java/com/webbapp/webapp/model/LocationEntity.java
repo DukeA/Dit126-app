@@ -1,6 +1,7 @@
 package com.webbapp.webapp.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "location", schema = "public", catalog = "dit126")
@@ -8,9 +9,8 @@ public class LocationEntity {
     private double latitude;
     private double longitude;
     private String city;
-
-    @Id
     private int locationId;
+    private Collection<ActivityEntity> activitiesByLocationId;
 
     @Basic
     @Column(name = "latitude")
@@ -78,5 +78,14 @@ public class LocationEntity {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + locationId;
         return result;
+    }
+
+    @OneToMany(mappedBy = "locationByLocationId")
+    public Collection<ActivityEntity> getActivitiesByLocationId() {
+        return activitiesByLocationId;
+    }
+
+    public void setActivitiesByLocationId(Collection<ActivityEntity> activitiesByLocationId) {
+        this.activitiesByLocationId = activitiesByLocationId;
     }
 }

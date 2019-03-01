@@ -1,8 +1,6 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.ActivityEntity;
-import com.webbapp.webapp.model.AddActivityFacade;
-import com.webbapp.webapp.model.LocationEntity;
+import com.webbapp.webapp.model.*;
 import com.webbapp.webapp.util.HttpRequest;
 import com.webbapp.webapp.util.HttpRequestFactory;
 import lombok.Getter;
@@ -20,6 +18,9 @@ public class AddActivity implements Serializable {
     @Inject
     AddActivityFacade activityFacade;
 
+    @Inject
+    UsersFacade usersFacade;
+
     @Getter
     @Setter
     private String lat;
@@ -36,12 +37,16 @@ public class AddActivity implements Serializable {
     @Setter
     private String description;
 
+    @Getter
+    @Setter
+    private ActivityType type;
+
     public void add(){
         ActivityEntity activity = new ActivityEntity();
-        activity.setTitle("Cycling spot");
-
-        activity.setDescription("Lorem ipsum");
-        activity.setActivity("Cycling");
+        activity.setTitle(title);
+        activity.setActivityId(title); //Auto genereras
+        activity.setDescription(description);
+        activity.setActivity(ActivityType.TYPE1.name());
 
         HttpRequest req = HttpRequestFactory.getHttpRequest();
         String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
@@ -51,9 +56,12 @@ public class AddActivity implements Serializable {
         loc.setLongitude(Double.parseDouble(lng));
         loc.setCity(city);
 
+        activity.setAppUsersByUserId(usersFacade.findAll().get(0));
+        activity.setLocationByLocationId(loc);
+
         System.out.println(activity);
         System.out.println(loc);
 
-
+        activityFacade.create(activity);
     }
 }
