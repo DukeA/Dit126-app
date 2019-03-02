@@ -1,10 +1,20 @@
 package com.webbapp.webapp.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
 @Entity
 @Table(name = "app_users", schema = "public", catalog = "dit126")
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name="app_users.findall", query = "SELECT u FROM AppUsersEntity u ")
+        ,@NamedQuery(name="app_users.findUserId", query = "SELECT u FROM AppUsersEntity u WHERE u.userId = :userId")
+        ,@NamedQuery( name="app_users.findUsername", query ="SELECT u FROM  AppUsersEntity u WHERE u.userName = :userName" )
+        ,@NamedQuery(name="app_users.finduserPassword", query ="SELECT u FROM  AppUsersEntity  u WHERE u.userPassword = :userPassword")
+        ,@NamedQuery(name="app_users.login",query = "SELECT u FROM AppUsersEntity u WHERE u.userName = :userName AND u.userPassword = :userPassword")
+
+})
 public class AppUsersEntity {
     private int userId;
     private String userPassword;
