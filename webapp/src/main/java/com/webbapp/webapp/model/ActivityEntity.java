@@ -8,15 +8,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
 public class ActivityEntity {
-
-    @Getter @Setter
-    @Id
-    @Column(name = "activity_id")
-    private String id;
-
     private String title;
     private String activity;
     private String description;
+    private String activityId;
+    private LocationEntity locationByLocationId;
+    private AppUsersEntity appUsersByUserId;
 
     @Basic
     @Column(name = "title")
@@ -68,5 +65,35 @@ public class ActivityEntity {
         result = 31 * result + (activity != null ? activity.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+    @Id
+    @Column(name = "activity_id")
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    public LocationEntity getLocationByLocationId() {
+        return locationByLocationId;
+    }
+
+    public void setLocationByLocationId(LocationEntity locationByLocationId) {
+        this.locationByLocationId = locationByLocationId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    public AppUsersEntity getAppUsersByUserId() {
+        return appUsersByUserId;
+    }
+
+    public void setAppUsersByUserId(AppUsersEntity appUsersByUserId) {
+        this.appUsersByUserId = appUsersByUserId;
     }
 }
