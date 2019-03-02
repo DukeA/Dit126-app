@@ -22,12 +22,14 @@ function placeMarker(location) {
 
     document.getElementById("j_idt16:lat").value = location.lat();
     document.getElementById("j_idt16:lng").value = location.lng();
-
 }
 
 $("#go").click(function foo(){
     $("#second").removeClass("hide");
     $("#first").addClass("hide");
-    $("#map").addClass("hide");
+    $("#map").removeClass("big-map").addClass("small-map");
     $(this).addClass("hide");
+    map.setOptions({gestureHandling: "none", zoomControl: false})
+    google.maps.event.clearListeners(map, 'click');
+    map.panTo(marker.getPosition())
 });

@@ -8,7 +8,9 @@
     <ui:define name="content">
         <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
 
-        <div id="map"></div>
+        <b:row>
+            <div id="map" class="big-map col-md-12"></div>
+        </b:row>
         <h:form>
             <div id="first">
                 <h:inputHidden id="lat" value="#{addActivity.lat}" />
@@ -16,19 +18,39 @@
             </div>
 
             <div class="hide" id="second">
-                <img src="" alt="Google maps preview of the location"/>
-                <b:inputText placeholder="Activity name" value="#{addActivity.title}"/>
-                <b:selectOneMenu value="#{addActivity.type}">
-                    <f:selectItems value="#{type.types}"/>
-                </b:selectOneMenu>
-                <b:inputTextarea placeholder="Activity description" value="#{addActivity.description}"/>
-
-                <b:commandButton look="primary" action="#{addActivity.add}" value="Add"/>
+                <b:container fluid="true">
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:inputText placeholder="Activity name" value="#{addActivity.title}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:selectOneMenu value="#{addActivity.type}">
+                                <f:selectItems value="#{type.types}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:inputTextarea placeholder="Activity description" value="#{addActivity.description}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="6">
+                            <b:commandButton look="primary" action="#{addActivity.add}" value="Add"/>
+                        </b:column>
+                    </b:row>
+                </b:container>
             </div>
 
         </h:form>
 
-        <b:button id="go" look="primary" value="Next" />
+        <b:row>
+            <b:column>
+                <b:button id="go" look="primary" value="Next" />
+            </b:column>
+        </b:row>
 
         <script type="text/javascript" src="map.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
