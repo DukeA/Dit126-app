@@ -8,11 +8,28 @@
 >
     <ui:define name="content">
         <b:form horizontal="true">
-            <b:selectMultiMenu>
-                <f:selectItems value="#{type.types}" />
-            </b:selectMultiMenu>
+            <h:selectManyCheckbox id="selectActivities"
+                                  value="#{activityList.types}">
+                <f:selectItems value="#{type.types}"/>
+            </h:selectManyCheckbox>
+            <h:commandButton value="Show">
+                <f:ajax execute="selectActivities"
+                        render="outputActivities outputActivitiesList outputActivitiesText"/>
+            </h:commandButton>
         </b:form>
+        <h:panelGroup id="outputActivities">
+            <ui:repeat id="outputActivitiesList"
+                       rendered="${activityList.types != null}"
+                       value="#{activityList.list}"
+                       var="activity">
+                <h:outputText id="outputActivitiesText"
+                              value="#{activity.id} #{activity.title} #{activity.activity} #{activity.description}"/>
+            </ui:repeat>
+        </h:panelGroup>
+        <div style="height: 300px" id="map"></div>
+
+        <script type="text/javascript" src="map.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
     </ui:define>
 
 </ui:composition>
-

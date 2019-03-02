@@ -1,0 +1,52 @@
+package com.webbapp.webapp.controller;
+
+import com.webbapp.webapp.model.ActivityEntity;
+import com.webbapp.webapp.model.ActivityFacade;
+import com.webbapp.webapp.model.ActivityType;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Named
+@ViewScoped
+public class ActivityList implements Serializable {
+    private String[] types;
+
+    @Inject
+    ActivityFacade activityFacade;
+
+
+    public String[] getTypes() {
+        return types;
+    }
+
+    public void setTypes(String[] types) {
+        System.out.println("Updating types: " + types.length);
+        for(String activityType : types) {
+            System.out.println("Updating type: " + activityType);
+        }
+        this.types = types;
+    }
+
+    public List<ActivityEntity> getList() {
+        List<ActivityEntity> activities = activityFacade
+                .findAll()
+                .stream()
+                .filter(activity -> Arrays.stream(types)
+                        .anyMatch(types -> types.equalsIgnoreCase(activity.getActivity())))
+                .collect(Collectors.toList());
+
+        System.out.println("activities: " + activities.size());
+        for (ActivityEntity activity : activities) {
+            System.out.println("activity: " + activity.getActivity());
+        }
+
+        return activities;
+    }
+}
