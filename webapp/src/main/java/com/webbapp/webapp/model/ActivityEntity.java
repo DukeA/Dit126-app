@@ -1,9 +1,21 @@
 package com.webbapp.webapp.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name="activity.find_all", query = "SELECT u FROM  ActivityEntity  u")
+        ,@NamedQuery(name="activity.findActivityId", query="SELECT  u from ActivityEntity  u WHERE u.activityId = :activityId")
+        ,@NamedQuery(name="activity.findtitle",query = "SELECT u FROM ActivityEntity u WHERE u.title = :title")
+        ,@NamedQuery(name ="activity.findactivity" ,query = "SELECT u from ActivityEntity u WHERE u.activity = :activity")
+        ,@NamedQuery(name="activity.findDescription",query = "SELECT u from ActivityEntity  u WHERE u.description = :description")
+        ,@NamedQuery(name="activity.findlocation",query="SELECT u FROM ActivityEntity  u WHERE u.locationByLocationId = :locationByLocationId")
+        ,@NamedQuery(name="activity.findUser_id" ,query = "SELECT u FROM ActivityEntity  u WHERE u.appUsersByUserId = :appUsersByUSerid")
+        ,@NamedQuery(name="activity.getActivity" ,query = "SELECT u FROM ActivityEntity  u WHERE u.title = :title AND u.activity = :activity")
+})
 public class ActivityEntity {
     private String activityId;
     private String title;

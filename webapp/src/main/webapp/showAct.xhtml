@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <link rel="stylesheet" type="text/css" href="css/showAct.css" />
+        <b:form Vertical="true">
+            <b:column span= "3" >
+                <b:inputText placeholder="Name.."
+                             value="#{showBean.title}">
+                </b:inputText>
+                <h:selectOneMenu value="#{showBean.type}">
+                    <f:selectItem itemValue="Jogging" itemLabel="Jogging"/>
+                </h:selectOneMenu>
+                <b:commandButton value="Search" look="primary"
+                                 actionListener="#{showBean.findBytitleActivity}"/>
+            </b:column>
+        </b:form>
+        <br/>
+        <b:column >
+            <ui:fragment rendered="#{showBean.value}">
+                <div style="height: 500px" id="map"></div>
+                <script type="text/javascript" src="map.js"></script>
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+                        async="defer"></script>
+                <div class ="ShadowBox">
+                    <h:outputLabel value="Title"/>
+                    <br/>
+                    <h:outputLabel value="#{showBean.activity.title}"/>
+                    <br/>
+                    <h:outputLabel value="Type"/>
+                    <br/>
+                    <h:outputLabel value="#{showBean.activity.activity}"/>
+                    <br/>
+                    <h:outputLabel value="Description"/>
+                    <br/>
+                    <h:outputLabel value="#{showBean.activity.description}"/>
+                    <br/>
+                </div>
+            </ui:fragment>
+        </b:column>
+    </ui:define>
+</ui:composition>

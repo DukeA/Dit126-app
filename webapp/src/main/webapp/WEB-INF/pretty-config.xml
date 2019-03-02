@@ -14,4 +14,10 @@
         <view-id value="/list-activities.xhtml" />
     </url-mapping>
 
+    <url-mapping id="showAct">
+        <pattern value="/showAct" />
+        <view-id value="/showAct.xhtml" />
+    </url-mapping>
+
+
 </pretty-config>
