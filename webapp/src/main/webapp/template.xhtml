@@ -14,7 +14,7 @@
         <title>Activity Search</title>
     </h:head>
 
-    <h:body style="padding-top: 70px">
+    <h:body style="padding-top: 100px">
 
         <c:set var="root" value="#{request.contextPath}" />
 
@@ -23,10 +23,16 @@
                 <b:navLink value="Map"></b:navLink>
                 <b:navLink value="Activities" href="${root}/list-activities"></b:navLink>
             </b:navbarLinks>
-            <b:form horizontal="true" style="padding-top:10px">
+            <b:form horizontal="true" style="padding-top:10px; padding-left:250px">
                 <b:column span="3">
                     <b:inputText placeholder="Search..."
                                  value="#{searchBean.text}">
+                        <f:facet name="prepend">
+                            <b:selectOneMenu style="width: 80px">
+                                <f:selectItem itemLabel="Type" />
+                                <f:selectItem itemLabel="City" />
+                            </b:selectOneMenu>
+                        </f:facet>
                     </b:inputText>
                 </b:column>
                 <b:column span="3">
