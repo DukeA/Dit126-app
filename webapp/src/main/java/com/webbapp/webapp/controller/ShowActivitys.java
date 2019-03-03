@@ -39,17 +39,13 @@ public class ShowActivitys implements Serializable {
 
     private ActivityEntity activity;
 
-    public String findByTitleActivity() {
+    public void findBytitleActivity() {
         String value =title;
         String valueEnum = name;
         activity = activityFacade.findActivity(value, valueEnum);
         if(activity != null) {
             setValue(true);
-            setLat(activity.getLocationByLocationId().getLatitude());
-            setLat(activity.getLocationByLocationId().getLongitude());
-            return "Found";
-        } else {
-            return "Not Found";
+
         }
     }
 

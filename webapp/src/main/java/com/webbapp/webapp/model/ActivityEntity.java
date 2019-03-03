@@ -24,6 +24,18 @@ public class ActivityEntity {
     private LocationEntity locationByLocationId;
     private AppUsersEntity appUsersByUserId;
 
+    public ActivityEntity() {
+
+    }
+
+    public ActivityEntity(String activityId,String title, String type, String description, LocationEntity entity) {
+        this.activityId = activityId;
+        this.title = title;
+        this.activity = type;
+        this.description = description;
+        this.locationByLocationId = entity;
+    }
+
     @Id
     @Column(name = "activity_id")
     public String getActivityId() {

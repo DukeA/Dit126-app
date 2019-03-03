@@ -12,6 +12,17 @@ public class LocationEntity {
     private int locationId;
     private Collection<ActivityEntity> activitiesByLocationId;
 
+    public LocationEntity() {
+
+    }
+
+    public LocationEntity(int value,  String city, Double lat, Double lng) {
+        this.locationId=value;
+        this.city = city;
+        this.latitude = lat;
+        this.longitude = lng;
+    }
+
     @Basic
     @Column(name = "latitude")
     public double getLatitude() {
