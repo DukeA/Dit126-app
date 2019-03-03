@@ -7,6 +7,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
+@NamedQueries({
+        @NamedQuery(
+            name = "ActivityEntity.findByType",
+            query = "SELECT a FROM ActivityEntity a WHERE a.type = :type"
+        ),
+        @NamedQuery(
+            name = "ActivityEntity.findByCity",
+            query = "SELECT a FROM ActivityEntity a, LocationEntity l WHERE l.city = :city"
+        )
+})
 public class ActivityEntity {
 
     @Getter @Setter
@@ -15,7 +25,7 @@ public class ActivityEntity {
     private String id;
 
     private String title;
-    private String activity;
+    private String type;
     private String description;
 
     @Basic
@@ -29,13 +39,13 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column(name = "activity")
-    public String getActivity() {
-        return activity;
+    @Column(name = "type")
+    public String getType() {
+        return type;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Basic
@@ -56,7 +66,7 @@ public class ActivityEntity {
         ActivityEntity that = (ActivityEntity) o;
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (activity != null ? !activity.equals(that.activity) : that.activity != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
 
         return true;
@@ -65,7 +75,7 @@ public class ActivityEntity {
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (activity != null ? activity.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }

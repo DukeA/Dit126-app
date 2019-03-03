@@ -28,9 +28,9 @@
                     <b:inputText placeholder="Search..."
                                  value="#{searchBean.text}">
                         <f:facet name="prepend">
-                            <b:selectOneMenu style="width: 80px">
-                                <f:selectItem itemLabel="Type" />
-                                <f:selectItem itemLabel="City" />
+                            <b:selectOneMenu value="#{searchBean.searchEnum}" style="width: 80px">
+                                <f:selectItem itemLabel="Type" itemValue="TYPE" />
+                                <f:selectItem itemLabel="City" itemValue="CITY" />
                             </b:selectOneMenu>
                         </f:facet>
                     </b:inputText>
