@@ -35,17 +35,7 @@ public class ActivityList implements Serializable {
     }
 
     public List<ActivityEntity> getList() {
-        List<ActivityEntity> activities = activityFacade
-                .findAll()
-                .stream()
-                .filter(activity -> Arrays.stream(types)
-                        .anyMatch(types -> types.equalsIgnoreCase(activity.getActivity())))
-                .collect(Collectors.toList());
-
-        System.out.println("activities: " + activities.size());
-        for (ActivityEntity activity : activities) {
-            System.out.println("activity: " + activity.getActivity());
-        }
+        List<ActivityEntity> activities = activityFacade.getFilteredActivities(types);
 
         return activities;
     }
