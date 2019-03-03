@@ -27,10 +27,6 @@ public class ActivityList implements Serializable {
     }
 
     public void setTypes(String[] types) {
-        System.out.println("Updating types: " + types.length);
-        for(String activityType : types) {
-            System.out.println("Updating type: " + activityType);
-        }
         this.types = types;
     }
 
