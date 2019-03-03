@@ -33,7 +33,7 @@ public class Search implements Serializable {
     public void search() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("text", text);
 
-        text = text.trim().toLowerCase();
+        this.prepareString();
 
         if (searchEnum == SearchEnum.TYPE) {
             this.findByType(text);
@@ -51,5 +51,9 @@ public class Search implements Serializable {
 
     private void findByCity(String city) {
         activityEntities = activityFacade.findByCity(city);
+    }
+
+    void prepareString() {
+        text = text.trim().toLowerCase();
     }
 }
