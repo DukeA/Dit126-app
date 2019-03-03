@@ -5,7 +5,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.ActivityEntity;
 import com.webbapp.webapp.model.ActivityType;
-import com.webbapp.webapp.model.showActivityFacade;
+import com.webbapp.webapp.model.ShowActivityFacade;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -18,32 +18,52 @@ import java.io.Serializable;
 
 @Named(value = "showBean")
 @RequestScoped
-public class showActivitys implements Serializable {
+public class ShowActivitys implements Serializable {
 
 
     private String title;
 
     private String description;
 
-
     private String name;
 
     private boolean value;
 
+    private double lat =0.0;
+
+    private double lng =0.0;
+
     @Inject
-    showActivityFacade activityFacade;
+    ShowActivityFacade activityFacade;
 
 
     private ActivityEntity activity;
 
-    public void findBytitleActivity() {
+    public String findByTitleActivity() {
         String value =title;
         String valueEnum = name;
-        ActivityEntity type = activityFacade.findActivity(value, valueEnum);
-        setActivity(type);
+        activity = activityFacade.findActivity(value, valueEnum);
         if(activity != null) {
             setValue(true);
+            setLat(activity.getLocationByLocationId().getLatitude());
+            setLat(activity.getLocationByLocationId().getLongitude());
+            return "Found";
+        } else {
+            return "Not Found";
         }
+    }
+
+    public String findbyTitleActvity() {
+        String value = title;
+        String valueEnum =name;
+        ActivityEntity type = activityFacade.findActivity(value,valueEnum);
+        setActivity(type);
+        if(activity !=null) {
+            return "ShowAct?faces-redirect=true";
+        } else {
+            return "index";
+        }
+
     }
 
 
@@ -86,5 +106,21 @@ public class showActivitys implements Serializable {
     }
     public boolean getValue() {
         return this.value;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 }

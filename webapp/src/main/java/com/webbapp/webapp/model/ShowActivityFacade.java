@@ -11,13 +11,13 @@ import java.util.List;
  * @ author Adam
  */
 @Stateless
-public class showActivityFacade extends AbstractFacade<ActivityEntity> {
+public class ShowActivityFacade extends AbstractFacade<ActivityEntity> {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private  EntityManager em;
 
 
-    public showActivityFacade() {
+    public ShowActivityFacade() {
         super(ActivityEntity.class);
     }
 
@@ -71,7 +71,7 @@ public class showActivityFacade extends AbstractFacade<ActivityEntity> {
         Query q  = em.createNamedQuery("activity.find_all");
         try {
             List<ActivityEntity> List = new ArrayList<>();
-             List.add ((ActivityEntity) q.getResultList());
+            List.add ((ActivityEntity) q.getResultList());
             System.out.println("Found all the Activites");
             return  List;
         }catch (Exception e) {
