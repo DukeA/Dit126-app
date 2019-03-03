@@ -25,10 +25,10 @@ CREATE TABLE Activity
 );
 
 INSERT  INTO Location (latitude, longitude, city, location_id)
-VALUES (57.6877304,11.9788552,'Gothenburg',1);
+VALUES (57.6877304,11.9788552,'gothenburg',1);
 
 INSERT  INTO App_User (user_id, user_password, user_name)
 VALUES (1,'qwerty','DukeA');
 
 INSERT  INTO Activity (activity_id, title, type, description, location_id, user_id)
-VALUES (1,'Monaden','Jogging','Nice jogging experiance',1,1);
+VALUES (1,'Monaden','jogging','Nice jogging experiance',1,1);
