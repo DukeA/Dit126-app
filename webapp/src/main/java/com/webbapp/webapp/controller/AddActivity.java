@@ -44,7 +44,7 @@ public class AddActivity implements Serializable {
     public void add(){
         ActivityEntity activity = new ActivityEntity();
         activity.setTitle(title);
-        activity.setActivityId(title); //Auto genereras
+        //activity.setActivityId(title); //Auto genereras
         activity.setDescription(description);
         activity.setActivity(ActivityType.TYPE1.name());
 
@@ -60,7 +60,7 @@ public class AddActivity implements Serializable {
         activity.setLocationByLocationId(loc);
 
         System.out.println(activity);
-        System.out.println(loc);
+        //System.out.println(loc);
 
         activityFacade.create(activity);
     }

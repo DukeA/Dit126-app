@@ -20,8 +20,8 @@ function initMap() {
 function placeMarker(location) {
     marker.setPosition(location);
 
-    document.getElementById("j_idt16:lat").value = location.lat();
-    document.getElementById("j_idt16:lng").value = location.lng();
+    document.getElementById("j_idt18:lat").value = location.lat();
+    document.getElementById("j_idt18:lng").value = location.lng();
 }
 
 $("#go").click(function foo(){

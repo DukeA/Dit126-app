@@ -1,56 +1,50 @@
 package com.webbapp.webapp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
 public class ActivityEntity {
-    private String activityId;
-    private String title;
-    private String activity;
-    private String description;
-    private LocationEntity locationByLocationId;
-    private AppUsersEntity appUsersByUserId;
 
     @Id
-    @Column(name = "activity_id")
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+    @SequenceGenerator(name="activity_activity_id_seq", sequenceName="activity_activity_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_activity_id_seq")
+    @NotNull
+    @Column(name = "activity_id", updatable=false)
+    private Integer activityId;
 
     @Basic
     @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    @Getter
+    @Setter
+    private String title;
     @Basic
     @Column(name = "activity")
-    public String getActivity() {
-        return activity;
-    }
-
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
-
+    @Getter
+    @Setter
+    private String activity;
     @Basic
     @Column(name = "description")
-    public String getDescription() {
-        return description;
-    }
+    @Getter
+    @Setter
+    private String description;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    @Getter
+    @Setter
+    private LocationEntity locationByLocationId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @Getter
+    @Setter
+    private AppUsersEntity appUsersByUserId;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -74,25 +68,5 @@ public class ActivityEntity {
         result = 31 * result + (activity != null ? activity.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
-    public LocationEntity getLocationByLocationId() {
-        return locationByLocationId;
-    }
-
-    public void setLocationByLocationId(LocationEntity locationByLocationId) {
-        this.locationByLocationId = locationByLocationId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    public AppUsersEntity getAppUsersByUserId() {
-        return appUsersByUserId;
-    }
-
-    public void setAppUsersByUserId(AppUsersEntity appUsersByUserId) {
-        this.appUsersByUserId = appUsersByUserId;
     }
 }
