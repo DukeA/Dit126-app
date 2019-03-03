@@ -1,6 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.ActivityEntity;
+import com.webbapp.webapp.util.SearchEnum;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;
@@ -23,11 +24,15 @@ public class SearchResult implements Serializable {
     @Getter
     private Integer size;
 
+    @Getter
+    private SearchEnum searchEnum;
+
     @PostConstruct
     private void post() {
         activityEntities = (List<ActivityEntity>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("activityEntities");
         text = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("text");
         size = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("size");
+        searchEnum = (SearchEnum) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("searchEnum");
     }
 
 }

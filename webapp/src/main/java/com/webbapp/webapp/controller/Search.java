@@ -32,6 +32,7 @@ public class Search implements Serializable {
 
     public void search() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("text", text);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("searchEnum", searchEnum);
 
         this.prepareString();
 
