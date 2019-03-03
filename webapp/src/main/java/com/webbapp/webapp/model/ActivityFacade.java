@@ -36,12 +36,12 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         return em;
     }
 
-    public List<ActivityEntity> getFilteredActivities(String[] filter) {
+    public List<ActivityEntity> getFilteredActivities(List<String> filter) {
         List<ActivityEntity> activities = queryFactory.selectFrom(activity)
-                .where(activity.activity.lower().in(Arrays
-                                .stream(filter)
-                                .map(item -> item.toLowerCase())
-                                .collect(Collectors.toList())))
+                .where(activity.activity.lower().in(filter
+                        .stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList())))
                 .fetch();
 
         return activities;

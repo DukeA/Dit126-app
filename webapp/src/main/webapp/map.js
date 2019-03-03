@@ -17,6 +17,7 @@ function addMarker({lat, lng}) {
 }
 
 function deleteMarkers() {
+  console.log("DELETING MARKERS");
   markers.forEach(marker => marker.setMap(null));
   markers = [];
 }

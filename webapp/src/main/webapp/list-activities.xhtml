@@ -13,18 +13,19 @@
     <ui:composition template="template.xhtml"
     >
         <ui:define name="content">
-            <h:form horizontal="true">
-                <h:selectManyCheckbox id="selectActivities"
-                                      value="#{activityList.types}">
-                    <f:selectItems value="#{type.types}"/>
-                </h:selectManyCheckbox>
-                <h:commandButton value="Show">
+            <b:form horizontal="true">
+                <b:selectMultiMenu id="selectActivities"
+                                   value="#{activityList.types}">
+                    <f:selectItems value="#{type.types}"
+                                   var="t"
+                                   itemValue="#{t.name()}"/>
+                </b:selectMultiMenu>
+                <b:commandButton value="Find" onclick="deleteMarkers()" >
                     <f:ajax execute="selectActivities"
                             render="outputActivities outputActivitiesList"
-                            onevent="deleteMarkers()"
                     />
-                </h:commandButton>
-            </h:form>
+                </b:commandButton>
+            </b:form>
 
             <div style="height: 500px" id="map"></div>
 
@@ -36,9 +37,12 @@
                            rendered="${activityList.types != null}"
                            value="#{activityList.list}"
                            var="activity">
-                    <b:panel title="#{activity.title}" span="3">
-                        <h:outputText value="#{activity.description}"/>
-                    </b:panel>
+                        <b:column span="3">
+                            <b:panel styleClass="panel" title="#{activity.title}" collapsible="false">
+                                <h:outputText styleClass="panel-body" value="#{activity.description}"/>
+                                <b:button styleClass="btn" value="Go To" />
+                            </b:panel>
+                        </b:column>
                     <script type="text/javascript">
                         lat = '#{activity.locationByLocationId.latitude}';
                         lng = '#{activity.locationByLocationId.longitude}';

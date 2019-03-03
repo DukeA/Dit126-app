@@ -16,22 +16,24 @@ import java.util.stream.Collectors;
 @Named
 @ViewScoped
 public class ActivityList implements Serializable {
-    private String[] types;
+    private String types;
 
     @Inject
     ActivityFacade activityFacade;
 
 
-    public String[] getTypes() {
+    public String getTypes() {
         return types;
     }
 
-    public void setTypes(String[] types) {
+    public void setTypes(String types) {
+        System.out.println("new types: " + types);
         this.types = types;
     }
 
     public List<ActivityEntity> getList() {
-        List<ActivityEntity> activities = activityFacade.getFilteredActivities(types);
+        System.out.println("QUERYING: " + types);
+        List<ActivityEntity> activities = activityFacade.getFilteredActivities(Arrays.asList(types.split(",")));
 
         return activities;
     }
