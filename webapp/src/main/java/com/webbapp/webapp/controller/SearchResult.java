@@ -1,18 +1,19 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.ActivityEntity;
+import com.webbapp.webapp.model.ActivityFacade;
 import com.webbapp.webapp.util.SearchEnum;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named("searchResult")
-@ViewScoped
+@RequestScoped
 public class SearchResult implements Serializable {
 
     @Getter
@@ -27,12 +28,35 @@ public class SearchResult implements Serializable {
     @Getter
     private SearchEnum searchEnum;
 
+    @Inject
+    private ActivityFacade activityFacade;
+
+    @Inject
+    private Search searchBean;
+
     @PostConstruct
     private void post() {
-        activityEntities = (List<ActivityEntity>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("activityEntities");
-        text = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("text");
-        size = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("size");
-        searchEnum = (SearchEnum) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("searchEnum");
+        text = searchBean.getText().trim().toLowerCase();;
+        searchEnum = searchBean.getSearchEnum();
+    }
+
+    public void search() {
+
+        if (searchEnum == SearchEnum.TYPE) {
+            this.findByType(text);
+        } else if (searchEnum == SearchEnum.CITY) {
+            this.findByCity(text);
+        }
+
+        size = activityEntities.size();
+    }
+
+    private void findByType(String type) {
+        activityEntities = activityFacade.findByType(type);
+    }
+
+    private void findByCity(String city) {
+        activityEntities = activityFacade.findByCity(city);
     }
 
 }
