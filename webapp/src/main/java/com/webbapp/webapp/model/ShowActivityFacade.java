@@ -40,6 +40,7 @@ public class ShowActivityFacade extends AbstractFacade<ActivityEntity> {
             return null;
         }
     }
+    /*
     public ActivityEntity findByTitle(String title) {
         Query q = em.createNamedQuery("activity.findtitle");
         q.setParameter("title", title);
@@ -80,6 +81,7 @@ public class ShowActivityFacade extends AbstractFacade<ActivityEntity> {
             return  null;
         }
     }
+    */
 
 
 }
