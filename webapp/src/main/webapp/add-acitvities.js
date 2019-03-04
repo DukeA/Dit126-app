@@ -1,5 +1,5 @@
 var map;
-var marker;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:  57.687799, lng: 11.978534},
