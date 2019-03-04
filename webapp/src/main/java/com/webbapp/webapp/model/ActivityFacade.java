@@ -6,10 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.Arrays;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +31,18 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public List<ActivityEntity> findByType(String type) {
+        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByType", ActivityEntity.class);
+        query.setParameter("type", type);
+        return query.getResultList();
+    }
+
+    public List<ActivityEntity> findByCity(String city) {
+        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByCity", ActivityEntity.class);
+        query.setParameter("city", city);
+        return query.getResultList();
     }
 
     public List<ActivityEntity> getFilteredActivities(List<String> filter) {

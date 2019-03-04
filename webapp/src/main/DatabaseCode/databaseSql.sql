@@ -1,34 +1,34 @@
-CREATE TABLE LOCATION
+CREATE TABLE Location
 (
-  latitude    float        not null,
-  longitude   float        not null,
-  city        VARCHAR(255) not null,
   location_id serial      NOT NULL,
-  primary key (location_id)
+  latitude    FLOAT        NOT NULL,
+  longitude   FLOAT        NOT NULL,
+  city        VARCHAR(255) NOT NULL,
+  PRIMARY KEY (location_id)
 );
-CREATE TABLE APP_USERS
+CREATE TABLE App_User
 (
-  user_id       serial NOT NULL,
-  user_password VARCHAR(255)   NOT NULL,
-  user_name     VARCHAR(255)   NOT NULL,
-  primary key (user_id)
+  user_id       serial      NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
+  user_name     VARCHAR(255) NOT NULL,
+  PRIMARY KEY (user_id)
 );
-CREATE TABLE ACTIVITY
+CREATE TABLE Activity
 (
-  Activity_id    serial not null,
-  Title       VARCHAR(255) not null,
-  Activity    VARCHAR(255) not null,
-  Description VARCHAR(255),
-  location_id integer references LOCATION (location_id),
-  user_id     integer references APP_USERS (user_id),
-  primary key (ACTIVITY_id)
+  activity_id serial  NOT NULL,
+  title       VARCHAR(255) NOT NULL,
+  type        VARCHAR(255) NOT NULL,
+  description VARCHAR(255),
+  location_id INTEGER REFERENCES Location (location_id),
+  user_id     INTEGER REFERENCES App_User (user_id),
+  PRIMARY KEY (activity_id)
 );
 
 INSERT  INTO LOCATION (latitude, longitude, city)
-VALUES (57.6877304,11.9788552,'Gothenburg');
+VALUES (57.6877304,11.9788552,'gothenburg');
 
-INSERT  INTO  APP_USERS(user_password, user_name)
+INSERT  INTO  APP_USER(user_password, user_name)
 VALUES ('qwerty','DukeA');
 
-INSERT  INTO ACTIVITY (Title, Activity, Description, location_id, user_id)
-VALUES ('Monaden','Jogging','Nice jogging experiance',1,1);
+INSERT  INTO ACTIVITY (title, type, description, location_id, user_id)
+VALUES ('Monaden','jogging','Nice jogging experiance',1,1);

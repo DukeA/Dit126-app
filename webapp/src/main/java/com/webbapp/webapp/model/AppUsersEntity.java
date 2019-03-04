@@ -8,11 +8,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
-@Table(name = "app_users", schema = "public", catalog = "dit126")
+@Table(name = "app_user", schema = "public", catalog = "dit126")
 public class AppUsersEntity {
     @Id
-    @SequenceGenerator(name="app_users_user_id_seq", sequenceName="app_users_user_id_seq", allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="app_users_user_id_seq")
+    @SequenceGenerator(name="app_user_user_id_seq", sequenceName="app_user_user_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="app_user_user_id_seq")
     @NotNull
     @Column(name = "user_id", updatable=false)
     private Integer userId;

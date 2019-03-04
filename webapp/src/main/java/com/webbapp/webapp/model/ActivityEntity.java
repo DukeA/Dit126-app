@@ -8,6 +8,16 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
+@NamedQueries({
+        @NamedQuery(
+            name = "ActivityEntity.findByType",
+            query = "SELECT a FROM ActivityEntity a WHERE a.type = :type"
+        ),
+        @NamedQuery(
+            name = "ActivityEntity.findByCity",
+            query = "SELECT a FROM ActivityEntity a, LocationEntity l WHERE l.city = :city"
+        )
+})
 public class ActivityEntity {
 
     @Id
@@ -23,10 +33,10 @@ public class ActivityEntity {
     @Setter
     private String title;
     @Basic
-    @Column(name = "activity")
+    @Column(name = "type")
     @Getter
     @Setter
-    private String activity;
+    private String type;
     @Basic
     @Column(name = "description")
     @Getter
@@ -55,7 +65,7 @@ public class ActivityEntity {
 
         if (activityId != null ? !activityId.equals(that.activityId) : that.activityId != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (activity != null ? !activity.equals(that.activity) : that.activity != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
 
         return true;
@@ -65,7 +75,7 @@ public class ActivityEntity {
     public int hashCode() {
         int result = activityId != null ? activityId.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (activity != null ? activity.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
