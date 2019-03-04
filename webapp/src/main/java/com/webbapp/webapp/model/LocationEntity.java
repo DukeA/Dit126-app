@@ -1,56 +1,45 @@
 package com.webbapp.webapp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Table(name = "location", schema = "public", catalog = "dit126")
 public class LocationEntity {
-    private double latitude;
-    private double longitude;
-    private String city;
-
-    @Id
-    private int locationId;
-
     @Basic
     @Column(name = "latitude")
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
+    @Getter
+    @Setter
+    private double latitude;
     @Basic
     @Column(name = "longitude")
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+    @Getter
+    @Setter
+    private double longitude;
 
     @Basic
     @Column(name = "city")
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+    @Getter
+    @Setter
+    private String city;
 
     @Id
-    @Column(name = "location_id")
-    public int getLocationId() {
-        return locationId;
-    }
+    @SequenceGenerator(name="location_location_id_seq", sequenceName="location_location_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="location_location_id_seq")
+    @NotNull
+    @Column(name = "location_id", updatable=false)
+    private Integer locationId;
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
+    @OneToMany(mappedBy = "locationByLocationId")
+    @Getter
+    @Setter
+    private Collection<ActivityEntity> activitiesByLocationId;
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,45 +1,40 @@
 package com.webbapp.webapp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Table(name = "app_users", schema = "public", catalog = "dit126")
 public class AppUsersEntity {
-
     @Id
-    private int userId;
-    private String userPassword;
-    private String userName;
-
-    @Basic
-    @Column(name = "user_id")
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    @SequenceGenerator(name="app_users_user_id_seq", sequenceName="app_users_user_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="app_users_user_id_seq")
+    @NotNull
+    @Column(name = "user_id", updatable=false)
+    private Integer userId;
 
     @Basic
     @Column(name = "user_password")
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
+    @Getter
+    @Setter
+    private String userPassword;
 
     @Basic
     @Column(name = "user_name")
-    public String getUserName() {
-        return userName;
-    }
+    @Getter
+    @Setter
+    private String userName;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    @OneToMany(mappedBy = "appUsersByUserId")
+    @Getter
+    @Setter
+    private Collection<ActivityEntity> activitiesByUserId;
+
+
 
     @Override
     public boolean equals(Object o) {
