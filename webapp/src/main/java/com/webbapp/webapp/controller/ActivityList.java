@@ -3,6 +3,8 @@ package com.webbapp.webapp.controller;
 import com.webbapp.webapp.model.ActivityEntity;
 import com.webbapp.webapp.model.ActivityFacade;
 import com.webbapp.webapp.model.ActivityType;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,20 +18,13 @@ import java.util.stream.Collectors;
 @Named
 @ViewScoped
 public class ActivityList implements Serializable {
+    @Getter
+    @Setter
     private String types;
 
     @Inject
     ActivityFacade activityFacade;
-
-
-    public String getTypes() {
-        return types;
-    }
-
-    public void setTypes(String types) {
-        System.out.println("new types: " + types);
-        this.types = types;
-    }
+    
 
     public List<ActivityEntity> getList() {
         System.out.println("QUERYING: " + types);
