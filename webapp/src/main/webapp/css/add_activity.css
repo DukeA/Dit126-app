@@ -1,0 +1,20 @@
+.hide{
+    display: none;
+}
+
+.big-map{
+    height: 70vh;
+}
+
+.small-map{
+    height: 30vh;
+}
+
+.center{
+    margin: auto;
+    float: none;
+}
+
+#go{
+    margin-top: 20px;
+}

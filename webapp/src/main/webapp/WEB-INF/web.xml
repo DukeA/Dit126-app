@@ -4,6 +4,10 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -11,7 +15,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,6 +23,36 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+
+    <data-source>
+        <name>java:app/JPAExampleDataSource</name>
+        <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
+
+        <url>jdbc:postgresql://localhost:5432/dit126</url>
+        <user>admin</user>
+        <password>3wYTiwSN112M</password>
+
+        <property>
+            <name>fish.payara.slow-query-threshold-in-seconds</name>
+            <value>5</value>
+        </property>
+        <property>
+            <name>fish.payara.log-jdbc-calls</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>fish.payara.is-connection-validation-required</name>
+            <value>true</value>
+        </property>
+        <property>
+            <name>fish.payara.connection-validation-method</name>
+            <value>custom-validation</value>
+        </property>
+        <property>
+            <name>fish.payara.validation-classname</name>
+            <value>org.glassfish.api.jdbc.validation.PostgresConnectionValidation</value>
+        </property>
+    </data-source>
 </web-app>

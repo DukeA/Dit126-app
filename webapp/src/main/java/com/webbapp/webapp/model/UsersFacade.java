@@ -15,9 +15,9 @@ import javax.persistence.Query;
  * @author gustav
  */
 @Stateless
-public class UsersFacade extends AbstractFacade<Users> {
+public class UsersFacade extends AbstractFacade<AppUsersEntity> {
 
-    @PersistenceContext(unitName = "projectPU")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
     @Override
@@ -26,16 +26,16 @@ public class UsersFacade extends AbstractFacade<Users> {
     }
 
     public UsersFacade() {
-        super(Users.class);
+        super(AppUsersEntity.class);
     }
     
-    public Users findUser(String username, String password){
-        Query q = em.createNamedQuery("Users.login");
-        q.setParameter("username", username);
-        q.setParameter("password", password);
+    public AppUsersEntity findUser(String username, String password){
+        Query q = em.createNamedQuery("app_users.login");
+        q.setParameter("userName", username);
+        q.setParameter("userPassword", password);
         
         try{
-            Users u = (Users)q.getSingleResult();
+            AppUsersEntity u = (AppUsersEntity)q.getSingleResult();
             System.out.println("User found");
             return u;
         }catch(Exception e){

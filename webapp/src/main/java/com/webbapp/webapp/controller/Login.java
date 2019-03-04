@@ -10,7 +10,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import com.webbapp.webapp.model.Users;
+
+import com.webbapp.webapp.model.AppUsersEntity;
 import com.webbapp.webapp.model.UsersFacade;
 
 /**
@@ -28,7 +29,7 @@ public class Login implements Serializable{
     @Inject
     UsersFacade userManager;
     
-    private Users user;
+    private AppUsersEntity user;
     
     public String login(){
         user = userManager.findUser(username, password);
@@ -37,28 +38,6 @@ public class Login implements Serializable{
         }else{
             return "index";
         }
-    }
-    
-    public String newHome(){
-        System.out.println("Set new home!");
-        userManager.edit(user);
-        return "list";
-    }
-    
-    public void setLat(String d){
-        user.setLat(Double.parseDouble(d));
-    }
-    
-    public void setLng(String d){
-        user.setLng(Double.parseDouble(d));
-    }
-    
-    public String getLng(){
-        return ""+user.getLng();
-    }
-    
-    public String getLat(){
-        return ""+user.getLat();
     }
     
     public String logout(){

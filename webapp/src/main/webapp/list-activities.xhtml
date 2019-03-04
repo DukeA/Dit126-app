@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+</h:head>
+<h:body>
+    <ui:composition template="template.xhtml"
+    >
+        <ui:define name="content">
+            <b:form horizontal="true">
+                <b:selectMultiMenu id="selectActivities"
+                                   value="#{activityList.types}">
+                    <f:selectItems value="#{type.types}"
+                                   var="t"
+                                   itemValue="#{t.name()}"/>
+                </b:selectMultiMenu>
+                <b:commandButton value="Find" onclick="deleteMarkers()" >
+                    <f:ajax execute="selectActivities"
+                            render="outputActivities outputActivitiesList"
+                    />
+                </b:commandButton>
+            </b:form>
+
+            <div style="height: 500px" id="map"></div>
+
+            <script type="text/javascript" src="display-activites.js"></script>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
+
+            <h:panelGroup id="outputActivities">
+                <ui:repeat id="outputActivitiesList"
+                           rendered="${activityList.types != null}"
+                           value="#{activityList.list}"
+                           var="activity">
+                        <b:column span="3">
+                            <b:panel styleClass="panel" title="#{activity.title}" collapsible="false">
+                                <h:outputText styleClass="panel-body" value="#{activity.description}"/>
+                                <b:button styleClass="btn" value="Go To" />
+                            </b:panel>
+                        </b:column>
+                    <script type="text/javascript">
+                        lat = '#{activity.locationByLocationId.latitude}';
+                        lng = '#{activity.locationByLocationId.longitude}';
+                        addMarker({lat, lng});</script>
+                </ui:repeat>
+            </h:panelGroup>
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html>

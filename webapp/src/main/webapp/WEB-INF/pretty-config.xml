@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="home">
+        <pattern value="/" />
+        <view-id value="/index.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="list-activities">
+        <pattern value="/list-activities" />
+        <view-id value="/list-activities.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="showAct">
+        <pattern value="/showAct" />
+        <view-id value="/showAct.xhtml" />
+    </url-mapping>
+
+
+    <url-mapping id="search-result">
+        <pattern value="/search/result" />
+        <view-id value="/search/search-result.xhtml"/>
+    </url-mapping>
+
+</pretty-config>
