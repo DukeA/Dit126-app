@@ -24,10 +24,9 @@ public class ActivityList implements Serializable {
 
     @Inject
     ActivityFacade activityFacade;
-    
+
 
     public List<ActivityEntity> getList() {
-        System.out.println("QUERYING: " + types);
         List<ActivityEntity> activities = activityFacade.getFilteredActivities(Arrays.asList(types.split(",")));
 
         return activities;
