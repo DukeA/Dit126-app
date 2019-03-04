@@ -7,7 +7,13 @@
                 xmlns:f="http://java.sun.com/jsf/core"
 >
     <ui:define name="content">
-        <h:outputLabel value="#{searchResult.searchEnum}: Found #{searchResult.size} results for '#{searchResult.text}'" />
+        <f:metadata>
+            <f:viewAction action="#{searchResult.search}" />
+        </f:metadata>
+
+        <h:outputLabel
+                rendered="#{searchResult.activityEntities != null}"
+                value="#{searchResult.searchEnum}: Found #{searchResult.size} results for '#{searchResult.text}'" />
         <ui:repeat value="#{searchResult.activityEntities}" var="result">
             <b:panel title="#{result.title}" style="width: 360px;" collapsible="false">
                 <h:outputText value="#{result.description}"/>
