@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ActivityTest.class
+        ActivityTest.class,
+        ShowAct.class
 })
 public class testSuite {
 

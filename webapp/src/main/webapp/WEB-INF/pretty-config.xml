@@ -14,6 +14,12 @@
         <view-id value="/list-activities.xhtml" />
     </url-mapping>
 
+    <url-mapping id="showAct">
+        <pattern value="/showAct" />
+        <view-id value="/showAct.xhtml" />
+    </url-mapping>
+
+
     <url-mapping id="search-result">
         <pattern value="/search/result" />
         <view-id value="/search/search-result.xhtml"/>

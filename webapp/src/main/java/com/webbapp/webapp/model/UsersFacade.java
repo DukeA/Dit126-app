@@ -30,9 +30,9 @@ public class UsersFacade extends AbstractFacade<AppUsersEntity> {
     }
     
     public AppUsersEntity findUser(String username, String password){
-        Query q = em.createNamedQuery("Users.login");
-        q.setParameter("username", username);
-        q.setParameter("password", password);
+        Query q = em.createNamedQuery("app_users.login");
+        q.setParameter("userName", username);
+        q.setParameter("userPassword", password);
         
         try{
             AppUsersEntity u = (AppUsersEntity)q.getSingleResult();

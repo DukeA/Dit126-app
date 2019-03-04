@@ -16,9 +16,22 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(
             name = "ActivityEntity.findByCity",
             query = "SELECT a FROM ActivityEntity a, LocationEntity l WHERE l.city = :city"
-        )
+        ),@NamedQuery(
+                name="activity.getActivity" ,
+                query = "SELECT u FROM ActivityEntity  u WHERE u.title = :title AND u.type = :type")
 })
 public class ActivityEntity {
+
+    public ActivityEntity() {
+
+    }
+
+    public ActivityEntity(String title, String type, String description, LocationEntity entity) {
+        this.title = title;
+        this.type = type;
+        this.description = description;
+        this.locationByLocationId = entity;
+    }
 
     @Id
     @SequenceGenerator(name="activity_activity_id_seq", sequenceName="activity_activity_id_seq", allocationSize=1)
