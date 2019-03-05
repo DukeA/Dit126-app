@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
+        <!-- TOOD: add conditional render, so that only owner can edit the post -->
+        <f:metadata>
+            <f:viewParam name="id" value="#{editActivity.id}" />
+        </f:metadata>
+
+        <b:row style="margin:auto">
+            <div id="map" class="big-map col-md-12 center"></div>
+        </b:row>
+        <h:form>
+            <div id="first">
+                <h:inputHidden id="lat" value="#{addActivity.lat}" />
+                <h:inputHidden id="lng" value="#{addActivity.lng}" />
+            </div>
+
+            <div class="hide" id="second">
+                <b:container fluid="true">
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:inputText placeholder="Activity name" value="#{addActivity.title}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:selectOneMenu value="#{addActivity.type}">
+                                <f:selectItems value="#{type.types}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="12">
+                            <b:inputTextarea placeholder="Activity description" value="#{addActivity.description}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="6">
+                            <b:commandButton look="primary" action="#{editActivity.edit}" value="Add"/>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </div>
+
+        </h:form>
+
+        <b:row>
+            <b:column offset="11">
+                <b:button id="go" look="primary" value="Next" />
+            </b:column>
+        </b:row>
+
+        <script type="text/javascript" src="add-acitvities.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
+
+    </ui:define>
+
+</ui:composition>

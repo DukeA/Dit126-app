@@ -49,7 +49,7 @@ public class ShowAct {
         Assert.assertEquals(value.getTitle(),title);
         Assert.assertEquals(value.getType(),type);
     }
-
+/*
     @Test
     @DisplayName("Testing the findByTitleActivity")
     public void checkFindByTitle() {
@@ -65,7 +65,7 @@ public class ShowAct {
         ActivityEntity value = facade.findByTitle(title);
         Assert.assertFalse(false);
     }
-
+*/
     @Test
     @DisplayName("Testing the findALL")
     public void checkFindALL() {
