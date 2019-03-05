@@ -53,7 +53,7 @@ public class AddActivity implements Serializable {
         ActivityEntity activity = new ActivityEntity();
         activity.setTitle(title);
         activity.setDescription(description);
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(type.name());
 
         HttpRequest req = HttpRequestFactory.getHttpRequest();
         String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
