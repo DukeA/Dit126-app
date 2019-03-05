@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
+import javax.el.MethodExpression;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -50,10 +51,7 @@ public class EditActivity implements Serializable {
     @Setter
     private ActivityType type;
 
-    @PostConstruct
-    public void init(){
-        //TODO: get all the values so that the interface can show what we already have
-    }
+    private ActivityEntity current;
 
     /**
      * Adds a new activity to the activity facade
@@ -61,18 +59,31 @@ public class EditActivity implements Serializable {
      * */
     public void edit(){
 
-        System.out.println("This guy =>" + id);
+
         //TODO: check so that its really the owner of the post who is trying to edit it
-
-        //Get the activity
-        //ActivityEntity act = activityFacade.find();
-
         //Do the editing
+        current.setTitle(title);
+        current.setType(type.name());
+        current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
+        current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
+
         HttpRequest req = HttpRequestFactory.getHttpRequest();
         String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
-
         //Save the changes
+        current.getLocationByLocationId().setCity(city);
 
-        //activityFacade.edit(activity);
+        activityFacade.edit(current);
+    }
+
+    public void onLoad() {
+        current = activityFacade.find(Integer.parseInt(id));
+        if(current != null){
+            title = current.getTitle();
+            lat = current.getLocationByLocationId().getLatitude()+"";
+            lng = current.getLocationByLocationId().getLongitude()+"";
+            description = current.getDescription();
+        }
+
+
     }
 }

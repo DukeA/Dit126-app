@@ -10,34 +10,34 @@
         <!-- TOOD: add conditional render, so that only owner can edit the post -->
         <f:metadata>
             <f:viewParam name="id" value="#{editActivity.id}" />
+            <f:viewAction action="#{editActivity.onLoad}" />
         </f:metadata>
-
         <b:row style="margin:auto">
             <div id="map" class="big-map col-md-12 center"></div>
         </b:row>
         <h:form>
             <div id="first">
-                <h:inputHidden id="lat" value="#{addActivity.lat}" />
-                <h:inputHidden id="lng" value="#{addActivity.lng}" />
+                <h:inputHidden id="lat" value="#{editActivity.lat}" />
+                <h:inputHidden id="lng" value="#{editActivity.lng}" />
             </div>
 
             <div class="hide" id="second">
                 <b:container fluid="true">
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:inputText placeholder="Activity name" value="#{addActivity.title}"/>
+                            <b:inputText placeholder="Activity name" value="#{editActivity.title}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:selectOneMenu value="#{addActivity.type}">
+                            <b:selectOneMenu value="#{editActivity.type}">
                                 <f:selectItems value="#{type.types}"/>
                             </b:selectOneMenu>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:inputTextarea placeholder="Activity description" value="#{addActivity.description}"/>
+                            <b:inputTextarea placeholder="Activity description" value="#{editActivity.description}"/>
                         </b:column>
                     </b:row>
                     <b:row>
@@ -56,7 +56,7 @@
             </b:column>
         </b:row>
 
-        <script type="text/javascript" src="add-acitvities.js"></script>
+        <script type="text/javascript" src="edit-acitvities.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
 
     </ui:define>
