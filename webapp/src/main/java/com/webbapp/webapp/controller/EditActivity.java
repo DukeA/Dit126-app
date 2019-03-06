@@ -65,42 +65,35 @@ public class EditActivity implements Serializable {
      * */
     public void edit(){
 
-        //TODO: check so that its really the owner of the post who is trying to edit it
         //Do the editing
-        current.setTitle(title);
-        current.setType(type.name());
-        current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
-        current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
+        if(title != null && description != null && type != null && lat != null && lng != null) {
+            current.setTitle(title);
+            current.setType(type.name());
+            current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
+            current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
 
-        HttpRequest req = HttpRequestFactory.getHttpRequest();
-        String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
-        //Save the changes
-        current.getLocationByLocationId().setCity(city);
+            HttpRequest req = HttpRequestFactory.getHttpRequest();
+            String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+            //Save the changes
 
-        locationFacade.edit(current.getLocationByLocationId());
-        activityFacade.edit(current);
+            current.getLocationByLocationId().setCity(city.toLowerCase());
+
+            locationFacade.edit(current.getLocationByLocationId());
+            activityFacade.edit(current);
+        }
     }
 
-    public void onLoad() {
-
+    public String onLoad() {
         current = activityFacade.find(Integer.parseInt(id));
         if(current != null && loginBean.getUser() != null && current.getAppUsersByUserId().equals(loginBean.getUser())){
-            System.out.println("Hello, " + loginBean.getUserName());
             title = current.getTitle();
             lat = current.getLocationByLocationId().getLatitude()+"";
             lng = current.getLocationByLocationId().getLongitude()+"";
             description = current.getDescription();
+            type = ActivityType.valueOf(current.getType());
+            return null;
         } else{
-            System.out.println("You are not logged in!");
-            FacesContext context = FacesContext.getCurrentInstance();
-            try {
-                context.getExternalContext().redirect("/webbapp");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            return "index.xhtml";
         }
-
-
     }
 }
