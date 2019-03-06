@@ -20,6 +20,12 @@
     </url-mapping>
 
 
+    <url-mapping id ="register">
+        <pattern value="/register"/>
+        <view-id value ="register.xhtml"/>
+    </url-mapping>
+
+
     <url-mapping id="search-result">
         <pattern value="/search/result" />
         <view-id value="/search/search-result.xhtml"/>
