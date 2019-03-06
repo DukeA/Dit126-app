@@ -1,5 +1,7 @@
 package com.webbapp.webapp.util;
 
+import com.webbapp.webapp.util.HttpRequest.HttpRequest;
+import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 

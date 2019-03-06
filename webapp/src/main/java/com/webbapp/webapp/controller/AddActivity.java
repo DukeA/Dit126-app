@@ -1,8 +1,8 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
-import com.webbapp.webapp.util.HttpRequest;
-import com.webbapp.webapp.util.HttpRequestFactory;
+import com.webbapp.webapp.util.HttpRequest.HttpRequest;
+import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;
 import lombok.Getter;
 import lombok.Setter;
 

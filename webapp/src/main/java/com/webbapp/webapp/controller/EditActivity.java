@@ -1,19 +1,14 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
-import com.webbapp.webapp.util.HttpRequest;
-import com.webbapp.webapp.util.HttpRequestFactory;
+import com.webbapp.webapp.util.HttpRequest.HttpRequest;
+import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.PostConstruct;
-import javax.el.MethodExpression;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
 import java.io.Serializable;
 
 @Named(value="editActivity")
