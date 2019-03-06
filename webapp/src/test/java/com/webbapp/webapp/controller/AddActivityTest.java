@@ -2,6 +2,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
@@ -41,7 +42,6 @@ public class AddActivityTest {
 
         ac.add();
 
-        //verify(activityFacade).create(ent);
         verify(activityFacade).create(argThat((ActivityEntity activity) -> activity.getTitle().equals("Hello")
                                                                                 && activity.getDescription().equals("Desc")
                                                                                 && activity.getType().equals(ActivityType.TYPE1.name())
@@ -84,6 +84,55 @@ public class AddActivityTest {
         ac.add();
 
         verify(activityFacade, never()).create(Mockito.any());
+    }
+
+    @Test
+    @DisplayName("City test")
+    public void correctCityName(){
+        AppUsersEntity user = new AppUsersEntity();
+        user.setUserName("Alice");
+        user.setUserPassword("alice_password");
+        when(login.getUser()).thenReturn(user);
+
+        ac.setTitle("Hello");
+        ac.setDescription("Desc");
+        ac.setLat("57.710532072641925");
+        ac.setLng("11.958837619599421");
+        ac.setType(ActivityType.TYPE5);
+
+        ac.add();
+
+        verify(activityFacade).create(argThat((ActivityEntity activity) -> activity.getTitle().equals("Hello")
+                && activity.getDescription().equals("Desc")
+                && activity.getType().equals(ActivityType.TYPE5.name())
+                && activity.getLocationByLocationId().getLatitude() == 57.710532072641925
+                && activity.getLocationByLocationId().getLongitude() == 11.958837619599421
+                && activity.getAppUsersByUserId().getUserName().equals("Alice")
+                && activity.getLocationByLocationId().getCity().equals("gothenburg")));
+
+    }
+
+    @Test
+    @DisplayName("Getter setter test")
+    public void gettersTest(){
+        AppUsersEntity user = new AppUsersEntity();
+        user.setUserName("Alice");
+        user.setUserPassword("alice_password");
+        when(login.getUser()).thenReturn(user);
+
+        ac.setTitle("Hello");
+        ac.setDescription("Desc");
+        ac.setLat("57.710532072641925");
+        ac.setLng("11.958837619599421");
+        ac.setType(ActivityType.TYPE5);
+
+        ac.add();
+
+        assertEquals("Hello", ac.getTitle());
+        assertEquals("Desc", ac.getDescription());
+        assertEquals("57.710532072641925", ac.getLat());
+        assertEquals("11.958837619599421", ac.getLng());
+        assertEquals(ac.getType(), ActivityType.TYPE5);
     }
 
 }
