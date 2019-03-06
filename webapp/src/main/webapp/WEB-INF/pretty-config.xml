@@ -19,10 +19,14 @@
         <view-id value="/showAct.xhtml" />
     </url-mapping>
 
-
     <url-mapping id="search-result">
         <pattern value="/search/result" />
         <view-id value="/search/search-result.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/login.xhtml" />
     </url-mapping>
 
 </pretty-config>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+>
+    <ui:define name="content">
+        <b:form horizontal="true">
+            <h:outputLabel value="Username" />
+            <b:inputText span="4"
+                         value="#{login.username}"
+                         required="true"
+                         requiredMessage="Username is required"/>
+            <h:outputLabel value="Password" />
+            <b:inputSecret span="4"
+                           value="#{login.password}"
+                           required="true"
+                           requiredMessage="Password is required"/>
+            <b:commandButton look="primary"
+                             actionListener="#{login.login}"
+                             action="pretty:home"
+                             value="Login"/>
+        </b:form>
+    </ui:define>
+
+</ui:composition>
