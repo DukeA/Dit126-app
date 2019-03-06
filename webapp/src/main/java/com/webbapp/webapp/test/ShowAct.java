@@ -54,7 +54,7 @@ public class ShowAct {
     @DisplayName("Testing the findByTitleActivity")
     public void checkFindByTitle() {
         String title = activitysC.getTitle();
-        ActivityEntity value = facade.findByTitle(title);
+//        ActivityEntity value = facade.findByTitle(title);
         Assert.assertFalse(false);
 
     }
@@ -62,7 +62,7 @@ public class ShowAct {
     @DisplayName("Testing the findByTypeActivity")
     public void checkFindByType() {
         String title = activitysC.getTitle();
-        ActivityEntity value = facade.findByTitle(title);
+//        ActivityEntity value = facade.findByTitle(title);
         Assert.assertFalse(false);
     }
 
