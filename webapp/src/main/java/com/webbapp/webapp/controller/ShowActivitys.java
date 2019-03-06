@@ -4,8 +4,11 @@ package com.webbapp.webapp.controller;
 //import com.webbapp.webapp.model.showActivity;
 
 import com.webbapp.webapp.model.ActivityEntity;
+import com.webbapp.webapp.model.ActivityFacade;
 import com.webbapp.webapp.model.ActivityType;
 import com.webbapp.webapp.model.ShowActivityFacade;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,17 +23,36 @@ import java.io.Serializable;
 @RequestScoped
 public class ShowActivitys implements Serializable {
 
+    @Getter
+    @Setter
+    private ActivityEntity activityEntity;
 
+    @Getter
+    @Setter
+    private Integer  activityid;
+
+    @Getter
+    @Setter
     private String title;
 
+    @Getter
+    @Setter
     private String description;
 
+    @Getter
+    @Setter
     private String name;
 
+    @Getter
+    @Setter
     private boolean value;
 
+    @Getter
+    @Setter
     private double lat =0.0;
 
+    @Getter
+    @Setter
     private double lng =0.0;
 
     @Inject
@@ -38,6 +60,17 @@ public class ShowActivitys implements Serializable {
 
 
     private ActivityEntity activity;
+
+    public String findActivityById() {
+        Integer value = activityid;
+        activity = activityFacade.findActivityById(String.valueOf(value));
+        if(activity != null) {
+            return "ShowAct?faces-redirect=true";
+        } else {
+            return "index";
+        }
+    }
+
 
     public void findBytitleActivity() {
         String value =title;
@@ -53,7 +86,7 @@ public class ShowActivitys implements Serializable {
         String value = title;
         String valueEnum =name;
         ActivityEntity type = activityFacade.findActivity(value,valueEnum);
-        setActivity(type);
+        setActivityEntity(type);
         if(activity !=null) {
             return "ShowAct?faces-redirect=true";
         } else {
@@ -62,61 +95,8 @@ public class ShowActivitys implements Serializable {
 
     }
 
+    public void onload() {
 
-    public void setType(String typeEnum) {
-        this.name =typeEnum;
-    }
-    public  String  getType() {
-        return this.name;
     }
 
-    public ActivityType[] getTypes() {
-        return ActivityType.values();
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public ActivityEntity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(ActivityEntity activity) {
-        this.activity = activity;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setValue(boolean value) {
-        this.value =value;
-    }
-    public boolean getValue() {
-        return this.value;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
 }

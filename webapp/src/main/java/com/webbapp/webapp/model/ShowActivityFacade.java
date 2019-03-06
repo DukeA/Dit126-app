@@ -4,8 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @ author Adam
@@ -40,48 +38,19 @@ public class ShowActivityFacade extends AbstractFacade<ActivityEntity> {
             return null;
         }
     }
-    /*
-    public ActivityEntity findByTitle(String title) {
-        Query q = em.createNamedQuery("activity.findtitle");
-        q.setParameter("title", title);
+   public ActivityEntity findActivityById(String integerId) {
+        Query query = em.createNamedQuery("ActivityEntity.findByActivityId");
+        query.setParameter("ActivityId", integerId);
         try {
-            ActivityEntity activityEntity = (ActivityEntity) q.getResultList();
-            System.out.println("Found all the Activites");
+            ActivityEntity activityEntity = (ActivityEntity) query.getSingleResult();
+            System.out.println("Activity Found");
             return  activityEntity;
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("Activites not Found");
-            return  null;
+            System.out.println("Activity not found");
+            return null;
         }
-    }
-    public ActivityEntity findBytypeAll(String type) {
-        Query q = em.createNamedQuery("activity.findactivity");
-        q.setParameter("activity", type);
-        try {
-            ActivityEntity activityEntity = (ActivityEntity) q.getResultList();
-            System.out.println("Found all the Activites");
-            return  activityEntity;
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("Activites not Found");
-            return  null;
-        }
-    }
-    @Override
-    public List<ActivityEntity> findAll() {
-        Query q  = em.createNamedQuery("activity.find_all");
-        try {
-            List<ActivityEntity> List = new ArrayList<>();
-            List.add ((ActivityEntity) q.getResultList());
-            System.out.println("Found all the Activites");
-            return  List;
-        }catch (Exception e) {
-            System.out.println(e);
-            System.out.println("Activites not Found");
-            return  null;
-        }
-    }
-    */
+   }
 
 
 }
