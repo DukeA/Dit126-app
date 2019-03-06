@@ -23,7 +23,7 @@ public class AddActivity implements Serializable {
     AddActivityFacade activityFacade;
 
     @Inject
-    UsersFacade usersFacade;
+    AppUserFacade usersFacade;
 
     @Getter
     @Setter

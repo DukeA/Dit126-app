@@ -64,7 +64,7 @@ public class ActivityEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @Getter
     @Setter
-    private AppUsersEntity appUsersByUserId;
+    private AppUserEntity appUsersByUserId;
 
 
 
