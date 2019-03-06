@@ -66,7 +66,7 @@ public class EditActivity implements Serializable {
     public void edit(){
 
         //Do the editing
-        if(title != null && description != null && type != null && lat != null && lng != null) {
+        if(current != null && title != null && description != null && type != null && lat != null && lng != null) {
             current.setTitle(title);
             current.setType(type.name());
             current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
