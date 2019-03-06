@@ -49,6 +49,7 @@ public class SearchResult implements Serializable {
         }
 
         size = activityEntities.size();
+        searchBean.setText("");
     }
 
     private void findByType(String type) {
