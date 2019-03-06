@@ -8,20 +8,24 @@
     <ui:define name="content">
         <div>
             <b:form horizontal="true">
-                    <h:outputLabel value="Username" for="inputText"/>
-                    <b:inputText span="4"
-                                 required="true"
-                                 id="inputText"
-                                 requiredMessage="Username required"
-                                 value="#{register.username}"/>
-                    <h:outputLabel value="Password" for="inputPassword"/>
-                    <b:inputSecret span="4"
-                                   id="inputPassword"
-                                   requiredMessage="Password required"
-                                   value="#{register.password}"/>
-                    <b:commandButton look="primary"
-                                     action="#{register.onRegister}"
-                                     value="Reg"/>
+                <h:outputLabel value="Username" for="inputText"/>
+                <b:inputText span="4"
+                             required="true"
+                             id="inputText"
+                             requiredMessage="Username required"
+                             value="#{register.username}"/>
+                <h:outputLabel value="Password" for="inputPassword"/>
+                <b:inputSecret span="4"
+                               id="inputPassword"
+                               requiredMessage="Password required"
+                               value="#{register.password}"/>
+                <b:commandButton look="primary"
+                                 action="#{register.onRegister}"
+                                 value="Reg"/>
+                <b:button id="Cancel"
+                          look="primary"
+                          value="Cancel"
+                          outcome="index"/>
             </b:form>
         </div>
     </ui:define>

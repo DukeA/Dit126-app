@@ -2,8 +2,8 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.AppUsersEntity;
 import com.webbapp.webapp.model.RegisterFacade;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -28,9 +28,10 @@ public class Register implements Serializable {
         List<AppUsersEntity> list = registerFacade.checkUserName(username);
         if(list.size() <= 0) {
             System.out.println("Create User");
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
             appUsersEntity = new AppUsersEntity();
             appUsersEntity.setUserName(username);
-            appUsersEntity.setUserPassword(password);
+            appUsersEntity.setUserPassword(encoder.encode(password));
             registerFacade.create(appUsersEntity);
             return "index?faces-redirect=true";
         } else {
