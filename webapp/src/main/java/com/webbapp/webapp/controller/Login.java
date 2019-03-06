@@ -34,7 +34,7 @@ public class Login implements Serializable{
     public String login(){
         user = userManager.findUser(username, password);
         if(user != null){
-            return "list?faces-redirect=true";
+            return "add-activity.xhtml";
         }else{
             return "index";
         }
@@ -59,5 +59,9 @@ public class Login implements Serializable{
     
     public void setPassword(String pass){
         password = pass;
+    }
+
+    public AppUsersEntity getUser() {
+        return user;
     }
 }

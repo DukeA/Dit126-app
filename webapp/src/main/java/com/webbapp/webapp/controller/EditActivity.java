@@ -8,9 +8,12 @@ import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.el.MethodExpression;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 
 @Named(value="editActivity")
@@ -25,7 +28,10 @@ public class EditActivity implements Serializable {
     AddActivityFacade activityFacade;
 
     @Inject
-    UsersFacade usersFacade;
+    LocationFacade locationFacade;
+
+    @Inject
+    Login loginBean;
 
     @Getter
     @Setter
@@ -59,7 +65,6 @@ public class EditActivity implements Serializable {
      * */
     public void edit(){
 
-
         //TODO: check so that its really the owner of the post who is trying to edit it
         //Do the editing
         current.setTitle(title);
@@ -72,16 +77,28 @@ public class EditActivity implements Serializable {
         //Save the changes
         current.getLocationByLocationId().setCity(city);
 
+        locationFacade.edit(current.getLocationByLocationId());
         activityFacade.edit(current);
     }
 
     public void onLoad() {
+
         current = activityFacade.find(Integer.parseInt(id));
-        if(current != null){
+        if(current != null && loginBean.getUser() != null && current.getAppUsersByUserId().equals(loginBean.getUser())){
+            System.out.println("Hello, " + loginBean.getUserName());
             title = current.getTitle();
             lat = current.getLocationByLocationId().getLatitude()+"";
             lng = current.getLocationByLocationId().getLongitude()+"";
             description = current.getDescription();
+        } else{
+            System.out.println("You are not logged in!");
+            FacesContext context = FacesContext.getCurrentInstance();
+            try {
+                context.getExternalContext().redirect("/webbapp");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
 

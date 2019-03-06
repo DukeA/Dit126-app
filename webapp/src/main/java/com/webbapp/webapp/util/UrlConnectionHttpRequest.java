@@ -17,7 +17,10 @@ class UrlConnectionHttpRequest implements HttpRequest{
     @Override
     public String getCity(Double lat, Double lng) {
         try {
-            URL googleApi = new URL("https://maps.googleapis.com/maps/api/geocode/json?latlng="+ lat +"," + lng + "&sensor=false&key=<INSERT KEY>");
+            if(ApiKey.MAPSKEY.equals("")){
+                throw new Exception("No API-key supplied");
+            }
+            URL googleApi = new URL("https://maps.googleapis.com/maps/api/geocode/json?latlng="+ lat +"," + lng + "&sensor=false&key="+ApiKey.MAPSKEY);
             URLConnection connection = googleApi.openConnection();
 
 
@@ -57,6 +60,8 @@ class UrlConnectionHttpRequest implements HttpRequest{
         }catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {;
             e.printStackTrace();
         }
 

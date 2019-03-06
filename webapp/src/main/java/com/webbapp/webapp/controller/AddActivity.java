@@ -23,7 +23,7 @@ public class AddActivity implements Serializable {
     AddActivityFacade activityFacade;
 
     @Inject
-    UsersFacade usersFacade;
+    Login login;
 
     @Getter
     @Setter
@@ -50,23 +50,25 @@ public class AddActivity implements Serializable {
      * Uses the lat, lng, title, type, description instance variables as input for the activity and location
      * */
     public void add(){
-        ActivityEntity activity = new ActivityEntity();
-        activity.setTitle(title);
-        activity.setDescription(description);
-        activity.setType(type.name());
+        if(title != null && description != null && type != null && lat != null && lng != null){
+            ActivityEntity activity = new ActivityEntity();
+            activity.setTitle(title);
+            activity.setDescription(description);
+            activity.setType(type.name());
 
-        HttpRequest req = HttpRequestFactory.getHttpRequest();
-        String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+            HttpRequest req = HttpRequestFactory.getHttpRequest();
+            String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+            if(city != null){
+                LocationEntity loc = new LocationEntity();
+                loc.setLatitude(Double.parseDouble(lat));
+                loc.setLongitude(Double.parseDouble(lng));
+                loc.setCity(city.toLowerCase());
 
+                activity.setAppUsersByUserId(login.getUser());
+                activity.setLocationByLocationId(loc);
 
-        LocationEntity loc = new LocationEntity();
-        loc.setLatitude(Double.parseDouble(lat));
-        loc.setLongitude(Double.parseDouble(lng));
-        loc.setCity(city.toLowerCase());
-
-        activity.setAppUsersByUserId(usersFacade.findAll().get(0));
-        activity.setLocationByLocationId(loc);
-
-        activityFacade.create(activity);
+                activityFacade.create(activity);
+            }
+        }
     }
 }
