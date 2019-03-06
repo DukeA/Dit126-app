@@ -22,7 +22,7 @@
 
     <url-mapping id ="register">
         <pattern value="/register"/>
-        <view-id value ="register.xhtml"/>
+        <view-id value ="/register.xhtml"/>
     </url-mapping>
 
 

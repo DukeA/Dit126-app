@@ -5,19 +5,18 @@ import com.webbapp.webapp.model.RegisterFacade;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
-@Named("Register")
+@Named("register")
+@ViewScoped
 public class Register implements Serializable {
 
-    @Getter
-    @Setter
     private String username;
 
-    @Getter
-    @Setter
     private String password;
 
     @Inject
@@ -25,20 +24,30 @@ public class Register implements Serializable {
 
     private AppUsersEntity appUsersEntity;
 
-    public String register() {
-        appUsersEntity = new AppUsersEntity();
-        appUsersEntity.setUserName(username);
-        appUsersEntity.setUserPassword(password);
-        registerFacade.create(appUsersEntity);
-        if(appUsersEntity != null) {
-            return"Register?faces-redirect=true";
-        } else{
-            return "list";
+    public String onRegister() {
+        List<AppUsersEntity> list = registerFacade.checkUserName(username);
+        if(list.size() <= 0) {
+            System.out.println("Create User");
+            appUsersEntity = new AppUsersEntity();
+            appUsersEntity.setUserName(username);
+            appUsersEntity.setUserPassword(password);
+            registerFacade.create(appUsersEntity);
+            return "index?faces-redirect=true";
+        } else {
+            return "register";
         }
-
     }
 
-
-
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getUsername() {
+        return this.username;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getPassword() {
+        return this.password;
+    }
 }

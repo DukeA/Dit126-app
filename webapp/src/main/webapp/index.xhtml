@@ -6,6 +6,7 @@
                 xmlns:b="http://bootsfaces.net/ui"
 >
     <ui:define name="content">
+        <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
         <b:form horizontal="true">
             <h:outputLabel value="Username" />
             <b:inputText span="4"
@@ -17,10 +18,11 @@
                            value="#{login.password}"
                            required="true"
                            requiredMessage="Password is required"/>
-            <b:commandButton look="primary" action="#{login.login}" value="Login"/>
-            <b:button look="primary" value="Register User" outcome="register"/>
+            <div class = "divider">
+            <b:commandButton look="primary" action="#{login.login}" value="Login" styleClass="button"/>
+            <b:button id="Regiseter" look="primary" value="Register User" outcome="register" styleClass="button"/>
+            </div>
         </b:form>
     </ui:define>
-
 </ui:composition>
 

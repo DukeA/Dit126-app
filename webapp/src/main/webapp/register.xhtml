@@ -7,29 +7,21 @@
                 xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
         <div>
-            <b:form>
-                <b:container fluid="true">
-                    <b:row>
-                        <b:column colSm="12">
-                            <h:outputLabel value="Username" for="inputText"/>
-                            <b:inputText span="4" id="inputText" value="#{Register.username}"
-                            />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column colSm="12">
-                            <h:outputLabel value="Password" for="inputPassword"/>
-                            <b:inputSecret span="4" id="inputPassword" value="#{Register.password}"/>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column colSm="6">
-                            <b:commandButton look="primary"
-                                             action="#{Register.register}"
-                                             value="Reg"/>
-                        </b:column>
-                    </b:row>
-                </b:container>
+            <b:form horizontal="true">
+                    <h:outputLabel value="Username" for="inputText"/>
+                    <b:inputText span="4"
+                                 required="true"
+                                 id="inputText"
+                                 requiredMessage="Username required"
+                                 value="#{register.username}"/>
+                    <h:outputLabel value="Password" for="inputPassword"/>
+                    <b:inputSecret span="4"
+                                   id="inputPassword"
+                                   requiredMessage="Password required"
+                                   value="#{register.password}"/>
+                    <b:commandButton look="primary"
+                                     action="#{register.onRegister}"
+                                     value="Reg"/>
             </b:form>
         </div>
     </ui:define>
