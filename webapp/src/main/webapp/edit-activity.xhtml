@@ -7,7 +7,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
         <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
-        <!-- TOOD: add conditional render, so that only owner can edit the post -->
         <f:metadata>
             <f:viewParam name="id" value="#{editActivity.id}" />
             <f:viewAction action="#{editActivity.onLoad}" />
