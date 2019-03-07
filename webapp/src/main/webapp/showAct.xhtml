@@ -30,6 +30,9 @@
                     <h:outputLabel value="#{showBean.activityEntity.description}"/>
                     <br/>
                 </div>
+            <b:form>
+                <b:commandButton look="danger" value="Delete" action="#{showBean.delete}" />
+            </b:form>
         </b:column>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
         <script type="text/javascript">
