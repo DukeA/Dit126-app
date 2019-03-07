@@ -95,8 +95,14 @@ public class ShowActivitys implements Serializable {
 
     }
 
-    public void onload() {
-
+    public String onload() {
+        Integer value = activityid;
+        activityEntity = activityFacade.find(value);
+        if(activityEntity != null) {
+            return null;
+        } else {
+            return "index";
+        }
     }
 
 }

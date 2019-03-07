@@ -41,6 +41,7 @@ public class ActivityEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_activity_id_seq")
     @NotNull
     @Column(name = "activity_id", updatable=false)
+    @Getter
     private Integer activityId;
 
     @Basic
