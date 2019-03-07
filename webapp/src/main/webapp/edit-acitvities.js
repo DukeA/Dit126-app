@@ -1,8 +1,8 @@
 var map;
 
 function initMap() {
-    let parsedLat = parseFloat(document.getElementById("j_idt24:lat").value)
-    let parsedLng = parseFloat(document.getElementById("j_idt24:lng").value)
+    let parsedLat = parseFloat(document.getElementById("inputform:lat").value)
+    let parsedLng = parseFloat(document.getElementById("inputform:lng").value)
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: parsedLat , lng: parsedLng},
@@ -23,8 +23,8 @@ function initMap() {
 function placeMarker(location) {
     marker.setPosition(location);
 
-    document.getElementById("j_idt24:lat").value = location.lat();
-    document.getElementById("j_idt24:lng").value = location.lng();
+    document.getElementById("inputform:lat").value = location.lat();
+    document.getElementById("inputform:lng").value = location.lng();
 }
 
 $("#go").click(function foo(){

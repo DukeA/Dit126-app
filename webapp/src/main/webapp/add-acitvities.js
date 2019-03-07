@@ -9,7 +9,7 @@ function initMap() {
     marker = new google.maps.Marker({
         position: {lat: 57.687799, lng: 11.978534},
         map: map,
-        title: 'Hello World!'
+        title: ''
     });
 
     google.maps.event.addListener(map, 'click', function(event) {
@@ -20,8 +20,8 @@ function initMap() {
 function placeMarker(location) {
     marker.setPosition(location);
 
-    document.getElementById("j_idt22:lat").value = location.lat();
-    document.getElementById("j_idt22:lng").value = location.lng();
+    document.getElementById("inputform:lat").value = location.lat();
+    document.getElementById("inputform:lng").value = location.lng();
 }
 
 $("#go").click(function foo(){
