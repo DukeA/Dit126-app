@@ -26,6 +26,17 @@ public class AddActivityTest {
         MockitoAnnotations.initMocks(this);
     }
 
+
+    @Test
+    @DisplayName("User not logged in")
+    public void notLoggedInActivity(){
+        when(login.getUser()).thenReturn(null);
+
+        String redirect = ac.onLoad();
+
+        assertEquals("index.xhtml", redirect);
+    }
+
     @Test
     @DisplayName("Add Test")
     public void testActivity(){
@@ -33,6 +44,9 @@ public class AddActivityTest {
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
         when(login.getUser()).thenReturn(user);
+
+        String redirect = ac.onLoad();
+        assertEquals(null, redirect);
 
         ac.setTitle("Hello");
         ac.setDescription("Desc");

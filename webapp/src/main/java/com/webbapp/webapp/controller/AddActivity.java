@@ -71,4 +71,12 @@ public class AddActivity implements Serializable {
             }
         }
     }
+
+    public String onLoad() {
+        if(login.getUser() != null){
+            return null;
+        } else{
+            return "index.xhtml";
+        }
+    }
 }

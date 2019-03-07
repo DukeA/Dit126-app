@@ -6,6 +6,10 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{addActivity.onLoad}" />
+        </f:metadata>
+
         <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
 
         <b:row style="margin:auto">
