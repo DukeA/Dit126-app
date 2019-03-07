@@ -40,7 +40,7 @@
                         <b:column span="3">
                             <b:panel styleClass="panel" title="#{activity.title}" collapsible="false">
                                 <h:outputText styleClass="panel-body" value="#{activity.description}"/>
-                                <b:button styleClass="btn" value="Go To" />
+                                <b:button styleClass="btn" value="Go To" outcome="showAct?id=#{activity.activityId}"/>
                             </b:panel>
                         </b:column>
                     <script type="text/javascript">
