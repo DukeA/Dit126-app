@@ -2,101 +2,223 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.AppUsersEntity;
 import com.webbapp.webapp.model.RegisterFacade;
-import javafx.beans.binding.When;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
+
+
+/***
+ * @author Adam Grandén
+ *
+ *  The test class for testing the Register action should work
+ *  and  the class which make up the Register case
+ */
+
 
 
 @RunWith(JUnit4.class)
 public class RegisterFacadeTest {
 
-    @InjectMocks
+    @Mock
     private Register register;
 
     @Mock
     private RegisterFacade registerFacade;
 
+    @Mock
+    private AppUsersEntity appUsersEntity;
 
-    @BeforeClass
-    public static  void setup() {
+    @Mock
+    private EntityManager entityManager;
+
+
+    @Before
+    public  void setup() {
         RegisterFacadeTest registerFacadeTest = new RegisterFacadeTest();
         MockitoAnnotations.initMocks(registerFacadeTest);
+
+        registerFacadeTest.register = new Register();
+        MockitoAnnotations.initMocks(registerFacadeTest.register);
+
+        registerFacadeTest.registerFacade = new RegisterFacade();
+        MockitoAnnotations.initMocks(registerFacadeTest.registerFacade);
+
+        registerFacadeTest.registerFacade = new RegisterFacade();
+        MockitoAnnotations.initMocks(registerFacadeTest.registerFacade);
+
+        registerFacadeTest.appUsersEntity = new AppUsersEntity();
+        MockitoAnnotations.initMocks(registerFacadeTest.appUsersEntity);
+
     }
+
+    /**
+     *  Test for the checker class sets an getters work in the Register
+     */
 
     @Test
     @DisplayName("Check Set and getters")
     public void testAddUserGetterAndSetter(){
-        register = new Register();
+
         String userName = "Alice1234";
         String Password = "123456";
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         AppUsersEntity usersEntity = new AppUsersEntity();
+        Register n_regeister = new Register();
+
         usersEntity.setUserName(userName);
         usersEntity.setUserPassword(Password);
 
-        register.setPassword(Password);
-        register.setUsername(userName);
+        n_regeister.setPassword(encoder.encode(Password));
+        n_regeister.setUsername(userName);
 
-        assertEquals(userName,register.getUsername());
-        assertEquals(Password,register.getPassword());
+        assertEquals(userName,n_regeister.getUsername());
+        assertSame(encoder.matches(Password,n_regeister.getPassword()), true);
     }
+
+
+    /**
+     *  Test for the checker RegisterFacade will return the User in the ArrayList
+     */
+
     @Test
     @DisplayName("On Register Test")
+    public void testRegisterFacadeQuery() {
+
+        String userName = "Motorway1468";
+        String password ="123456";
+
+
+        appUsersEntity = new AppUsersEntity();
+        appUsersEntity.setUserName(userName);
+        appUsersEntity.setUserPassword(password);
+
+        ArrayList<AppUsersEntity> list = new ArrayList<>();
+        list.add(appUsersEntity);
+
+        entityManager =mock(EntityManager.class);
+
+        RegisterFacade registerFacade = mock(RegisterFacade.class);
+        when(registerFacade.checkUserName(userName)).thenReturn(list);
+        list = (ArrayList<AppUsersEntity>) registerFacade.checkUserName(userName);
+
+        Assert.assertTrue(list.size()==1);
+
+    }
+
+
+    /***
+     * Check for the on register if the user is then created by the method
+     */
+
+    @Test
+    @DisplayName("On check user don't exist")
     public void testAddUser() {
-        register =new Register();
-        registerFacade = new RegisterFacade();
+
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String userName = "Motorway1468";
         String password ="123456";
 
-        register.setUsername(userName);
-        register.setPassword(password);
+        String encoded = encoder.encode(password);
+
+        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        appUsersEntity.setUserName(userName);
+        appUsersEntity.setUserPassword(password);
 
         ArrayList<AppUsersEntity> list = new ArrayList<>();
+        entityManager =mock(EntityManager.class);
+
+        registerFacade = mock(RegisterFacade.class);
+
+        when(registerFacade.checkUserName(userName)).thenReturn(list);
+
+        register =mock(Register.class);
+
+        when(register.getUsername()).thenReturn(userName);
+
+        String name = register.getUsername();
+        Assert.assertEquals(name,userName);
+
+        when(register.getPassword()).thenReturn(encoded);
+        String registerPassword = register.getPassword();
+
+
+        Assert.assertSame(encoder.matches(password, registerPassword), true);
 
         when(register.onRegister()).thenReturn("index?faces-redirect=true");
+        String onregister = register.onRegister();
 
-        Assert.assertEquals(userName,register.getUsername());
-        Assert.assertEquals(password,register.getPassword());
+        Assert.assertEquals("index?faces-redirect=true", onregister);
 
     }
+
+    /***
+     * Check for the on register if the user  can't be created from the Register class.
+     */
+
+
     @Test
     @DisplayName("Check if there already exist user")
     public void checkUserExist() {
-        register = new Register();
-        registerFacade = new RegisterFacade();
+
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String username ="DUKEA";
+
+        String userName = "Motorway1468";
         String password ="123456";
 
-        AppUsersEntity appUsersEntity = new AppUsersEntity();
-        appUsersEntity.setUserName(username);
-        appUsersEntity.setUserPassword(password);
-        
+        String encoded = encoder.encode(password);
 
-        register.setPassword(password);
-        register.setUsername(username);
+        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        appUsersEntity.setUserName(userName);
+        appUsersEntity.setUserPassword(password);
+
+        ArrayList<AppUsersEntity> list = new ArrayList<>();
+        list.add(appUsersEntity);
+        entityManager =mock(EntityManager.class);
+
+        registerFacade = mock(RegisterFacade.class);
+
+        when(registerFacade.checkUserName(userName)).thenReturn(list);
+        list = (ArrayList<AppUsersEntity>) registerFacade.checkUserName(userName);
+
+        Assert.assertTrue(list.size()==1);
+
+        register =mock(Register.class);
+
+        register.setUsername(userName);
+        when(register.getUsername()).thenReturn(userName);
+        String name = register.getUsername();
+
+        Assert.assertEquals(name,userName);
+
+        when(register.getPassword()).thenReturn(encoded);
+        String registerPassword = register.getPassword();
+
+        Assert.assertSame(encoder.matches(password, registerPassword), true);
 
         when(register.onRegister()).thenReturn("register");
+        String onregister = register.onRegister();
 
-        Assert.assertEquals(username,register.getUsername());
-        Assert.assertEquals(password,register.getPassword());
+        Assert.assertEquals("register", onregister);
+
     }
 
 }

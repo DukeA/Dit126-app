@@ -14,6 +14,7 @@ import java.util.Collection;
         ,@NamedQuery( name="app_users.findUsername", query ="SELECT u FROM  AppUsersEntity u WHERE u.userName = :userName" )
         ,@NamedQuery(name="app_users.finduserPassword", query ="SELECT u FROM  AppUsersEntity  u WHERE u.userPassword = :userPassword")
         ,@NamedQuery(name="app_users.login",query = "SELECT u FROM AppUsersEntity u WHERE u.userName = :userName AND u.userPassword = :userPassword")
+        ,@NamedQuery(name="app_users.register" ,query = "SELECT u from AppUsersEntity  u WHERE  u.userName = :userName")
 
 })
 @Table(name = "app_user", schema = "public", catalog = "dit126")
