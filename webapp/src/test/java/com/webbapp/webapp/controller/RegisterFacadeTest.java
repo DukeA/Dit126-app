@@ -102,7 +102,7 @@ public class RegisterFacadeTest {
     @DisplayName("On Register Test")
     public void testRegisterFacadeQuery() {
 
-        String userName = "Motorway1468";
+        String userName = "Alice1234";
         String password ="123456";
 
 
@@ -134,7 +134,7 @@ public class RegisterFacadeTest {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String userName = "Motorway1468";
+        String userName = "Alice1234";
         String password ="123456";
 
         String encoded = encoder.encode(password);
@@ -181,7 +181,7 @@ public class RegisterFacadeTest {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String userName = "Motorway1468";
+        String userName = "Alice1234";
         String password ="123456";
 
         String encoded = encoder.encode(password);
