@@ -13,6 +13,7 @@ import javax.inject.Named;
 
 import com.webbapp.webapp.model.AppUsersEntity;
 import com.webbapp.webapp.model.UsersFacade;
+import lombok.Getter;
 
 /**
  *
@@ -28,13 +29,14 @@ public class Login implements Serializable{
     
     @Inject
     UsersFacade userManager;
-    
+
+    @Getter
     private AppUsersEntity user;
     
     public String login(){
         user = userManager.findUser(username, password);
         if(user != null){
-            return "list?faces-redirect=true";
+            return "index";
         }else{
             return "index";
         }

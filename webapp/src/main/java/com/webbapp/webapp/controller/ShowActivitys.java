@@ -59,6 +59,9 @@ public class ShowActivitys implements Serializable {
     @Inject
     LocationFacade locationFacade;
 
+    @Inject
+    Login login;
+
 
     private ActivityEntity activity;
 
@@ -107,11 +110,16 @@ public class ShowActivitys implements Serializable {
     }
 
     public String delete() {
-        System.out.println("DELETING");
-        LocationEntity loc = activityEntity.getLocationByLocationId();
-        activityFacade.remove(activityEntity);
-        locationFacade.remove(loc);
+        if (isOwnActivity()) {
+            LocationEntity loc = activityEntity.getLocationByLocationId();
+            activityFacade.remove(activityEntity);
+            locationFacade.remove(loc);
+        }
         return "index";
+    }
+
+    public boolean isOwnActivity() {
+        return activityEntity.getAppUsersByUserId() != null && login.getUser() != null && activityEntity.getAppUsersByUserId().equals(login.getUser());
     }
 
 }
