@@ -68,6 +68,51 @@ public class ShowActTest {
         MockitoAnnotations.initMocks(showActTest.appUsersEntity);
     }
 
+    /***
+     *  Test method to check the locationEntity
+     */
+
+    @Test
+    @DisplayName("Test LocationEntity")
+    public void checkgetsandSetterslocationeneinty() {
+        Double latitude = 55.0;
+        Double longitude = 11.0;
+        String city = "Gothenburg";
+
+        LocationEntity locationEntity = new LocationEntity();
+        locationEntity.setLatitude(latitude);
+        locationEntity.setLongitude(longitude);
+        locationEntity.setCity(city);
+
+        Assert.assertEquals(latitude,(Double)locationEntity.getLatitude());
+        Assert.assertEquals(longitude, (Double) locationEntity.getLongitude());
+        Assert.assertEquals(city,locationEntity.getCity());
+    }
+
+    /***
+     *  Test method to check the AppUsersEntity
+     */
+
+    @Test
+    @DisplayName("Test AppUsersEntity")
+    public void checkgetsandSettersAppuserseneinty() {
+        String username ="Alice1234";
+        String password ="12345";
+
+        AppUsersEntity usersEntity = new AppUsersEntity();
+        usersEntity.setUserName(username);
+        usersEntity.setUserPassword(password);
+
+        Assert.assertEquals(username,usersEntity.getUserName());
+        Assert.assertEquals(password,usersEntity.getUserPassword());
+
+    }
+
+    /**
+     * Test if the value can't be found by the Integer
+     */
+
+
     @Test
     @DisplayName("Can't find findByInteger")
     public void checkFindByIntegerActivityFacade() {
@@ -80,6 +125,18 @@ public class ShowActTest {
         when(locationEntity.getLongitude()).thenReturn(longitiude);
         when(locationEntity.getLatitude()).thenReturn(latitiute);
 
+        Double longitude =locationEntity.getLongitude();
+        verify(locationEntity,times(1)).getLongitude();
+        Assert.assertEquals(longitude,longitiude);
+
+        Double latitude = locationEntity.getLatitude();
+        verify(locationEntity,times(1)).getLatitude();
+        Assert.assertEquals( latitiute, latitude);
+
+        String loc_city = locationEntity.getCity();
+        verify(locationEntity,times(1)).getCity();
+        Assert.assertEquals(loc_city,city);
+
         String userName = "Alice1234";
         String userPassword = "12345";
 
@@ -87,10 +144,19 @@ public class ShowActTest {
         when(appUsersEntity.getUserName()).thenReturn(userName);
         when(appUsersEntity.getUserPassword()). thenReturn(userPassword);
 
+        String username = appUsersEntity.getUserName();
+        verify(appUsersEntity, times(1)).getUserName();
+        Assert.assertEquals( username, userName);
+
+        String userpasssword =appUsersEntity.getUserPassword();
+        verify(appUsersEntity).getUserName();
+        Assert.assertEquals( userpasssword, userPassword);
 
         activityFacade = mock(ActivityFacade.class);
         when(activityFacade.find(1)).thenReturn(activityEntity);
+
         ActivityEntity activityEntity1 = activityFacade.find(1);
+        verify(activityFacade).find(1);
 
         Assert.assertEquals(activityEntity1, activityEntity);
 
@@ -102,13 +168,12 @@ public class ShowActTest {
 
 
         Assert.assertEquals(onload,"index");
-
-
     }
 
 
-
-
+    /**
+     * Test if the value can be found by the Integer
+     */
 
     @Test
     @DisplayName("Testing the findbyInteger")
@@ -123,12 +188,35 @@ public class ShowActTest {
         when(locationEntity.getLongitude()).thenReturn(longitiude);
         when(locationEntity.getLatitude()).thenReturn(latitiute);
 
+        Double longitude =locationEntity.getLongitude();
+        verify(locationEntity,times(1)).getLongitude();
+        Assert.assertEquals(longitude,longitiude);
+
+        Double latitude = locationEntity.getLatitude();
+        verify(locationEntity,times(1)).getLatitude();
+        Assert.assertEquals( latitiute, latitude);
+
+        String loc_city = locationEntity.getCity();
+        verify(locationEntity,times(1)).getCity();
+        Assert.assertEquals(loc_city,city);
+
+
+
         String userName = "Alice1234";
         String userPassword = "12345";
 
         appUsersEntity =mock(AppUsersEntity.class);
         when(appUsersEntity.getUserName()).thenReturn(userName);
         when(appUsersEntity.getUserPassword()). thenReturn(userPassword);
+
+        String username = appUsersEntity.getUserName();
+        verify(appUsersEntity, times(1)).getUserName();
+        Assert.assertEquals( username, userName);
+
+        String userpasssword =appUsersEntity.getUserPassword();
+        verify(appUsersEntity).getUserName();
+        Assert.assertEquals( userpasssword, userPassword);
+
 
         String title = "Monaden";
         String type = "Jogging";
@@ -142,12 +230,21 @@ public class ShowActTest {
         when(activityEntity.getTitle()).thenReturn(title);
         when(activityEntity.getActivityId()).thenReturn(1);
 
-        Assert.assertEquals(activityEntity.getTitle(), title);
-        Assert.assertEquals(activityEntity.getAppUsersByUserId(), appUsersEntity);
-        Assert.assertEquals(activityEntity.getDescription(),description);
-        Assert.assertEquals(activityEntity.getType(), type);
-        Assert.assertEquals(activityEntity.getLocationByLocationId(),locationEntity);
 
+        Assert.assertEquals(activityEntity.getTitle(), title);
+        verify(activityEntity,times(1)).getTitle();
+
+        Assert.assertEquals(activityEntity.getAppUsersByUserId(), appUsersEntity);
+        verify(activityEntity,times(1)).getAppUsersByUserId();
+
+        Assert.assertEquals(activityEntity.getDescription(),description);
+        verify(activityEntity,times(1)).getDescription();
+
+        Assert.assertEquals(activityEntity.getType(), type);
+        verify(activityEntity,times(1)).getType();
+
+        Assert.assertEquals(activityEntity.getLocationByLocationId(),locationEntity);
+        verify(activityEntity,times(1)).getLocationByLocationId();
 
         activityFacade = mock(ActivityFacade.class);
         when(activityFacade.find(1)).thenReturn(activityEntity);
@@ -165,7 +262,4 @@ public class ShowActTest {
         Assert.assertEquals(onload,"ShowAct?faces-redirect=true");
 
     }
-
-
-
 }
