@@ -7,20 +7,29 @@
 >
     <ui:define name="content">
         <b:form horizontal="true">
-            <h:outputLabel value="Username" />
-            <b:inputText span="4"
-                         value="#{login.username}"
-                         required="true"
-                         requiredMessage="Username is required"/>
-            <h:outputLabel value="Password" />
-            <b:inputSecret span="4"
-                           value="#{login.password}"
-                           required="true"
-                           requiredMessage="Password is required"/>
-            <b:commandButton look="primary"
-                             actionListener="#{login.login}"
-                             action="pretty:home"
-                             value="Login"/>
+            <b:row>
+                <h:outputLabel value="Username" />
+                <b:inputText
+                    span="3"
+                    value="#{credentials.username}"
+                    required="true"
+                    requiredMessage="Username is required"
+                />
+            </b:row>
+            <b:row>
+                <h:outputLabel value="Password" />
+                <b:inputSecret
+                    span="3"
+                    value="#{credentials.password}"
+                    required="true"
+                    requiredMessage="Password is required"
+                />
+            </b:row>
+            <b:commandButton
+                look="primary"
+                actionListener="#{login.login}"
+                value="Login"
+            />
         </b:form>
     </ui:define>
 
