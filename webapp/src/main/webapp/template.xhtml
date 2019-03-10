@@ -30,7 +30,8 @@
                 <b:column span="1">
                     <b:navCommandLink value="Login" action="pretty:login" />
                 </b:column>
-
+            </b:form>
+            <b:form>
                 <b:column span="3">
                     <b:inputText placeholder="Search..."
                                  value="#{searchBean.text}">
@@ -50,7 +51,8 @@
                         action="pretty:search-result"
                     />
                 </b:column>
-
+            </b:form>
+            <b:form>
                 <b:column span="3" rendered="#{userSession.user != null}">
                     <b:row>
                         <h:outputLabel value="Logged in as: #{userSession.user.userName}" />
