@@ -6,39 +6,36 @@
 package com.webbapp.webapp.controller;
 
 import java.io.Serializable;
-import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.AppUserFacade;
-import com.webbapp.webapp.util.IncorrectPasswordException;
-import com.webbapp.webapp.util.MultipleUsersFoundException;
-import com.webbapp.webapp.util.UserNotFoundException;
-import lombok.Getter;
-import lombok.Setter;
+import com.webbapp.webapp.util.*;
 
 @Named(value="login")
 @RequestScoped
-public class Login implements Serializable{
+public class Login implements Serializable {
 
-    @Getter @Setter
-    private String username;
+    @Inject
+    private Credentials credentials;
 
-    @Getter @Setter
-    private String password;
+    @Inject
+    private AppUserFacade userFacade;
 
-    @EJB
-    private AppUserFacade userManager;
-    
-    private AppUserEntity user;
-    
+    @Inject
+    private AppUserSession userSession;
+
     public void login() {
 
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
         try {
-            user = userManager.login(username, password);
+           userSession.setUser(userFacade.login(username, password));
         } catch (UserNotFoundException e) {
             String message = "User not found";
             FacesContext.getCurrentInstance().addMessage(null,
@@ -51,12 +48,14 @@ public class Login implements Serializable{
             String message = "Incorrect password";
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        } catch (EJBException e) {
+            //perhaps should be avoided
         }
     }
     
     public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index?faces-redirect=true";
+        return "index.xhtml";
     }
 
 }
