@@ -1,13 +1,16 @@
 var map;
 
 function initMap() {
+    let parsedLat = parseFloat(document.getElementById("inputform:lat").value)
+    let parsedLng = parseFloat(document.getElementById("inputform:lng").value)
+
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat:  57.687799, lng: 11.978534},
+        center: {lat: parsedLat , lng: parsedLng},
         zoom: 15
     });
 
     marker = new google.maps.Marker({
-        position: {lat: 57.687799, lng: 11.978534},
+        position: {lat: parsedLat, lng: parsedLng},
         map: map,
         title: ''
     });

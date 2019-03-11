@@ -6,44 +6,44 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
+        <link rel="stylesheet" type="text/css" href="../css/add_activity.css" />
         <f:metadata>
-            <f:viewAction action="#{addActivity.onLoad}" />
+            <f:viewParam name="id" value="#{editActivity.id}" />
+            <f:viewAction action="#{editActivity.onLoad}" />
         </f:metadata>
 
-        <link rel="stylesheet" type="text/css" href="css/add_activity.css" />
-
-        <h1>Add activity</h1>
+        <h1>Edit activity #{editActivity.title}</h1>
         <b:row style="margin:auto">
             <div id="map" class="big-map col-md-12 center"></div>
         </b:row>
         <h:form id="inputform">
             <div id="first">
-                <h:inputHidden id="lat" value="#{addActivity.lat}" />
-                <h:inputHidden id="lng" value="#{addActivity.lng}" />
+                <h:inputHidden id="lat" value="#{editActivity.lat}" />
+                <h:inputHidden id="lng" value="#{editActivity.lng}" />
             </div>
 
             <div class="hide" id="second">
                 <b:container fluid="true">
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:inputText placeholder="Activity name" value="#{addActivity.title}"/>
+                            <b:inputText placeholder="Activity name" value="#{editActivity.title}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:selectOneMenu value="#{addActivity.type}">
+                            <b:selectOneMenu value="#{editActivity.type}">
                                 <f:selectItems value="#{type.types}"/>
                             </b:selectOneMenu>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column mediumScreen="12">
-                            <b:inputTextarea placeholder="Activity description" value="#{addActivity.description}"/>
+                            <b:inputTextarea placeholder="Activity description" value="#{editActivity.description}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column mediumScreen="6">
-                            <b:commandButton look="primary" action="#{addActivity.add}" value="Add"/>
+                            <b:commandButton look="primary" action="#{editActivity.edit}" value="Edit"/>
                         </b:column>
                     </b:row>
                 </b:container>
@@ -57,7 +57,7 @@
             </b:column>
         </b:row>
 
-        <script type="text/javascript" src="add-acitvities.js"></script>
+        <script type="text/javascript" src="../edit-acitvities.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
 
     </ui:define>
