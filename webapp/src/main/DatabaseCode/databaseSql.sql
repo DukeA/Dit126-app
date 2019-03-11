@@ -31,4 +31,4 @@ INSERT  INTO  APP_USER(user_password, user_name)
 VALUES ('qwerty','DukeA');
 
 INSERT  INTO ACTIVITY (title, type, description, location_id, user_id)
-VALUES ('Monaden','jogging','Nice jogging experiance',1,1);
+VALUES ('Monaden','JOGGING','Nice jogging experiance',1,1);

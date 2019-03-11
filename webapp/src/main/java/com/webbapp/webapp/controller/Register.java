@@ -5,6 +5,7 @@ import com.webbapp.webapp.model.RegisterFacade;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,7 +22,7 @@ import java.util.List;
 
 
 @Named("register")
-@ViewScoped
+@RequestScoped
 public class Register implements Serializable {
 
     private String username;
@@ -42,7 +43,6 @@ public class Register implements Serializable {
      */
 
     public String onRegister() {
-        registerFacade = new RegisterFacade();
         List<AppUsersEntity> list = registerFacade.checkUserName(username);
         if(list.size() <= 0) {
             System.out.println("Create User");

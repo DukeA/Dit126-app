@@ -39,7 +39,7 @@ public class RegisterFacade extends AbstractFacade<AppUsersEntity> {
      * @return List<AppUsersEntity>
      */
     public List<AppUsersEntity> checkUserName(String userName) {
-        return em.createQuery("app_users.register", AppUsersEntity.class).
+        return em.createNamedQuery("app_user.register", AppUsersEntity.class).
                 setParameter("userName",userName).getResultList();
     }
 
