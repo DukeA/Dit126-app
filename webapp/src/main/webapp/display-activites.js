@@ -9,6 +9,7 @@ function initMap() {
 }
 
 function addMarker({lat, lng}) {
+    console.log('ADDING');
   var marker = new google.maps.Marker({
     position: {lat: Number(lat), lng: Number(lng)},
     map: map
@@ -20,4 +21,12 @@ function deleteMarkers() {
   console.log("DELETING MARKERS");
   markers.forEach(marker => marker.setMap(null));
   markers = [];
+}
+
+function setMapPosition() {
+    console.log('SETTING');
+    const bounds = new google.maps.LatLngBounds();
+    markers.forEach(marker => bounds.extend(marker.getPosition()));
+
+    map.fitBounds(bounds)
 }
