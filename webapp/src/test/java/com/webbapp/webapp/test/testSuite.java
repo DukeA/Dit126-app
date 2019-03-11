@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ActivityTest.class,
-        ShowActTest.class
+        ShowActTest.class,
         RegisterFacadeTest.class
 })
 public class testSuite {
