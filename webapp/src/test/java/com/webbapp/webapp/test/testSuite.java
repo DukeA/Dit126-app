@@ -12,7 +12,6 @@ import org.junit.runners.Suite;
         ActivityTest.class,
         AddActivityTest.class,
         EditActivityTest.class,
-
         ShowActTest.class,
         RegisterFacadeTest.class
 })
