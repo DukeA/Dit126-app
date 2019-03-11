@@ -58,7 +58,7 @@
                         <h:outputLabel value="Logged in as: #{userSession.user.userName}" />
                     </b:row>
                     <b:row>
-                        <h:outputLink value="#{login.logout()}">Logout</h:outputLink>
+                        <h:commandLink action="#{login.logout()}">Logout</h:commandLink>
                     </b:row>
                 </b:column>
             </b:form>
