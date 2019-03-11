@@ -9,11 +9,12 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name="app_users.findall", query = "SELECT u FROM AppUsersEntity u ")
-        ,@NamedQuery(name="app_users.findUserId", query = "SELECT u FROM AppUsersEntity u WHERE u.userId = :userId")
-        ,@NamedQuery( name="app_users.findUsername", query ="SELECT u FROM  AppUsersEntity u WHERE u.userName = :userName" )
-        ,@NamedQuery(name="app_users.finduserPassword", query ="SELECT u FROM  AppUsersEntity  u WHERE u.userPassword = :userPassword")
-        ,@NamedQuery(name="app_users.login",query = "SELECT u FROM AppUsersEntity u WHERE u.userName = :userName AND u.userPassword = :userPassword")
+        @NamedQuery(name="app_user.findall", query = "SELECT u FROM AppUsersEntity u ")
+        ,@NamedQuery(name="app_user.findUserId", query = "SELECT u FROM AppUsersEntity u WHERE u.userId = :userId")
+        ,@NamedQuery( name="app_user.findUsername", query ="SELECT u FROM  AppUsersEntity u WHERE u.userName = :userName" )
+        ,@NamedQuery(name="app_user.finduserPassword", query ="SELECT u FROM  AppUsersEntity  u WHERE u.userPassword = :userPassword")
+        ,@NamedQuery(name="app_user.login",query = "SELECT u FROM AppUsersEntity u WHERE u.userName = :userName AND u.userPassword = :userPassword")
+        ,@NamedQuery(name="app_user.register" ,query = "SELECT u from AppUsersEntity  u WHERE  u.userName = :userName")
 
 })
 @Table(name = "app_user", schema = "public", catalog = "dit126")
