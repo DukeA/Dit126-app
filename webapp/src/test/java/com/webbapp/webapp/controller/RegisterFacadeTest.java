@@ -133,7 +133,7 @@ public class RegisterFacadeTest {
      */
 
     @Test
-    @DisplayName("On check user don't exist")
+    @DisplayName("On check user exist")
     public void testAddUser() {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
