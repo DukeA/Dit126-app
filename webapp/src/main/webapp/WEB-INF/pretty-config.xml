@@ -27,8 +27,8 @@
 
 
     <url-mapping id="search-result">
-        <pattern value="/search/result" />
-        <view-id value="/search/search-result.xhtml"/>
+        <pattern value="/search-result" />
+        <view-id value="/search-result.xhtml"/>
     </url-mapping>
 
     <url-mapping id="add-activity">
