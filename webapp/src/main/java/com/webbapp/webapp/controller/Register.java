@@ -51,7 +51,7 @@ public class Register implements Serializable {
             appUsersEntity.setUserName(username);
             appUsersEntity.setUserPassword(encoder.encode(password));
             registerFacade.create(appUsersEntity);
-            return "index?faces-redirect=true";
+            return "login?faces-redirect=true";
         } else {
             return "register";
         }
