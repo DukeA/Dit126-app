@@ -1,7 +1,5 @@
 package com.webbapp.webapp.model;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,16 +15,9 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
-    private JPAQueryFactory queryFactory;
-    private QActivityEntity activity = QActivityEntity.activityEntity;
 
     public ActivityFacade() {
         super(ActivityEntity.class);
-    }
-
-    @PostConstruct
-    public void init() {
-        queryFactory = new JPAQueryFactory(em);
     }
 
     @Override
@@ -50,14 +41,5 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByTypes", ActivityEntity.class);
         query.setParameter("types", Stream.of("jogging").collect(Collectors.toList()));
         return query.getResultList();
-
-        /*List<ActivityEntity> activities = queryFactory.selectFrom(activity)
-                .where(activity.type.lower().in(filter
-                        .stream()
-                        .map(String::toLowerCase)
-                        .collect(Collectors.toList())))
-                .fetch();
-
-        return activities;*/
      }
 }
