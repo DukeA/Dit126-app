@@ -38,29 +38,30 @@ public class Login implements Serializable {
         String username = credentials.getUsername();
         String password = credentials.getPassword();
 
-        FacesContext context = FacesContext.getCurrentInstance();
-
         try {
            userSession.setUser(userFacade.login(username, password));
-        } catch (UserNotFoundException e) {
-            String message = "User not found";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (MultipleUsersFoundException e) {
-            String message = "Found multiple users with the same name";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (IncorrectPasswordException e) {
-            String message = "Incorrect password";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        }
+        catch (UserNotFoundException e) {
+            this.addErrorMessage("User not found");
+        }
+        catch (MultipleUsersFoundException e) {
+            this.addErrorMessage("Found multiple users with the same name");
+        }
+        catch (IncorrectPasswordException e) {
+            this.addErrorMessage("Incorrect password");
         }
 
-        if (userSession.getUser() != null) {
-            return "index";
-        } else {
-            return null;
-        }
+        return this.onLoad();
+    }
+
+    /**
+     * Adds an error message to login.xhtml depending on  Exception was caught
+     * during a failed login.
+     */
+    public void addErrorMessage(String message) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(loginButton.getClientId(context),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
     
     public String logout(){
