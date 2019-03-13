@@ -4,7 +4,6 @@ package com.webbapp.webapp.controller;
 import com.sun.xml.internal.ws.policy.AssertionSet;
 import com.webbapp.webapp.controller.ShowActivitys;
 import com.webbapp.webapp.model.*;
-import com.webbapp.webapp.util.AppUserSession;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -38,9 +37,6 @@ public class ShowActTest {
     private ActivityFacade activityFacade;
 
     @Mock
-    private LocationFacade locationFacade;
-
-    @Mock
     private ActivityEntity activityEntity;
 
     @Mock
@@ -48,9 +44,6 @@ public class ShowActTest {
 
     @Mock
     private AppUserEntity appUsersEntity;
-
-    @Mock
-    private AppUserSession userSession;
 
     @Before
     @DisplayName("Setup class")
@@ -264,105 +257,8 @@ public class ShowActTest {
         String onload = showActivitys.onload();
 
         verify(showActivitys).onload();
-        
+
         Assert.assertEquals(onload,"ShowAct?faces-redirect=true");
 
-    }
-
-    @Test
-    public void testDeleteNotLoggedIn() {
-        when(userSession.getUser()).thenReturn(null);
-        ActivityEntity activityEntity = new ActivityEntity();
-        AppUserEntity owner = new AppUserEntity();
-        owner.setUserName("alice");
-        owner.setUserPassword("alicePassword");
-
-        activityEntity.setAppUsersByUserId(owner);
-        activityEntity.setLocationByLocationId(new LocationEntity());
-        showActivitys.setActivityEntity(activityEntity);
-
-        String result = showActivitys.delete();
-        String expected = null;
-
-        Assert.assertEquals(result, expected);
-
-        verify(activityFacade, never()).remove(activityEntity);
-    }
-
-
-    @Test
-    public void testDeleteNotOwner() {
-        AppUserEntity loggedIn = new AppUserEntity();
-        loggedIn.setUserName("alice");
-        loggedIn.setUserPassword("alicePassword");
-
-        AppUserEntity activityOwner = new AppUserEntity();
-        activityOwner.setUserName("bob");
-        activityOwner.setUserPassword("bobPassword");
-
-        when(userSession.getUser()).thenReturn(loggedIn);
-        ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setAppUsersByUserId(activityOwner);
-
-        String result = showActivitys.delete();
-        String expected = null;
-
-        Assert.assertEquals(result, expected);
-
-        verify(activityFacade, never()).remove(activityEntity);
-    }
-
-    @Test
-    public void testDeleteNonExistingActivivty() {
-        AppUserEntity user = new AppUserEntity();
-        user.setUserName("alice");
-        user.setUserPassword("alicePassword");
-
-        when(userSession.getUser()).thenReturn(user);
-        ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setAppUsersByUserId(user);
-
-        LocationEntity locationEntity = new LocationEntity();
-
-        activityEntity.setLocationByLocationId(locationEntity);
-
-        showActivitys.setActivityid(0);
-        when(activityFacade.find(1)).thenReturn(null);
-
-        doNothing().when(locationFacade).remove(locationEntity);
-        showActivitys.onload();
-        String result = showActivitys.delete();
-        String expected = null;
-
-        Assert.assertEquals(result, expected);
-
-        verify(activityFacade, never()).remove(argThat(ae -> ae.equals(activityEntity)));
-    }
-
-    @Test
-    public void testDelete() {
-        AppUserEntity user = new AppUserEntity();
-        user.setUserName("alice");
-        user.setUserPassword("alicePassword");
-
-        when(userSession.getUser()).thenReturn(user);
-        ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setAppUsersByUserId(user);
-
-        LocationEntity locationEntity = new LocationEntity();
-
-        activityEntity.setLocationByLocationId(locationEntity);
-
-        showActivitys.setActivityid(0);
-        when(activityFacade.find(0)).thenReturn(activityEntity);
-
-        doNothing().when(locationFacade).remove(locationEntity);
-        showActivitys.onload();
-        String result = showActivitys.delete();
-        String expected = "index";
-
-        Assert.assertEquals(result, expected);
-
-        verify(activityFacade).remove(argThat(ae -> ae.equals(activityEntity)));
     }
 }
