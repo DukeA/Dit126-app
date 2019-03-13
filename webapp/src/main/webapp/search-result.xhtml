@@ -5,6 +5,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
     <ui:define name="content">
         <f:metadata>
@@ -12,7 +13,6 @@
         </f:metadata>
 
         <script type="text/javascript" src="display-activities.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
 
         <b:panel span="5">
             <div style="height: 360px; width: 360px" id="map"></div>
@@ -23,10 +23,19 @@
                 rendered="#{searchResult.activityEntities != null}"
                 value="#{searchResult.searchEnum}: Found #{searchResult.size} results for '#{searchResult.text}'"
             />
+
             <ui:repeat value="#{searchResult.activityEntities}" var="result">
+
                 <b:panel title="#{result.title}" collapsible="false">
                     <h:outputText value="#{result.description}"/>
                 </b:panel>
+
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
+                <script type="text/javascript">
+                    lat = '#{result.locationByLocationId.latitude}';
+                    lng = '#{result.locationByLocationId.longitude}';
+                    addMarker({lat, lng});
+                </script>
             </ui:repeat>
         </b:panel>
     </ui:define>
