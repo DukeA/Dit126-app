@@ -3,14 +3,13 @@ package com.webbapp.webapp.controller;
 
 //import com.webbapp.webapp.model.showActivity;
 
-import com.webbapp.webapp.model.ActivityEntity;
-import com.webbapp.webapp.model.ActivityFacade;
-import com.webbapp.webapp.model.ActivityType;
-import com.webbapp.webapp.model.ShowActivityFacade;
+import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.util.AppUserSession;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -20,7 +19,7 @@ import java.io.Serializable;
  */
 
 @Named(value = "showBean")
-@RequestScoped
+@ViewScoped
 public class ShowActivitys implements Serializable {
 
     @Getter
@@ -57,6 +56,12 @@ public class ShowActivitys implements Serializable {
 
     @Inject
     ShowActivityFacade activityFacade;
+
+    @Inject
+    LocationFacade locationFacade;
+
+    @Inject
+    AppUserSession userSession;
 
 
     private ActivityEntity activity;
@@ -103,6 +108,20 @@ public class ShowActivitys implements Serializable {
         } else {
             return "index";
         }
+    }
+
+    public String delete() {
+        if (isOwnActivity()) {
+            LocationEntity loc = activityEntity.getLocationByLocationId();
+            activityFacade.remove(activityEntity);
+            locationFacade.remove(loc);
+            return "index";
+        }
+        return null;
+    }
+
+    public boolean isOwnActivity() {
+        return activityEntity != null && userSession.getUser() != null && activityEntity.getAppUsersByUserId().equals(userSession.getUser());
     }
 
 }

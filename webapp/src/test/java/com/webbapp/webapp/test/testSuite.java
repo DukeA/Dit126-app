@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
         ShowActTest.class,
         RegisterFacadeTest.class
 })
+
 public class testSuite {
 
 
