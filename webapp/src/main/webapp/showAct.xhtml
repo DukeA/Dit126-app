@@ -38,6 +38,7 @@
         <script type="text/javascript">
             lat = '#{showBean.activityEntity.locationByLocationId.latitude}';
             lng = '#{showBean.activityEntity.locationByLocationId.longitude}';
-            addMarker({lat, lng});</script>
+            addMarker({lat, lng});
+            setMapPosition();</script>
     </ui:define>
 </ui:composition>
