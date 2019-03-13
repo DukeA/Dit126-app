@@ -1,6 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.util.AppUserSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +23,7 @@ public class EditActivityTest {
     @Mock
     private LocationFacade locationFacade;
     @Mock
-    private Login login;
+    private AppUserSession userSession;
 
 
     @Before
@@ -33,10 +34,10 @@ public class EditActivityTest {
     @Test
     @DisplayName("Getter setter test")
     public void gettersTest(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ac.setTitle("Hello");
         ac.setDescription("Desc");
@@ -54,10 +55,10 @@ public class EditActivityTest {
     @Test
     @DisplayName("Loading test")
     public void LoadingActivity(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
         activity.setType(ActivityType.TYPE1.name());
@@ -85,10 +86,10 @@ public class EditActivityTest {
     @Test
     @DisplayName("Add Test")
     public void testActivity(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
         activity.setType(ActivityType.TYPE1.name());
@@ -119,10 +120,10 @@ public class EditActivityTest {
     @Test
     @DisplayName("Edit invalid activity")
     public void addInvalidActivity(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
         activity.setType(ActivityType.TYPE1.name());
@@ -148,7 +149,7 @@ public class EditActivityTest {
     @Test
     @DisplayName("Add not loggedin activity")
     public void notLoggedinActivity(){
-        when(login.getUser()).thenReturn(null);
+        when(userSession.getUser()).thenReturn(null);
 
         ActivityEntity activity = new ActivityEntity();
         activity.setType(ActivityType.TYPE1.name());
@@ -174,10 +175,10 @@ public class EditActivityTest {
     @Test
     @DisplayName("City test")
     public void correctCityName(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
         activity.setType(ActivityType.TYPE1.name());

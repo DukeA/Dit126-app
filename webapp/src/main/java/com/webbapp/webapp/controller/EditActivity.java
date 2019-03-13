@@ -1,6 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.HttpRequest.HttpRequest;
 import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class EditActivity implements Serializable {
     LocationFacade locationFacade;
 
     @Inject
-    Login loginBean;
+    AppUserSession userSession;
 
     @Getter
     @Setter
@@ -80,7 +81,7 @@ public class EditActivity implements Serializable {
 
     public String onLoad() {
         current = activityFacade.find(Integer.parseInt(id));
-        if(current != null && loginBean.getUser() != null && current.getAppUsersByUserId().equals(loginBean.getUser())){
+        if(current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser())){
             title = current.getTitle();
             lat = current.getLocationByLocationId().getLatitude()+"";
             lng = current.getLocationByLocationId().getLongitude()+"";

@@ -1,6 +1,6 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUsersEntity;
+import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +32,7 @@ public class Register implements Serializable {
     @Inject
     RegisterFacade registerFacade;
 
-    private AppUsersEntity appUsersEntity;
+    private AppUserEntity appUsersEntity;
 
     /***
      *  The parameters are  returned from the input fields on the webbpage.
@@ -43,11 +43,11 @@ public class Register implements Serializable {
      */
 
     public String onRegister() {
-        List<AppUsersEntity> list = registerFacade.checkUserName(username);
+        List<AppUserEntity> list = registerFacade.checkUserName(username);
         if(list.size() <= 0) {
             System.out.println("Create User");
             PasswordEncoder encoder = new BCryptPasswordEncoder();
-            appUsersEntity = new AppUsersEntity();
+            appUsersEntity = new AppUserEntity();
             appUsersEntity.setUserName(username);
             appUsersEntity.setUserPassword(encoder.encode(password));
             registerFacade.create(appUsersEntity);

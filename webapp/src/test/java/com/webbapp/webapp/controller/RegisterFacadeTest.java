@@ -1,6 +1,6 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUsersEntity;
+import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.ArrayList;
 
 
@@ -44,7 +43,7 @@ public class RegisterFacadeTest {
     private RegisterFacade registerFacade;
 
     @Mock
-    private AppUsersEntity appUsersEntity;
+    private AppUserEntity appUsersEntity;
 
     @Mock
     private EntityManager entityManager;
@@ -66,7 +65,7 @@ public class RegisterFacadeTest {
         registerFacadeTest.registerFacade = new RegisterFacade();
         MockitoAnnotations.initMocks(registerFacadeTest.registerFacade);
 
-        registerFacadeTest.appUsersEntity = new AppUsersEntity();
+        registerFacadeTest.appUsersEntity = new AppUserEntity();
         MockitoAnnotations.initMocks(registerFacadeTest.appUsersEntity);
 
     }
@@ -82,7 +81,7 @@ public class RegisterFacadeTest {
         String userName = "Alice1234";
         String Password = "123456";
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        AppUsersEntity usersEntity = new AppUsersEntity();
+        AppUserEntity usersEntity = new AppUserEntity();
         Register n_regeister = new Register();
 
         usersEntity.setUserName(userName);
@@ -108,11 +107,11 @@ public class RegisterFacadeTest {
         String password ="123456";
 
 
-        appUsersEntity = new AppUsersEntity();
+        appUsersEntity = new AppUserEntity();
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUsersEntity> list = new ArrayList<>();
+        ArrayList<AppUserEntity> list = new ArrayList<>();
         list.add(appUsersEntity);
 
         entityManager =mock(EntityManager.class);
@@ -120,7 +119,7 @@ public class RegisterFacadeTest {
         RegisterFacade registerFacade = mock(RegisterFacade.class);
         when(registerFacade.checkUserName(userName)).thenReturn(list);
 
-        list = (ArrayList<AppUsersEntity>) registerFacade.checkUserName(userName);
+        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
         verify(registerFacade,times(1)).checkUserName(userName);
 
         Assert.assertTrue(list.size()==1);
@@ -143,11 +142,11 @@ public class RegisterFacadeTest {
 
         String encoded = encoder.encode(password);
 
-        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        AppUserEntity appUsersEntity = mock(AppUserEntity.class);
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUsersEntity> list = new ArrayList<>();
+        ArrayList<AppUserEntity> list = new ArrayList<>();
         entityManager =mock(EntityManager.class);
 
         registerFacade = mock(RegisterFacade.class);
@@ -196,18 +195,18 @@ public class RegisterFacadeTest {
 
         String encoded = encoder.encode(password);
 
-        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        AppUserEntity appUsersEntity = mock(AppUserEntity.class);
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUsersEntity> list = new ArrayList<>();
+        ArrayList<AppUserEntity> list = new ArrayList<>();
         list.add(appUsersEntity);
         entityManager =mock(EntityManager.class);
 
         registerFacade = mock(RegisterFacade.class);
 
         when(registerFacade.checkUserName(userName)).thenReturn(list);
-        list = (ArrayList<AppUsersEntity>) registerFacade.checkUserName(userName);
+        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
         verify(registerFacade,times(1)).checkUserName(userName);
 
         Assert.assertTrue(list.size()==1);

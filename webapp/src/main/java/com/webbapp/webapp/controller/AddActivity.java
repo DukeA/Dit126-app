@@ -1,6 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.HttpRequest.HttpRequest;
 import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class AddActivity implements Serializable {
     AddActivityFacade activityFacade;
 
     @Inject
-    AppUserFacade usersFacade;
+    AppUserSession userSession;
 
     @Getter
     @Setter
@@ -64,7 +65,7 @@ public class AddActivity implements Serializable {
                 loc.setLongitude(Double.parseDouble(lng));
                 loc.setCity(city.toLowerCase());
 
-                activity.setAppUsersByUserId(login.getUser());
+                activity.setAppUsersByUserId(userSession.getUser());
                 activity.setLocationByLocationId(loc);
 
                 activityFacade.create(activity);
@@ -73,7 +74,7 @@ public class AddActivity implements Serializable {
     }
 
     public String onLoad() {
-        if(login.getUser() != null){
+        if(userSession.getUser() != null){
             return null;
         } else{
             return "index.xhtml";

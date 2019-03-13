@@ -44,7 +44,7 @@ public class ShowActTest {
     private LocationEntity locationEntity;
 
     @Mock
-    private AppUsersEntity appUsersEntity;
+    private AppUserEntity appUsersEntity;
 
     @Before
     @DisplayName("Setup class")
@@ -64,7 +64,7 @@ public class ShowActTest {
         showActTest.locationEntity = new LocationEntity();
         MockitoAnnotations.initMocks(showActTest.locationEntity);
 
-        showActTest.appUsersEntity = new AppUsersEntity();
+        showActTest.appUsersEntity = new AppUserEntity();
         MockitoAnnotations.initMocks(showActTest.appUsersEntity);
     }
 
@@ -99,7 +99,7 @@ public class ShowActTest {
         String username ="Alice1234";
         String password ="12345";
 
-        AppUsersEntity usersEntity = new AppUsersEntity();
+        AppUserEntity usersEntity = new AppUserEntity();
         usersEntity.setUserName(username);
         usersEntity.setUserPassword(password);
 
@@ -140,7 +140,7 @@ public class ShowActTest {
         String userName = "Alice1234";
         String userPassword = "12345";
 
-        appUsersEntity =mock(AppUsersEntity.class);
+        appUsersEntity =mock(AppUserEntity.class);
         when(appUsersEntity.getUserName()).thenReturn(userName);
         when(appUsersEntity.getUserPassword()). thenReturn(userPassword);
 
@@ -205,7 +205,7 @@ public class ShowActTest {
         String userName = "Alice1234";
         String userPassword = "12345";
 
-        appUsersEntity =mock(AppUsersEntity.class);
+        appUsersEntity =mock(AppUserEntity.class);
         when(appUsersEntity.getUserName()).thenReturn(userName);
         when(appUsersEntity.getUserPassword()). thenReturn(userPassword);
 

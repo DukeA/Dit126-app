@@ -2,7 +2,7 @@ package com.webbapp.webapp.test;
 
 //import com.webbapp.webapp.model.Actvity;
 import com.webbapp.webapp.model.ActivityEntity;
-import com.webbapp.webapp.model.AppUsersEntity;
+import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.LocationEntity;
 import javafx.beans.binding.When;
 import org.eclipse.jdt.internal.compiler.ast.AssertStatement;
@@ -128,7 +128,7 @@ public class ActivityTest {
         String user ="Alice123";
         String passwd ="1234";
 
-        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        AppUserEntity appUsersEntity = mock(AppUserEntity.class);
         when(appUsersEntity.getUserName()).thenReturn(user);
         when(appUsersEntity.getUserPassword()).thenReturn(passwd);
 
@@ -195,7 +195,7 @@ public class ActivityTest {
         Assert.assertEquals(locCity,City);
         verify(locationEntity,times(1)).getCity();
 
-        AppUsersEntity appUsersEntity = mock(AppUsersEntity.class);
+        AppUserEntity appUsersEntity = mock(AppUserEntity.class);
         when(appUsersEntity.getUserName()).thenReturn(user);
         when(appUsersEntity.getUserPassword()).thenReturn(passwd);
 
@@ -256,7 +256,7 @@ public class ActivityTest {
         verify(activityEntity,times(1)).getLocationByLocationId();
         Assert.assertEquals(locationEntity,locEninty);
 
-        AppUsersEntity appUsersEntity1 = activityEntity.getAppUsersByUserId();
+        AppUserEntity appUsersEntity1 = activityEntity.getAppUsersByUserId();
         verify(activityEntity,times(1)).getAppUsersByUserId();
         Assert.assertEquals(appUsersEntity1,appUsersEntity);
 

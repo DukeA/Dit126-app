@@ -5,6 +5,7 @@ import com.webbapp.webapp.model.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import com.webbapp.webapp.util.AppUserSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +19,7 @@ public class AddActivityTest {
     @Mock
     private AddActivityFacade activityFacade;
     @Mock
-    private Login login;
+    private AppUserSession userSession;
 
 
     @Before
@@ -30,7 +31,7 @@ public class AddActivityTest {
     @Test
     @DisplayName("User not logged in")
     public void notLoggedInActivity(){
-        when(login.getUser()).thenReturn(null);
+        when(userSession.getUser()).thenReturn(null);
 
         String redirect = ac.onLoad();
 
@@ -40,10 +41,10 @@ public class AddActivityTest {
     @Test
     @DisplayName("Add Test")
     public void testActivity(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         String redirect = ac.onLoad();
         assertEquals(null, redirect);
@@ -68,10 +69,10 @@ public class AddActivityTest {
     @Test
     @DisplayName("Add invalid activity")
     public void addInvalidActivity(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ac.setDescription("Desc");
         ac.setLat("1.2");
@@ -87,8 +88,8 @@ public class AddActivityTest {
     @Test
     @DisplayName("Add not loggedin activity")
     public void notLoggedinActivity(){
-        AppUsersEntity user = null;
-        when(login.getUser()).thenReturn(user);
+        AppUserEntity user = null;
+        when(userSession.getUser()).thenReturn(user);
 
         ac.setDescription("Desc");
         ac.setLat("1.2");
@@ -103,10 +104,10 @@ public class AddActivityTest {
     @Test
     @DisplayName("City test")
     public void correctCityName(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ac.setTitle("Hello");
         ac.setDescription("Desc");
@@ -129,10 +130,10 @@ public class AddActivityTest {
     @Test
     @DisplayName("Getter setter test")
     public void gettersTest(){
-        AppUsersEntity user = new AppUsersEntity();
+        AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
         user.setUserPassword("alice_password");
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
 
         ac.setTitle("Hello");
         ac.setDescription("Desc");

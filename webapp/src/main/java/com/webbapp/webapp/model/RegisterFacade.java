@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Stateless
-public class RegisterFacade extends AbstractFacade<AppUsersEntity> {
+public class RegisterFacade extends AbstractFacade<AppUserEntity> {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
@@ -29,7 +29,7 @@ public class RegisterFacade extends AbstractFacade<AppUsersEntity> {
         return em;
     }
     public RegisterFacade() {
-        super(AppUsersEntity.class);
+        super(AppUserEntity.class);
     }
 
     /***
@@ -38,8 +38,8 @@ public class RegisterFacade extends AbstractFacade<AppUsersEntity> {
      * @param userName
      * @return List<AppUsersEntity>
      */
-    public List<AppUsersEntity> checkUserName(String userName) {
-        return em.createNamedQuery("app_user.register", AppUsersEntity.class).
+    public List<AppUserEntity> checkUserName(String userName) {
+        return em.createNamedQuery("app_user.register", AppUserEntity.class).
                 setParameter("userName",userName).getResultList();
     }
 
