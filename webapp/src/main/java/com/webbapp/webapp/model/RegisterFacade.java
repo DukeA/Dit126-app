@@ -13,16 +13,12 @@ import java.util.List;
  *  from the model class to get information from the Database
  *
  */
-
-
-
 @Stateless
 public class RegisterFacade extends AbstractFacade<AppUserEntity> {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
-    private Query query;
 
     @Override
     protected EntityManager getEntityManager() {
