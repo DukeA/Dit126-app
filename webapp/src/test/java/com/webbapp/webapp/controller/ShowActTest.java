@@ -4,7 +4,6 @@ package com.webbapp.webapp.controller;
 import com.sun.xml.internal.ws.policy.AssertionSet;
 import com.webbapp.webapp.controller.ShowActivitys;
 import com.webbapp.webapp.model.*;
-import javafx.beans.binding.When;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;

@@ -1,7 +1,5 @@
 package com.webbapp.webapp.model;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -4,8 +4,6 @@ package com.webbapp.webapp.test;
 import com.webbapp.webapp.model.ActivityEntity;
 import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.LocationEntity;
-import javafx.beans.binding.When;
-import org.eclipse.jdt.internal.compiler.ast.AssertStatement;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

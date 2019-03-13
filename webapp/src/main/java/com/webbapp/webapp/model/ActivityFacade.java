@@ -43,8 +43,4 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         return query.getResultList();
      }
 
-    public ActivityEntity getActivityById(int id) {
-        return queryFactory.selectFrom(activity).where(activity.activityId.eq(id)).fetchOne();
-    }
-
 }
