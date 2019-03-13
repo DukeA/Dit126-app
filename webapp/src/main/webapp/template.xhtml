@@ -24,9 +24,6 @@
                 <b:column span="1">
                     <b:navCommandLink value="Activities" action="pretty:list-activities" />
                 </b:column>
-                <b:column span="1">
-                    <b:navCommandLink value="Login" action="pretty:login" />
-                </b:column>
             </b:form>
             <b:form>
                 <b:column span="3">
@@ -49,6 +46,14 @@
                 </b:column>
             </b:form>
             <b:form>
+                <b:column span="1" rendered="#{userSession.user == null}">
+                    <b:row>
+                        <b:navCommandLink value="Login" action="pretty:login" />
+                    </b:row>
+                    <b:row>
+                        <b:navCommandLink value="Register" action="pretty:register" />
+                    </b:row>
+                </b:column>
                 <b:column span="3" rendered="#{userSession.user != null}">
                     <b:row>
                         <h:outputLabel value="Logged in as: #{userSession.user.userName}" />
