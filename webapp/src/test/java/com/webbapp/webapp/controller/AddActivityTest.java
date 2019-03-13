@@ -53,13 +53,13 @@ public class AddActivityTest {
         ac.setDescription("Desc");
         ac.setLat("1.2");
         ac.setLng("2.5");
-        ac.setType(ActivityType.TYPE1);
+        ac.setType(ActivityType.CANOEING);
 
         ac.add();
 
         verify(activityFacade).create(argThat((ActivityEntity activity) -> activity.getTitle().equals("Hello")
                                                                                 && activity.getDescription().equals("Desc")
-                                                                                && activity.getType().equals(ActivityType.TYPE1.name())
+                                                                                && activity.getType().equals(ActivityType.CANOEING.name())
                                                                                 && activity.getLocationByLocationId().getLatitude() == 1.2
                                                                                 && activity.getLocationByLocationId().getLongitude() == 2.5
                                                                                 && activity.getAppUsersByUserId().getUserName().equals("Alice")));
@@ -77,7 +77,7 @@ public class AddActivityTest {
         ac.setDescription("Desc");
         ac.setLat("1.2");
         ac.setLng("2.5");
-        ac.setType(ActivityType.TYPE1);
+        ac.setType(ActivityType.CYCLING);
 
         ac.add();
 
@@ -94,7 +94,7 @@ public class AddActivityTest {
         ac.setDescription("Desc");
         ac.setLat("1.2");
         ac.setLng("2.5");
-        ac.setType(ActivityType.TYPE1);
+        ac.setType(ActivityType.CYCLING);
 
         ac.add();
 
@@ -113,13 +113,13 @@ public class AddActivityTest {
         ac.setDescription("Desc");
         ac.setLat("57.710532072641925");
         ac.setLng("11.958837619599421");
-        ac.setType(ActivityType.TYPE5);
+        ac.setType(ActivityType.HIKING);
 
         ac.add();
 
         verify(activityFacade).create(argThat((ActivityEntity activity) -> activity.getTitle().equals("Hello")
                 && activity.getDescription().equals("Desc")
-                && activity.getType().equals(ActivityType.TYPE5.name())
+                && activity.getType().equals(ActivityType.HIKING.name())
                 && activity.getLocationByLocationId().getLatitude() == 57.710532072641925
                 && activity.getLocationByLocationId().getLongitude() == 11.958837619599421
                 && activity.getAppUsersByUserId().getUserName().equals("Alice")
@@ -139,7 +139,7 @@ public class AddActivityTest {
         ac.setDescription("Desc");
         ac.setLat("57.710532072641925");
         ac.setLng("11.958837619599421");
-        ac.setType(ActivityType.TYPE5);
+        ac.setType(ActivityType.LONGBOARDING);
 
         ac.add();
 
@@ -147,7 +147,7 @@ public class AddActivityTest {
         assertEquals("Desc", ac.getDescription());
         assertEquals("57.710532072641925", ac.getLat());
         assertEquals("11.958837619599421", ac.getLng());
-        assertEquals(ac.getType(), ActivityType.TYPE5);
+        assertEquals(ac.getType(), ActivityType.LONGBOARDING);
     }
 
 }

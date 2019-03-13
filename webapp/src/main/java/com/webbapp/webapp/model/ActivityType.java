@@ -9,13 +9,16 @@ package com.webbapp.webapp.model;
 
 
 public enum ActivityType {
-    TYPE1,
-    TYPE2,
-    TYPE3,
-    TYPE4,
-    TYPE5,
-    TYPE6,
-    TYPE7,
-    TYPE8,
-    JOGGING
+    SWIMMING,
+    CYCLING,
+    RUNNING,
+    CANOEING,
+    HIKING,
+    SKIING,
+    MOUNTAINBIKING,
+    SKATEBOARDING,
+    LONGBOARDING,
+    CLIMBING,
+    SAILING,
+    ROLLERSKATING
 }

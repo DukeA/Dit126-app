@@ -43,13 +43,13 @@ public class EditActivityTest {
         ac.setDescription("Desc");
         ac.setLat("57.710532072641925");
         ac.setLng("11.958837619599421");
-        ac.setType(ActivityType.TYPE5);
+        ac.setType(ActivityType.RUNNING);
 
         assertEquals("Hello", ac.getTitle());
         assertEquals("Desc", ac.getDescription());
         assertEquals("57.710532072641925", ac.getLat());
         assertEquals("11.958837619599421", ac.getLng());
-        assertEquals(ac.getType(), ActivityType.TYPE5);
+        assertEquals(ac.getType(), ActivityType.RUNNING);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class EditActivityTest {
         when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(ActivityType.SKIING.name());
         activity.setTitle("Test");
         activity.setDescription("Desc");
         LocationEntity loc = new LocationEntity();
@@ -79,7 +79,7 @@ public class EditActivityTest {
         assertEquals("Desc", ac.getDescription());
         assertEquals("1.0", ac.getLat());
         assertEquals("2.0", ac.getLng());
-        assertEquals(ActivityType.TYPE1, ac.getType());
+        assertEquals(ActivityType.SKIING, ac.getType());
 
     }
 
@@ -92,7 +92,7 @@ public class EditActivityTest {
         when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(ActivityType.CYCLING.name());
         activity.setTitle("Test");
         activity.setDescription("Desc");
         LocationEntity loc = new LocationEntity();
@@ -110,7 +110,7 @@ public class EditActivityTest {
 
         verify(activityFacade).edit(argThat((ActivityEntity ac) -> ac.getTitle().equals("Test")
                                                                                 && ac.getDescription().equals("Desc")
-                                                                                && ac.getType().equals(ActivityType.TYPE1.name())
+                                                                                && ac.getType().equals(ActivityType.CYCLING.name())
                                                                                 && ac.getLocationByLocationId().getLatitude() == 1.0
                                                                                 && ac.getLocationByLocationId().getLongitude() == 2.0
                                                                                 && ac.getAppUsersByUserId().getUserName().equals("Alice")));
@@ -126,7 +126,7 @@ public class EditActivityTest {
         when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(ActivityType.CYCLING.name());
         activity.setTitle(null);
         activity.setDescription("Desc");
         LocationEntity loc = new LocationEntity();
@@ -152,7 +152,7 @@ public class EditActivityTest {
         when(userSession.getUser()).thenReturn(null);
 
         ActivityEntity activity = new ActivityEntity();
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(ActivityType.RUNNING.name());
         activity.setTitle("Title");
         activity.setDescription("Desc");
         LocationEntity loc = new LocationEntity();
@@ -181,7 +181,7 @@ public class EditActivityTest {
         when(userSession.getUser()).thenReturn(user);
 
         ActivityEntity activity = new ActivityEntity();
-        activity.setType(ActivityType.TYPE1.name());
+        activity.setType(ActivityType.RUNNING.name());
         activity.setTitle("Test");
         activity.setDescription("Desc");
         LocationEntity loc = new LocationEntity();
@@ -199,7 +199,7 @@ public class EditActivityTest {
 
         verify(activityFacade).edit(argThat((ActivityEntity ac) -> ac.getTitle().equals("Test")
                 && ac.getDescription().equals("Desc")
-                && ac.getType().equals(ActivityType.TYPE1.name())
+                && ac.getType().equals(ActivityType.RUNNING.name())
                 && ac.getLocationByLocationId().getLatitude() == 57.710532072641925
                 && ac.getLocationByLocationId().getLongitude() == 11.958837619599421
                 && ac.getAppUsersByUserId().getUserName().equals("Alice")
