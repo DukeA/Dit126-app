@@ -6,10 +6,11 @@ function initMap() {
         center: {lat:  57.687799, lng: 11.978534},
         zoom: 15
     });
+
+    google.maps.event.addListenerOnce(map, 'bounds_changed', () => map.setZoom(Math.min(map.getZoom(), 15)));
 }
 
 function addMarker({lat, lng}) {
-    console.log('ADDING');
   var marker = new google.maps.Marker({
     position: {lat: Number(lat), lng: Number(lng)},
     map: map
@@ -18,15 +19,13 @@ function addMarker({lat, lng}) {
 }
 
 function deleteMarkers() {
-  console.log("DELETING MARKERS");
   markers.forEach(marker => marker.setMap(null));
   markers = [];
 }
 
 function setMapPosition() {
-    console.log('SETTING');
     const bounds = new google.maps.LatLngBounds();
     markers.forEach(marker => bounds.extend(marker.getPosition()));
 
-    map.fitBounds(bounds)
+    map.fitBounds(bounds);
 }
