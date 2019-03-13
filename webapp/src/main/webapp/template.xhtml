@@ -18,8 +18,8 @@
 
         <b:navBar brand="DIT126" fixed="top">
             <b:form style="padding-top:15px">
-                <b:column span="1">
-                    <b:navCommandLink value="Map" />
+                <b:column span="1" rendered="#{userSession.user != null}">
+                    <b:navCommandLink value="Add activity" action="pretty:add-activity"/>
                 </b:column>
                 <b:column span="1">
                     <b:navCommandLink value="Activities" action="pretty:list-activities" />
