@@ -13,6 +13,7 @@
     <ui:composition template="template.xhtml"
     >
         <ui:define name="content">
+            <script type="text/javascript" src="display-activities.js"></script>
             <b:form horizontal="true">
                 <b:selectMultiMenu id="selectActivities"
                                    value="#{activityList.types}">
@@ -28,11 +29,8 @@
             </b:form>
 
             <div style="height: 500px" id="map"></div>
-
-            <script type="text/javascript" src="display-activites.js"></script>
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="defer"></script>
-
             <h:panelGroup id="outputActivities">
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
                 <ui:repeat id="outputActivitiesList"
                            rendered="${activityList.types != null}"
                            value="#{activityList.list}"
@@ -40,14 +38,16 @@
                         <b:column span="3">
                             <b:panel styleClass="panel" title="#{activity.title}" collapsible="false">
                                 <h:outputText styleClass="panel-body" value="#{activity.description}"/>
-                                <b:button styleClass="btn" value="Go To" />
+                                <b:button styleClass="btn" value="Go To" outcome="showAct?id=#{activity.activityId}"/>
                             </b:panel>
                         </b:column>
                     <script type="text/javascript">
                         lat = '#{activity.locationByLocationId.latitude}';
                         lng = '#{activity.locationByLocationId.longitude}';
-                        addMarker({lat, lng});</script>
+                        addMarker({lat, lng});
+                    </script>
                 </ui:repeat>
+                <script jsf:rendered="#{activityList.types !=null}" type="text/javascript">setMapPosition()</script>
             </h:panelGroup>
         </ui:define>
 

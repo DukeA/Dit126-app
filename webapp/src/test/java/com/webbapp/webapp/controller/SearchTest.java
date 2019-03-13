@@ -18,7 +18,7 @@ public class SearchTest {
     public void testCapitalisedString() {
         String s = "GOTHENBURG";
         search.setText(s);
-        search.prepareString();
+//        search.prepareString();
         assertEquals(s.toLowerCase(), search.getText());
     }
 
@@ -26,7 +26,7 @@ public class SearchTest {
     public void testWhitespaceString() {
         String s = " GoThEnBuRg       ";
         search.setText(s);
-        search.prepareString();
+//        search.prepareString();
         assertEquals("gothenburg", search.getText());
     }
 

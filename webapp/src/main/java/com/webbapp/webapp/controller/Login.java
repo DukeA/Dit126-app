@@ -6,37 +6,61 @@
 package com.webbapp.webapp.controller;
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.webbapp.webapp.model.AppUsersEntity;
-import com.webbapp.webapp.model.UsersFacade;
+import com.webbapp.webapp.model.AppUserFacade;
+import com.webbapp.webapp.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- *
- * @author gustav
- */
 @Named(value="login")
-@SessionScoped
-public class Login implements Serializable{
-    
-    private String username;
-    
-    private String password;
-    
+@RequestScoped
+public class Login implements Serializable {
+
     @Inject
-    UsersFacade userManager;
-    
-    private AppUsersEntity user;
-    
-    public String login(){
-        user = userManager.findUser(username, password);
-        if(user != null){
-            return "list?faces-redirect=true";
-        }else{
+    private Credentials credentials;
+
+    @Inject
+    private AppUserFacade userFacade;
+
+    @Inject
+    private AppUserSession userSession;
+
+    @Getter @Setter
+    private UIComponent loginButton;
+
+    public String login() {
+
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        try {
+           userSession.setUser(userFacade.login(username, password));
+        } catch (UserNotFoundException e) {
+            String message = "User not found";
+            context.addMessage(loginButton.getClientId(context),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        } catch (MultipleUsersFoundException e) {
+            String message = "Found multiple users with the same name";
+            context.addMessage(loginButton.getClientId(context),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        } catch (IncorrectPasswordException e) {
+            String message = "Incorrect password";
+            context.addMessage(loginButton.getClientId(context),
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        }
+
+        if (userSession.getUser() != null) {
             return "index";
+        } else {
+            return null;
         }
     }
     
@@ -44,20 +68,13 @@ public class Login implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
-    
-    public String getUserName(){
-        return username;
+
+    public String onLoad() {
+        if (userSession.getUser() != null) {
+            return "index";
+        } else {
+            return null;
+        }
     }
-    
-    public String getPassword(){
-        return username;
-    }
-    
-    public void setUserName(String name){
-        username = name;
-    }
-    
-    public void setPassword(String pass){
-        password = pass;
-    }
+
 }

@@ -6,6 +6,8 @@ function initMap() {
         center: {lat:  57.687799, lng: 11.978534},
         zoom: 15
     });
+
+    google.maps.event.addListenerOnce(map, 'bounds_changed', () => map.setZoom(Math.min(map.getZoom(), 15)));
 }
 
 function addMarker({lat, lng}) {
@@ -17,7 +19,13 @@ function addMarker({lat, lng}) {
 }
 
 function deleteMarkers() {
-  console.log("DELETING MARKERS");
   markers.forEach(marker => marker.setMap(null));
   markers = [];
+}
+
+function setMapPosition() {
+    const bounds = new google.maps.LatLngBounds();
+    markers.forEach(marker => bounds.extend(marker.getPosition()));
+
+    map.fitBounds(bounds);
 }

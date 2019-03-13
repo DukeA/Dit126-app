@@ -6,20 +6,7 @@
                 xmlns:b="http://bootsfaces.net/ui"
 >
     <ui:define name="content">
-        <b:form horizontal="true">
-            <h:outputLabel value="Username" />
-            <b:inputText span="4"
-                         value="#{login.userName}"
-                         required="true"
-                         requiredMessage="Username is required"/>
-            <h:outputLabel value="Password" />
-            <b:inputSecret span="4"
-                           value="#{login.password}"
-                           required="true"
-                           requiredMessage="Password is required"/>
-            <b:commandButton look="primary" action="#{login.login}" value="Login"/>
-        </b:form>
-    </ui:define>
 
+    </ui:define>
 </ui:composition>
 

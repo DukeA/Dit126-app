@@ -19,6 +19,13 @@ import javax.validation.constraints.NotNull;
         ),@NamedQuery(
                 name="activity.getActivity" ,
                 query = "SELECT u FROM ActivityEntity  u WHERE u.title = :title AND u.type = :type")
+        ,@NamedQuery(
+                    name="ActivityEntity.findByActivityId",
+                    query = "SELECT u FROM ActivityEntity  u WHERE u.activityId =:ActivityId")
+        ,
+        @NamedQuery(
+                name="ActivityEntity.findByTypes",
+                query = "SELECT a FROM ActivityEntity a WHERE a.type IN :types")
 })
 public class ActivityEntity {
 
@@ -38,6 +45,7 @@ public class ActivityEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_activity_id_seq")
     @NotNull
     @Column(name = "activity_id", updatable=false)
+    @Getter
     private Integer activityId;
 
     @Basic
@@ -64,7 +72,7 @@ public class ActivityEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @Getter
     @Setter
-    private AppUsersEntity appUsersByUserId;
+    private AppUserEntity appUsersByUserId;
 
 
 
