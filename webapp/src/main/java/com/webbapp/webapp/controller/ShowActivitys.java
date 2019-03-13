@@ -114,12 +114,13 @@ public class ShowActivitys implements Serializable {
             LocationEntity loc = activityEntity.getLocationByLocationId();
             activityFacade.remove(activityEntity);
             locationFacade.remove(loc);
+            return "index";
         }
-        return "index";
+        return null;
     }
 
     public boolean isOwnActivity() {
-        return activityEntity.getAppUsersByUserId() != null && login.getUser() != null && activityEntity.getAppUsersByUserId().equals(login.getUser());
+        return activityEntity != null && login.getUser() != null && activityEntity.getAppUsersByUserId().equals(login.getUser());
     }
 
 }
