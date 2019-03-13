@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Stateless
 public class ActivityFacade extends AbstractFacade<ActivityEntity> {
@@ -45,14 +46,18 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         return query.getResultList();
     }
 
-    public List<ActivityEntity> getFilteredActivities(List<String> filter) {
-        List<ActivityEntity> activities = queryFactory.selectFrom(activity)
+    public List<ActivityEntity> findByTypes(List<String> types) {
+        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByTypes", ActivityEntity.class);
+        query.setParameter("types", Stream.of("jogging").collect(Collectors.toList()));
+        return query.getResultList();
+
+        /*List<ActivityEntity> activities = queryFactory.selectFrom(activity)
                 .where(activity.type.lower().in(filter
                         .stream()
                         .map(String::toLowerCase)
                         .collect(Collectors.toList())))
                 .fetch();
 
-        return activities;
+        return activities;*/
      }
 }

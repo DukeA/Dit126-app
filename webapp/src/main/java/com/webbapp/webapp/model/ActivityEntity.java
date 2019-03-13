@@ -22,6 +22,10 @@ import javax.validation.constraints.NotNull;
         ,@NamedQuery(
                     name="ActivityEntity.findByActivityId",
                     query = "SELECT u FROM ActivityEntity  u WHERE u.activityId =:ActivityId")
+        ,
+        @NamedQuery(
+                name="ActivityEntity.findByTypes",
+                query = "SELECT a FROM ActivityEntity a WHERE a.type IN :types")
 })
 public class ActivityEntity {
 
