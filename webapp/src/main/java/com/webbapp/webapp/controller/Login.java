@@ -34,7 +34,7 @@ public class Login implements Serializable {
     @Getter @Setter
     private UIComponent loginButton;
 
-    public void login() {
+    public String login() {
 
         String username = credentials.getUsername();
         String password = credentials.getPassword();
@@ -55,6 +55,12 @@ public class Login implements Serializable {
             String message = "Incorrect password";
             context.addMessage(loginButton.getClientId(context),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        }
+
+        if (userSession.getUser() != null) {
+            return "index";
+        } else {
+            return null;
         }
     }
     
