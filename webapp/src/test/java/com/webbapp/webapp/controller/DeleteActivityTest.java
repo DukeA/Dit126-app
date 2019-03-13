@@ -26,7 +26,7 @@ public class DeleteActivityTest {
 
 
     @Mock
-    private AppUserSession login;
+    private AppUserSession userSession;
 
     @Mock
     private ShowActivityFacade showActivityFacade;
@@ -36,7 +36,7 @@ public class DeleteActivityTest {
 
     @Test
     public void testDeleteNotLoggedIn() {
-        when(login.getUser()).thenReturn(null);
+        when(userSession.getUser()).thenReturn(null);
         ActivityEntity activityEntity = new ActivityEntity();
         AppUserEntity owner = new AppUserEntity();
         owner.setUserName("alice");
@@ -65,7 +65,6 @@ public class DeleteActivityTest {
         activityOwner.setUserName("bob");
         activityOwner.setUserPassword("bobPassword");
 
-        when(login.getUser()).thenReturn(loggedIn);
         ActivityEntity activityEntity = new ActivityEntity();
         activityEntity.setAppUsersByUserId(activityOwner);
 
@@ -83,25 +82,16 @@ public class DeleteActivityTest {
         user.setUserName("alice");
         user.setUserPassword("alicePassword");
 
-        when(login.getUser()).thenReturn(user);
-        ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setAppUsersByUserId(user);
-
-        LocationEntity locationEntity = new LocationEntity();
-
-        activityEntity.setLocationByLocationId(locationEntity);
-
         showActivitys.setActivityid(0);
-        when(showActivityFacade.find(1)).thenReturn(null);
+        when(showActivityFacade.find(0)).thenReturn(null);
 
-        doNothing().when(locationFacade).remove(locationEntity);
         showActivitys.onload();
         String result = showActivitys.delete();
         String expected = null;
 
         Assert.assertEquals(result, expected);
 
-        verify(showActivityFacade, never()).remove(argThat(ae -> ae.equals(activityEntity)));
+        verify(showActivityFacade, never()).remove(any());
     }
 
     @Test
@@ -110,7 +100,7 @@ public class DeleteActivityTest {
         user.setUserName("alice");
         user.setUserPassword("alicePassword");
 
-        when(login.getUser()).thenReturn(user);
+        when(userSession.getUser()).thenReturn(user);
         ActivityEntity activityEntity = new ActivityEntity();
         activityEntity.setAppUsersByUserId(user);
 
