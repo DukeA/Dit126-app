@@ -5,15 +5,12 @@
  */
 package com.webbapp.webapp.model;
 
-import com.webbapp.webapp.util.IncorrectPasswordException;
-import com.webbapp.webapp.util.MultipleUsersFoundException;
-import com.webbapp.webapp.util.UserNotFoundException;
+import com.webbapp.webapp.util.exception.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 

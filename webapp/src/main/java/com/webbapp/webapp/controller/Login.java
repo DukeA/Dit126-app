@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import com.webbapp.webapp.model.AppUserFacade;
 import com.webbapp.webapp.util.*;
+import com.webbapp.webapp.util.exception.*;
 import lombok.Getter;
 import lombok.Setter;
 

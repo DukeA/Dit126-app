@@ -1,4 +1,4 @@
-package com.webbapp.webapp.util;
+package com.webbapp.webapp.util.exception;
 
 public class MultipleUsersFoundException extends Exception {
 
