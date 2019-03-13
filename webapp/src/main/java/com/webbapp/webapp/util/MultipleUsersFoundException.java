@@ -1,5 +1,5 @@
 package com.webbapp.webapp.util;
 
-public class MultipleUsersFoundException extends Throwable {
+public class MultipleUsersFoundException extends Exception {
 
 }

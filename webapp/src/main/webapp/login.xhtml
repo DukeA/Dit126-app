@@ -25,11 +25,18 @@
                     requiredMessage="Password is required"
                 />
             </b:row>
-            <b:commandButton
-                look="primary"
-                action="#{login.login}"
-                value="Login"
-            />
+            <b:row>
+                <b:commandButton
+                    id="loginButton"
+                    binding="#{login.loginButton}"
+                    look="primary"
+                    action="#{login.login}"
+                    value="Login"
+                />
+            </b:row>
+            <b:row>
+                <b:messages for="loginButton" span="3"/>
+            </b:row>
         </b:form>
     </ui:define>
 

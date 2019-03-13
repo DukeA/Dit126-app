@@ -6,15 +6,17 @@
 package com.webbapp.webapp.controller;
 
 import java.io.Serializable;
-import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.webbapp.webapp.model.AppUserFacade;
 import com.webbapp.webapp.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named(value="login")
 @RequestScoped
@@ -29,27 +31,30 @@ public class Login implements Serializable {
     @Inject
     private AppUserSession userSession;
 
+    @Getter @Setter
+    private UIComponent loginButton;
+
     public void login() {
 
         String username = credentials.getUsername();
         String password = credentials.getPassword();
 
+        FacesContext context = FacesContext.getCurrentInstance();
+
         try {
            userSession.setUser(userFacade.login(username, password));
         } catch (UserNotFoundException e) {
             String message = "User not found";
-            FacesContext.getCurrentInstance().addMessage(null,
+            context.addMessage(loginButton.getClientId(context),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         } catch (MultipleUsersFoundException e) {
             String message = "Found multiple users with the same name";
-            FacesContext.getCurrentInstance().addMessage(null,
+            context.addMessage(loginButton.getClientId(context),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (IncorrectPasswordException e){
+        } catch (IncorrectPasswordException e) {
             String message = "Incorrect password";
-            FacesContext.getCurrentInstance().addMessage(null,
+            context.addMessage(loginButton.getClientId(context),
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (EJBException e) {
-            //perhaps should be avoided
         }
     }
     

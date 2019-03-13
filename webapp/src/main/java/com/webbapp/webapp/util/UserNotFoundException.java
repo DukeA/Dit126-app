@@ -1,5 +1,5 @@
 package com.webbapp.webapp.util;
 
-public class UserNotFoundException extends Throwable {
+public class UserNotFoundException extends Exception {
 
 }
