@@ -4,11 +4,10 @@ package com.webbapp.webapp.model;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
- * @author: Adan Grandén
+ * @author Adan Grandén
  *  The Facade Model class for register to get the  information
  *  from the model class to get information from the Database
  *
@@ -31,7 +30,7 @@ public class RegisterFacade extends AbstractFacade<AppUserEntity> {
     /***
      *  The Query to get all the information from the database where
      *  the  userName equals the username and return that to the controller
-     * @param userName
+     * @param userName String value of the username
      * @return List<AppUsersEntity>
      */
     public List<AppUserEntity> checkUserName(String userName) {

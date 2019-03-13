@@ -45,11 +45,11 @@ public class RegisterFacadeTest {
     @Mock
     private AppUserEntity appUsersEntity;
 
-    @Mock
-    private EntityManager entityManager;
 
 
-
+    /***
+     * The method initializes all the mock values for the test case before it starts
+     */
 
     @Before
     public  void setup() {
@@ -82,16 +82,16 @@ public class RegisterFacadeTest {
         String Password = "123456";
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         AppUserEntity usersEntity = new AppUserEntity();
-        Register n_regeister = new Register();
+        Register n_Register = new Register();
 
         usersEntity.setUserName(userName);
         usersEntity.setUserPassword(Password);
 
-        n_regeister.setPassword(encoder.encode(Password));
-        n_regeister.setUsername(userName);
+        n_Register.setPassword(encoder.encode(Password));
+        n_Register.setUsername(userName);
 
-        assertEquals(userName,n_regeister.getUsername());
-        assertSame(encoder.matches(Password,n_regeister.getPassword()), true);
+        assertEquals(userName,n_Register.getUsername());
+        assertSame(encoder.matches(Password,n_Register.getPassword()), true);
     }
 
 
@@ -114,7 +114,6 @@ public class RegisterFacadeTest {
         ArrayList<AppUserEntity> list = new ArrayList<>();
         list.add(appUsersEntity);
 
-        entityManager =mock(EntityManager.class);
 
         RegisterFacade registerFacade = mock(RegisterFacade.class);
         when(registerFacade.checkUserName(userName)).thenReturn(list);
@@ -122,7 +121,8 @@ public class RegisterFacadeTest {
         list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
         verify(registerFacade,times(1)).checkUserName(userName);
 
-        Assert.assertTrue(list.size()==1);
+
+        Assert.assertTrue(list.size()<=0);
 
     }
 
@@ -147,35 +147,34 @@ public class RegisterFacadeTest {
         appUsersEntity.setUserPassword(password);
 
         ArrayList<AppUserEntity> list = new ArrayList<>();
-        entityManager =mock(EntityManager.class);
 
         registerFacade = mock(RegisterFacade.class);
 
         when(registerFacade.checkUserName(userName)).thenReturn(list);
-        Assert.assertEquals(list.size()<=0, true);
+        Assert.assertTrue(list.size()<=0);
 
         register =mock(Register.class);
 
         when(register.getUsername()).thenReturn(userName);
 
         String name = register.getUsername();
-        verify(register,times(1)).getUsername();
+
 
         Assert.assertEquals(name,userName);
 
         when(register.getPassword()).thenReturn(encoded);
         String registerPassword = register.getPassword();
-        verify(register,times(1)).getPassword();
+
 
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
         when(register.onRegister()).thenReturn("index?faces-redirect=true");
 
-        String onregister = register.onRegister();
+        String on_Register = register.onRegister();
         verify(register,times(1)).onRegister();
 
-        Assert.assertEquals("index?faces-redirect=true", onregister);
+        Assert.assertEquals("index?faces-redirect=true", on_Register);
 
     }
 
@@ -201,7 +200,6 @@ public class RegisterFacadeTest {
 
         ArrayList<AppUserEntity> list = new ArrayList<>();
         list.add(appUsersEntity);
-        entityManager =mock(EntityManager.class);
 
         registerFacade = mock(RegisterFacade.class);
 
@@ -216,21 +214,20 @@ public class RegisterFacadeTest {
         register.setUsername(userName);
         when(register.getUsername()).thenReturn(userName);
         String name = register.getUsername();
-        verify(register,times(1)).getUsername();
+
 
         Assert.assertEquals(name,userName);
 
         when(register.getPassword()).thenReturn(encoded);
         String registerPassword = register.getPassword();
-        verify(register,times(1)).getPassword();
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
         when(register.onRegister()).thenReturn("register");
-        String onregister = register.onRegister();
+        String on_register = register.onRegister();
         verify(register,times(1)).onRegister();
 
-        Assert.assertEquals("register", onregister);
+        Assert.assertEquals("register", on_register);
 
     }
 

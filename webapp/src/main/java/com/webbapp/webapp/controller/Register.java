@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -37,10 +36,10 @@ public class Register implements Serializable {
     private AppUserSession userSession;
 
     /***
-     *  The parameters are  returned from the input fields on the webbpage.
+     *  The parameters are  returned from the input fields on the web page.
      *  It is checked if a user already exists in the database by checking the
      *  username in the database. If the Username exist then the new user would not be created.
-     * @return String for the new webbpage.
+     * @return String for the new web page.
      */
 
     public String onRegister() {
