@@ -2,13 +2,11 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.ActivityEntity;
 import com.webbapp.webapp.model.ActivityFacade;
-import com.webbapp.webapp.model.ActivityType;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -32,7 +30,7 @@ public class ActivityListTest {
 
     @Test
     public void testGetListEmpty() {
-        List<ActivityEntity> res = activityFacade.getFilteredActivities(new ArrayList<>());
+        List<ActivityEntity> res = activityFacade.findByTypes(new ArrayList<>());
         List<ActivityEntity> exp = new ArrayList<>();
 
         Assert.assertEquals(res, exp);
@@ -44,6 +42,6 @@ public class ActivityListTest {
 
         activityList.getList();
 
-        verify(activityFacade).getFilteredActivities(argThat(types -> types.equals(Stream.of("JOGGING").collect(Collectors.toList()))));
+        verify(activityFacade).findByTypes(argThat(types -> types.equals(Stream.of("JOGGING").collect(Collectors.toList()))));
     }
 }
