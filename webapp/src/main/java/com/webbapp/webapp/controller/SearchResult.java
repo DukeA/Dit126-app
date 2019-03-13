@@ -12,6 +12,10 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * RequestScoped bean that performs a search based on
+ * the user's input from Search.java.
+ */
 @Named("searchResult")
 @RequestScoped
 public class SearchResult implements Serializable {

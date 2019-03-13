@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.webbapp.webapp.controller;
 
 import java.io.Serializable;
@@ -18,6 +13,10 @@ import com.webbapp.webapp.util.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * RequestScoped bean that requires three other beans to perform
+ * a successful login.
+ */
 @Named(value="login")
 @RequestScoped
 public class Login implements Serializable {
