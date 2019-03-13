@@ -2,6 +2,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.util.AppUserSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -31,6 +32,9 @@ public class Register implements Serializable {
 
     @Inject
     RegisterFacade registerFacade;
+
+    @Inject
+    private AppUserSession userSession;
 
     private AppUserEntity appUsersEntity;
 
@@ -68,5 +72,13 @@ public class Register implements Serializable {
     }
     public String getPassword() {
         return this.password;
+    }
+
+    public String onLoad() {
+        if (userSession.getUser() != null) {
+            return "index";
+        } else {
+            return null;
+        }
     }
 }

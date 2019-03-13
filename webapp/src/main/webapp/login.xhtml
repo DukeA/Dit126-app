@@ -4,8 +4,13 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
 >
     <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{login.onLoad}" />
+        </f:metadata>
+
         <b:form horizontal="true">
             <b:row>
                 <h:outputLabel value="Username" />

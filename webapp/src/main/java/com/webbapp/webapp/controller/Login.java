@@ -63,4 +63,12 @@ public class Login implements Serializable {
         return "index?faces-redirect=true";
     }
 
+    public String onLoad() {
+        if (userSession.getUser() != null) {
+            return "index";
+        } else {
+            return null;
+        }
+    }
+
 }
