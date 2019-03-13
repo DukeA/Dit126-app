@@ -19,12 +19,10 @@
         <view-id value="/showAct.xhtml" />
     </url-mapping>
 
-
     <url-mapping id ="register">
         <pattern value="/register"/>
         <view-id value ="/register.xhtml"/>
     </url-mapping>
-
 
     <url-mapping id="search-result">
         <pattern value="/search-result" />
@@ -39,6 +37,11 @@
     <url-mapping id="edit-activity">
         <pattern value="/edit/#{id}" />
         <view-id value="/edit-activity.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/login.xhtml" />
     </url-mapping>
 
 </pretty-config>

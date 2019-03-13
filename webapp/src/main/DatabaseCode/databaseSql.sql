@@ -9,8 +9,8 @@ CREATE TABLE Location
 CREATE TABLE App_User
 (
   user_id       serial      NOT NULL,
-  user_password VARCHAR(255) NOT NULL,
   user_name     VARCHAR(255) NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
   PRIMARY KEY (user_id)
 );
 CREATE TABLE Activity
@@ -27,8 +27,8 @@ CREATE TABLE Activity
 INSERT  INTO LOCATION (latitude, longitude, city)
 VALUES (57.6877304,11.9788552,'gothenburg');
 
-INSERT  INTO  APP_USER(user_password, user_name)
-VALUES ('qwerty','DukeA');
+INSERT  INTO  APP_USER(user_name, user_password)
+VALUES ('DukeA','$2a$10$H0j25chrkHp84UiIQ/Oyg.R5EZ.SsZZJuYCcuotmjnjuK.TKmXevS');
 
 INSERT  INTO ACTIVITY (title, type, description, location_id, user_id)
 VALUES ('Monaden','JOGGING','Nice jogging experiance',1,1);

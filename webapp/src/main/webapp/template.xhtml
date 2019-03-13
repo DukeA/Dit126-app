@@ -16,14 +16,22 @@
 
     <h:body style="padding-top: 100px">
 
-        <c:set var="root" value="#{request.contextPath}" />
-
-        <b:navBar brand="DIT126" brandHref="${root}" fixed="top">
-            <b:navbarLinks>
-                <b:navLink value="Map"></b:navLink>
-                <b:navLink value="Activities" href="${root}/list-activities"></b:navLink>
-            </b:navbarLinks>
-            <b:form horizontal="true" style="padding-top:10px; padding-left:250px">
+        <b:navBar brand="DIT126" fixed="top">
+            <b:form style="padding-top:15px">
+                <b:column span="1">
+                    <b:navCommandLink value="Map" />
+                </b:column>
+                <b:column span="1">
+                    <b:navCommandLink value="Activities" action="pretty:list-activities" />
+                </b:column>
+                <b:column span="1">
+                    <b:navCommandLink value="ShowAct" action="pretty:showAct"/>
+                </b:column>
+                <b:column span="1">
+                    <b:navCommandLink value="Login" action="pretty:login" />
+                </b:column>
+            </b:form>
+            <b:form>
                 <b:column span="3">
                     <b:inputText placeholder="Search..."
                                  value="#{searchBean.text}">
@@ -35,10 +43,23 @@
                         </f:facet>
                     </b:inputText>
                 </b:column>
+
                 <b:column span="3">
-                    <b:commandButton value="Search" look="primary"
-                                     action="pretty:search-result"
+                    <b:commandButton
+                        value="Search" look="primary"
+                        actionListener="#{searchBean.search}"
+                        action="pretty:search-result"
                     />
+                </b:column>
+            </b:form>
+            <b:form>
+                <b:column span="3" rendered="#{userSession.user != null}">
+                    <b:row>
+                        <h:outputLabel value="Logged in as: #{userSession.user.userName}" />
+                    </b:row>
+                    <b:row>
+                        <h:commandLink action="#{login.logout()}">Logout</h:commandLink>
+                    </b:row>
                 </b:column>
             </b:form>
         </b:navBar>
