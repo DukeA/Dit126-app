@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.facade.RegisterFacade;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 
 

@@ -1,6 +1,9 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.model.entity.ActivityEntity;
+import com.webbapp.webapp.model.entity.LocationEntity;
+import com.webbapp.webapp.model.facade.AddActivityFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.HttpRequest.HttpRequest;
 import com.webbapp.webapp.util.HttpRequest.HttpRequestFactory;

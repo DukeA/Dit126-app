@@ -1,9 +1,9 @@
 package com.webbapp.webapp.test;
 
 //import com.webbapp.webapp.model.Actvity;
-import com.webbapp.webapp.model.ActivityEntity;
-import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.LocationEntity;
+import com.webbapp.webapp.model.entity.ActivityEntity;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.entity.LocationEntity;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class ActivityTest {
      * Test the method for the Activity entity
      */
     @Test
-    @DisplayName("Testing the Activity Entity")
+    @DisplayName("Testing the Activity entity")
     public void testConstructor(){
         String title =  "Runner";
         String type = "Jogging";

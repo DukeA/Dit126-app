@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.facade.RegisterFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

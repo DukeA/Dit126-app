@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.webbapp.webapp.model.LoginFacade;
+import com.webbapp.webapp.model.facade.LoginFacade;
 import com.webbapp.webapp.util.*;
 import com.webbapp.webapp.util.exception.*;
 import lombok.Getter;

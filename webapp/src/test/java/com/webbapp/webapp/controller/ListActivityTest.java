@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.ActivityEntity;
-import com.webbapp.webapp.model.ActivityFacade;
+import com.webbapp.webapp.model.entity.ActivityEntity;
+import com.webbapp.webapp.model.facade.ActivityFacade;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

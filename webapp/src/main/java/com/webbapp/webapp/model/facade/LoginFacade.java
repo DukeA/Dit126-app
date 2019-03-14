@@ -1,5 +1,6 @@
-package com.webbapp.webapp.model;
+package com.webbapp.webapp.model.facade;
 
+import com.webbapp.webapp.model.entity.AppUserEntity;
 import com.webbapp.webapp.util.exception.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -10,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Facade that use BCrypt to resolve if the user's credentials
+ * facade that use BCrypt to resolve if the user's credentials
  * are correct.
  */
 @Stateless

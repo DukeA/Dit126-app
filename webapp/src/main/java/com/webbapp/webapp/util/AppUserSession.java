@@ -1,6 +1,6 @@
 package com.webbapp.webapp.util;
 
-import com.webbapp.webapp.model.AppUserEntity;
+import com.webbapp.webapp.model.entity.AppUserEntity;
 import lombok.Getter;
 import lombok.Setter;
 

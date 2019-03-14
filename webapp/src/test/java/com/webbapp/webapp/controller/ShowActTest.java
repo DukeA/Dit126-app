@@ -1,12 +1,12 @@
 package com.webbapp.webapp.controller;
 
 
-import com.sun.xml.internal.ws.policy.AssertionSet;
-import com.webbapp.webapp.controller.ShowActivitys;
-import com.webbapp.webapp.model.*;
+import com.webbapp.webapp.model.entity.ActivityEntity;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.entity.LocationEntity;
+import com.webbapp.webapp.model.facade.ActivityFacade;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -15,10 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**

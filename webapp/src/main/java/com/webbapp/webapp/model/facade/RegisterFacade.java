@@ -1,5 +1,7 @@
-package com.webbapp.webapp.model;
+package com.webbapp.webapp.model.facade;
 
+
+import com.webbapp.webapp.model.entity.AppUserEntity;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Adan Grandén
- *  The Facade Model class for register to get the  information
+ *  The facade Model class for register to get the  information
  *  from the model class to get information from the Database
  *
  */

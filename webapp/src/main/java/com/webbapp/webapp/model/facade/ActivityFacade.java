@@ -1,13 +1,12 @@
-package com.webbapp.webapp.model;
+package com.webbapp.webapp.model.facade;
 
-import javax.annotation.PostConstruct;
+import com.webbapp.webapp.model.entity.ActivityEntity;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Stateless
 public class ActivityFacade extends AbstractFacade<ActivityEntity> {

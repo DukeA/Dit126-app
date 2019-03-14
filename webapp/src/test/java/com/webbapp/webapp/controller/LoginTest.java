@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.LoginFacade;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.facade.LoginFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.Credentials;
 import com.webbapp.webapp.util.exception.IncorrectPasswordException;

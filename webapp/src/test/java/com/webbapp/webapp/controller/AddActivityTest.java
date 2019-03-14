@@ -5,6 +5,9 @@ import com.webbapp.webapp.model.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import com.webbapp.webapp.model.entity.ActivityEntity;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.facade.AddActivityFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import org.junit.Before;
 import org.junit.Test;
