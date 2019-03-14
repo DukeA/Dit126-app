@@ -62,7 +62,7 @@ public class EditActivity implements Serializable {
     public void edit(){
 
         //Do the editing
-        if(current != null && title != null && description != null && type != null && lat != null && lng != null) {
+        if(isOwner() && current != null && title != null && description != null && type != null && lat != null && lng != null) {
             current.setTitle(title);
             current.setType(type.name());
             current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
@@ -84,7 +84,7 @@ public class EditActivity implements Serializable {
      * */
     public String onLoad() {
         current = activityFacade.find(Integer.parseInt(id));
-        if(current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser())){
+        if(isOwner()){
             title = current.getTitle();
             lat = current.getLocationByLocationId().getLatitude()+"";
             lng = current.getLocationByLocationId().getLongitude()+"";
@@ -94,5 +94,9 @@ public class EditActivity implements Serializable {
         } else{
             return "index.xhtml";
         }
+    }
+
+    private boolean isOwner(){
+        return current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser());
     }
 }

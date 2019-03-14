@@ -51,7 +51,7 @@ public class AddActivity implements Serializable {
      * Uses the lat, lng, title, type, description instance variables as input for the activity and location
      * */
     public void add(){
-        if(title != null && description != null && type != null && lat != null && lng != null){
+        if(userSession.getUser() != null && title != null && description != null && type != null && lat != null && lng != null){
             ActivityEntity activity = new ActivityEntity();
             activity.setTitle(title);
             activity.setDescription(description);

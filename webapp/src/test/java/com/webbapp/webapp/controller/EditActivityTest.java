@@ -173,6 +173,91 @@ public class EditActivityTest {
     }
 
     @Test
+    @DisplayName("Not owner of activity direct")
+    public void notOwnerOfActivityDirect(){
+        AppUserEntity user = new AppUserEntity();
+        user.setUserName("Alice");
+        user.setUserPassword("alice_password");
+        when(userSession.getUser()).thenReturn(user);
+
+        AppUserEntity user2 = new AppUserEntity();
+        user.setUserName("Bob");
+        user.setUserPassword("bob_password");
+
+        ActivityEntity activity = new ActivityEntity();
+        activity.setType(ActivityType.RUNNING.name());
+        activity.setTitle("Test");
+        activity.setDescription("Desc");
+        LocationEntity loc = new LocationEntity();
+        loc.setLatitude(57.710532072641925);
+        loc.setLongitude(11.958837619599421);
+        activity.setLocationByLocationId(loc);
+        activity.setAppUsersByUserId(user2);
+
+        ac.setId("1");
+        when(activityFacade.find(1)).thenReturn(activity);
+
+        ac.edit();
+        verify(activityFacade, never()).edit(Mockito.any());
+    }
+
+    @Test
+    @DisplayName("Not owner of activity")
+    public void notOwnerOfActivity(){
+        AppUserEntity user = new AppUserEntity();
+        user.setUserName("Alice");
+        user.setUserPassword("alice_password");
+        when(userSession.getUser()).thenReturn(user);
+
+        AppUserEntity user2 = new AppUserEntity();
+        user.setUserName("Bob");
+        user.setUserPassword("bob_password");
+
+        ActivityEntity activity = new ActivityEntity();
+        activity.setType(ActivityType.RUNNING.name());
+        activity.setTitle("Test");
+        activity.setDescription("Desc");
+        LocationEntity loc = new LocationEntity();
+        loc.setLatitude(57.710532072641925);
+        loc.setLongitude(11.958837619599421);
+        activity.setLocationByLocationId(loc);
+        activity.setAppUsersByUserId(user2);
+
+        ac.setId("1");
+        when(activityFacade.find(1)).thenReturn(activity);
+
+        String redirect = ac.onLoad();
+
+        assertEquals("index.xhtml", redirect);
+
+
+        ac.edit();
+        verify(activityFacade, never()).edit(Mockito.any());
+    }
+
+    @Test
+    @DisplayName("Add not loggedin activity")
+    public void notLoggedinDirectActivity(){
+        when(userSession.getUser()).thenReturn(null);
+
+        ActivityEntity activity = new ActivityEntity();
+        activity.setType(ActivityType.RUNNING.name());
+        activity.setTitle("Title");
+        activity.setDescription("Desc");
+        LocationEntity loc = new LocationEntity();
+        loc.setLatitude(1);
+        loc.setLongitude(2);
+        activity.setLocationByLocationId(loc);
+        activity.setAppUsersByUserId(null);
+
+        ac.setId("1");
+        when(activityFacade.find(1)).thenReturn(activity);
+
+        ac.edit();
+        verify(activityFacade, never()).edit(Mockito.any());
+    }
+
+    @Test
     @DisplayName("City test")
     public void correctCityName(){
         AppUserEntity user = new AppUserEntity();
