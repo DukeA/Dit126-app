@@ -122,7 +122,7 @@ public class RegisterFacadeTest {
         verify(registerFacade,times(1)).checkUserName(userName);
 
 
-        Assert.assertTrue(list.size()<=0);
+        Assert.assertTrue(list.size()<=1);
 
     }
 
