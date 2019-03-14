@@ -4,6 +4,8 @@ import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
+import com.webbapp.webapp.util.exception.UserNameNullOrEmptyException;
+import com.webbapp.webapp.util.exception.UserPasswordNullOrEmptyException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +29,7 @@ import java.util.List;
  */
 
 
-@Named(value="register")
+@Named(value = "register")
 @RequestScoped
 public class Register implements Serializable {
 
@@ -41,7 +43,8 @@ public class Register implements Serializable {
     @Inject
     private AppUserSession userSession;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private UIComponent registerButton;
 
     /***
@@ -55,11 +58,21 @@ public class Register implements Serializable {
     public String register() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         AppUserEntity appUsersEntity = new AppUserEntity();
+        if (username == null || username.equals("")) {
+            this.addErrorMessage("Username can't be empty");
+            return "register";
+        }
         appUsersEntity.setUserName(username);
+        if (password == null || password.equals("")) {
+            this.addErrorMessage("Username_password can't be empty");
+            return "register";
+        }
         appUsersEntity.setUserPassword(encoder.encode(password));
         try {
             registerFacade.checkUserName(username);
             registerFacade.create(appUsersEntity);
+            return "index";
+
         } catch (MultipleUsersFoundException e) {
             this.addErrorMessage("Found multiple users with the same name");
         }
@@ -90,7 +103,7 @@ public class Register implements Serializable {
      */
     public String onLoad() {
         if (userSession.getUser() != null) {
-            return "login?faces-redirect=true";
+            return "index";
         } else {
             return null;
         }

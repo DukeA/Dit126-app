@@ -2,6 +2,8 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.util.exception.UserNameNullOrEmptyException;
+import com.webbapp.webapp.util.exception.UserPasswordNullOrEmptyException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -169,10 +171,11 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-        when(register.register()).thenReturn("index?faces-redirect=true");
+            when(register.register()).thenReturn("index?faces-redirect=true");
+
 
         String on_Register = register.register();
-        verify(register,times(1)).register();
+            verify(register,times(1)).register();
 
         Assert.assertEquals("index?faces-redirect=true", on_Register);
 
