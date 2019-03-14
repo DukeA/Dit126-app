@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.AppUserFacade;
+import com.webbapp.webapp.model.LoginFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.Credentials;
 import com.webbapp.webapp.util.exception.IncorrectPasswordException;
@@ -27,7 +27,7 @@ public class LoginTest {
     private Credentials credentials;
 
     @Mock
-    private AppUserFacade userFacade;
+    private LoginFacade loginFacade;
 
     @Mock
     private AppUserSession userSession;
@@ -66,23 +66,23 @@ public class LoginTest {
 
     @Test(expected = UserNotFoundException.class)
     public void userNotFoundException() throws Exception {
-        when(userFacade.login(username, password))
+        when(loginFacade.login(username, password))
                 .thenThrow(UserNotFoundException.class);
-        userFacade.login(username, password);
+        loginFacade.login(username, password);
     }
 
     @Test(expected = IncorrectPasswordException.class)
     public void incorrectPasswordException() throws Exception {
-        when(userFacade.login(username, password))
+        when(loginFacade.login(username, password))
                 .thenThrow(IncorrectPasswordException.class);
-        userFacade.login(username, password);
+        loginFacade.login(username, password);
     }
 
     @Test(expected = MultipleUsersFoundException.class)
     public void multipleUsersFoundException() throws Exception {
-        when(userFacade.login(username, password))
+        when(loginFacade.login(username, password))
                 .thenThrow(MultipleUsersFoundException.class);
-        userFacade.login(username, password);
+        loginFacade.login(username, password);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class LoginTest {
         user.setUserName(username);
         user.setUserPassword(encoded);
 
-        when(userFacade.login(username, password)).thenReturn(user);
+        when(loginFacade.login(username, password)).thenReturn(user);
         when(userSession.getUser()).thenReturn(user);
         assertTrue(BCrypt.checkpw(password, user.getUserPassword()));
         assertEquals(username, user.getUserName());
@@ -109,10 +109,10 @@ public class LoginTest {
 
         assertFalse(BCrypt.checkpw(incorrectPassword, user.getUserPassword()));
 
-        when(userFacade.login(username, incorrectPassword))
+        when(loginFacade.login(username, incorrectPassword))
                 .thenThrow(IncorrectPasswordException.class);
         try {
-            userFacade.login(username, incorrectPassword);
+            loginFacade.login(username, incorrectPassword);
         } catch (IncorrectPasswordException e) {
             assertNull(userSession.getUser());
             assertNull(login.login());

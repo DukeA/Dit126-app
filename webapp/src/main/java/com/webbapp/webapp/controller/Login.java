@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.webbapp.webapp.model.AppUserFacade;
+import com.webbapp.webapp.model.LoginFacade;
 import com.webbapp.webapp.util.*;
 import com.webbapp.webapp.util.exception.*;
 import lombok.Getter;
@@ -26,7 +26,7 @@ public class Login implements Serializable {
     private Credentials credentials;
 
     @Inject
-    private AppUserFacade userFacade;
+    private LoginFacade loginFacade;
 
     @Inject
     private AppUserSession userSession;
@@ -40,7 +40,7 @@ public class Login implements Serializable {
         String password = credentials.getPassword();
 
         try {
-           userSession.setUser(userFacade.login(username, password));
+           userSession.setUser(loginFacade.login(username, password));
         }
         catch (UserNotFoundException e) {
             this.addErrorMessage("User not found");

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.webbapp.webapp.model;
 
 import com.webbapp.webapp.util.exception.*;
@@ -14,9 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-
+/**
+ * Facade that use BCrypt to resolve if the user's credentials
+ * are correct.
+ */
 @Stateless
-public class AppUserFacade extends AbstractFacade<AppUserEntity> {
+public class LoginFacade extends AbstractFacade<AppUserEntity> {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
@@ -26,18 +24,23 @@ public class AppUserFacade extends AbstractFacade<AppUserEntity> {
         return em;
     }
 
-    public AppUserFacade() {
+    public LoginFacade() {
         super(AppUserEntity.class);
+    }
+
+    public List<AppUserEntity> findUsername(String username) {
+        TypedQuery<AppUserEntity> q = em.createNamedQuery("app_user.findUsername", AppUserEntity.class);
+        q.setParameter("userName", username);
+        return q.getResultList();
     }
     
     public AppUserEntity login(String username, String password) throws
             UserNotFoundException,
             MultipleUsersFoundException,
             IncorrectPasswordException {
-        TypedQuery<AppUserEntity> q = em.createNamedQuery("app_user.findUsername", AppUserEntity.class);
-        q.setParameter("userName", username);
 
-        List<AppUserEntity> result = q.getResultList();
+        List<AppUserEntity> result = this.findUsername(username);
+
         if (result.size() == 0) {
             throw new UserNotFoundException();
         } else if (result.size() > 1) {
