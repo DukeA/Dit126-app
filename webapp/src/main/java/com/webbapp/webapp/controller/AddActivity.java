@@ -52,24 +52,30 @@ public class AddActivity implements Serializable {
      * */
     public void add(){
         if(userSession.getUser() != null && title != null && description != null && type != null && lat != null && lng != null){
-            ActivityEntity activity = new ActivityEntity();
-            activity.setTitle(title);
-            activity.setDescription(description);
-            activity.setType(type.name());
 
-            HttpRequest req = HttpRequestFactory.getHttpRequest();
-            String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
-            if(city != null){
-                LocationEntity loc = new LocationEntity();
-                loc.setLatitude(Double.parseDouble(lat));
-                loc.setLongitude(Double.parseDouble(lng));
-                loc.setCity(city.toLowerCase());
+            try{
+                ActivityEntity activity = new ActivityEntity();
+                activity.setTitle(title);
+                activity.setDescription(description);
+                activity.setType(type.name());
 
-                activity.setAppUsersByUserId(userSession.getUser());
-                activity.setLocationByLocationId(loc);
+                HttpRequest req = HttpRequestFactory.getHttpRequest();
+                String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+                if(city != null){
+                    LocationEntity loc = new LocationEntity();
+                    loc.setLatitude(Double.parseDouble(lat));
+                    loc.setLongitude(Double.parseDouble(lng));
+                    loc.setCity(city.toLowerCase());
 
-                activityFacade.create(activity);
+                    activity.setAppUsersByUserId(userSession.getUser());
+                    activity.setLocationByLocationId(loc);
+
+                    activityFacade.create(activity);
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
+
         }
     }
 

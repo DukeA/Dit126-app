@@ -63,19 +63,25 @@ public class EditActivity implements Serializable {
 
         //Do the editing
         if(isOwner() && current != null && title != null && description != null && type != null && lat != null && lng != null) {
-            current.setTitle(title);
-            current.setType(type.name());
-            current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
-            current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
+            try{
+                current.setTitle(title);
+                current.setType(type.name());
 
-            HttpRequest req = HttpRequestFactory.getHttpRequest();
-            String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
-            //Save the changes
+                current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
+                current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
 
-            current.getLocationByLocationId().setCity(city.toLowerCase());
 
-            locationFacade.edit(current.getLocationByLocationId());
-            activityFacade.edit(current);
+                HttpRequest req = HttpRequestFactory.getHttpRequest();
+                String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+                //Save the changes
+
+                current.getLocationByLocationId().setCity(city.toLowerCase());
+
+                locationFacade.edit(current.getLocationByLocationId());
+                activityFacade.edit(current);
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
