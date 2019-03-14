@@ -10,22 +10,23 @@ import javax.validation.constraints.NotNull;
 @Table(name = "activity", schema = "public", catalog = "dit126")
 @NamedQueries({
         @NamedQuery(
-            name = "ActivityEntity.findByType",
+            name  = "ActivityEntity.findByType",
             query = "SELECT a FROM ActivityEntity a WHERE a.type = :type"
         ),
         @NamedQuery(
-            name = "ActivityEntity.findByCity",
-            query = "SELECT a FROM ActivityEntity a, LocationEntity l WHERE l.city = :city"
+            name  = "ActivityEntity.findByCity",
+            query = "SELECT a FROM ActivityEntity a, LocationEntity l " +
+                    "WHERE a.locationByLocationId.locationId = l.locationId AND l.city = :city"
         ),@NamedQuery(
-                name="activity.getActivity" ,
-                query = "SELECT u FROM ActivityEntity  u WHERE u.title = :title AND u.type = :type")
+            name  = "activity.getActivity" ,
+            query = "SELECT u FROM ActivityEntity  u WHERE u.title = :title AND u.type = :type")
         ,@NamedQuery(
-                    name="ActivityEntity.findByActivityId",
-                    query = "SELECT u FROM ActivityEntity  u WHERE u.activityId =:ActivityId")
+            name  ="ActivityEntity.findByActivityId",
+            query = "SELECT u FROM ActivityEntity  u WHERE u.activityId =:ActivityId")
         ,
         @NamedQuery(
-                name="ActivityEntity.findByTypes",
-                query = "SELECT a FROM ActivityEntity a WHERE a.type IN :types")
+            name  = "ActivityEntity.findByTypes",
+            query = "SELECT a FROM ActivityEntity a WHERE a.type IN :types")
 })
 public class ActivityEntity {
 
