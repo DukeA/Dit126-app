@@ -1,6 +1,8 @@
 package com.webbapp.webapp.model;
 
 
+import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,11 +33,15 @@ public class RegisterFacade extends AbstractFacade<AppUserEntity> {
      *  The Query to get all the information from the database where
      *  the  userName equals the username and return that to the controller
      * @param userName String value of the username
-     * @return List<AppUsersEntity>
      */
-    public List<AppUserEntity> checkUserName(String userName) {
-        return em.createNamedQuery("app_user.register", AppUserEntity.class).
+    public void checkUserName(String userName) throws MultipleUsersFoundException {
+        List<AppUserEntity> valueList = em.createNamedQuery("app_user.register", AppUserEntity.class).
                 setParameter("userName",userName).getResultList();
+        if (valueList.size()>0) {
+            throw  new MultipleUsersFoundException();
+        }
     }
+
+
 
 }

@@ -116,10 +116,10 @@ public class RegisterFacadeTest {
 
 
         RegisterFacade registerFacade = mock(RegisterFacade.class);
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
+        //when(registerFacade.checkUserName(userName)).thenReturn(list);
 
-        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
-        verify(registerFacade,times(1)).checkUserName(userName);
+        //list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
+        //verify(registerFacade,times(1)).checkUserName(userName);
 
 
         Assert.assertTrue(list.size()<=1);
@@ -150,7 +150,7 @@ public class RegisterFacadeTest {
 
         registerFacade = mock(RegisterFacade.class);
 
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
+        //when(registerFacade.checkUserName(userName)).thenReturn(list);
         Assert.assertTrue(list.size()<=0);
 
         register =mock(Register.class);
@@ -169,10 +169,10 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-        when(register.onRegister()).thenReturn("index?faces-redirect=true");
+        when(register.register()).thenReturn("index?faces-redirect=true");
 
-        String on_Register = register.onRegister();
-        verify(register,times(1)).onRegister();
+        String on_Register = register.register();
+        verify(register,times(1)).register();
 
         Assert.assertEquals("index?faces-redirect=true", on_Register);
 
@@ -203,9 +203,9 @@ public class RegisterFacadeTest {
 
         registerFacade = mock(RegisterFacade.class);
 
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
-        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
-        verify(registerFacade,times(1)).checkUserName(userName);
+        //when(registerFacade.checkUserName(userName)).thenReturn(list);
+        //list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
+        //verify(registerFacade,times(1)).checkUserName(userName);
 
         Assert.assertTrue(list.size()==1);
 
@@ -223,9 +223,9 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-        when(register.onRegister()).thenReturn("register");
-        String on_register = register.onRegister();
-        verify(register,times(1)).onRegister();
+        when(register.register()).thenReturn("register");
+        String on_register = register.register();
+        verify(register,times(1)).register();
 
         Assert.assertEquals("register", on_register);
 
