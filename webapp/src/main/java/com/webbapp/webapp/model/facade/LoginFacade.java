@@ -5,8 +5,7 @@ import com.webbapp.webapp.util.exception.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -15,17 +14,13 @@ import java.util.List;
  * are correct.
  */
 @Stateless
-public class LoginFacade extends AppUserFacade {
+public class LoginFacade {
 
-    @PersistenceContext(unitName = "NewPersistenceUnit")
-    private EntityManager em;
-
-    public LoginFacade() {
-        super();
-    }
+    @Inject
+    private AppUserFacade userFacade;
 
     public List<AppUserEntity> findUsername(String username) {
-        TypedQuery<AppUserEntity> q = em.createNamedQuery("app_user.findUsername", AppUserEntity.class);
+        TypedQuery<AppUserEntity> q = userFacade.getEntityManager().createNamedQuery("app_user.findUsername", AppUserEntity.class);
         q.setParameter("userName", username);
         return q.getResultList();
     }

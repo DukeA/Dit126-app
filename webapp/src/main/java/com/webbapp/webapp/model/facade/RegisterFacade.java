@@ -4,8 +4,7 @@ package com.webbapp.webapp.model.facade;
 import com.webbapp.webapp.model.entity.AppUserEntity;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -15,14 +14,10 @@ import java.util.List;
  *
  */
 @Stateless
-public class RegisterFacade extends AppUserFacade {
+public class RegisterFacade {
 
-    @PersistenceContext(unitName = "NewPersistenceUnit")
-    private EntityManager em;
-
-    public RegisterFacade() {
-        super();
-    }
+    @Inject
+    private AppUserFacade userFacade;
 
     /***
      *  The Query to get all the information from the database where
@@ -31,8 +26,12 @@ public class RegisterFacade extends AppUserFacade {
      * @return List<AppUsersEntity>
      */
     public List<AppUserEntity> checkUserName(String userName) {
-        return em.createNamedQuery("app_user.register", AppUserEntity.class).
+        return userFacade.getEntityManager().createNamedQuery("app_user.register", AppUserEntity.class).
                 setParameter("userName",userName).getResultList();
+    }
+
+    public void create(AppUserEntity user) {
+        userFacade.create(user);
     }
 
 }
