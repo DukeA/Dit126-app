@@ -3,14 +3,13 @@ package com.webbapp.webapp.util.HttpRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 /**
  * @author Gustav
+ * Class that handles HTTP requests to the Google maps API
  * */
 class UrlConnectionHttpRequest implements HttpRequest{
 
@@ -46,7 +45,7 @@ class UrlConnectionHttpRequest implements HttpRequest{
                 JSONArray addressComponents = arr.getJSONObject(i).getJSONArray("address_components");
                 //For every result loop the adress_component
                 for(int j = 0;j<addressComponents.length();j++){
-                    //Check if the type array in adress_component contains postal or localaty
+                    //Check if the type array in adress_component contains postal or locality
                     JSONObject addressComponent = addressComponents.getJSONObject(j);
                     if(isPostalOrLocality(addressComponent)){
                         //If so we have found the city name
@@ -57,11 +56,7 @@ class UrlConnectionHttpRequest implements HttpRequest{
 
             return "";
 
-        }catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {;
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

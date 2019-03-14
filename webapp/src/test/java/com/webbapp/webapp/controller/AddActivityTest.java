@@ -39,6 +39,23 @@ public class AddActivityTest {
     }
 
     @Test
+    @DisplayName("User not logged direct")
+    public void notLoggedInDirectActivity(){
+        when(userSession.getUser()).thenReturn(null);
+
+        ac.setTitle("Hello");
+        ac.setDescription("Desc");
+        ac.setLat("1.2");
+        ac.setLng("2.5");
+        ac.setType(ActivityType.CANOEING);
+
+        ac.add();
+
+        verify(activityFacade, never()).create(any());
+
+    }
+
+    @Test
     @DisplayName("Add Test")
     public void testActivity(){
         AppUserEntity user = new AppUserEntity();

@@ -5,7 +5,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:b="http://bootsfaces.net/ui"
 >
     <h:head>
@@ -14,12 +13,12 @@
         <title>Activity Search</title>
     </h:head>
 
-    <h:body style="padding-top: 100px">
+    <h:body>
 
-        <b:navBar brand="DIT126" fixed="top">
+        <b:navBar brand="DIT126" stlye="position: sticky; top:0">
             <b:form style="padding-top:15px">
-                <b:column span="1">
-                    <b:navCommandLink value="Map" />
+                <b:column span="1" rendered="#{userSession.user != null}">
+                    <b:navCommandLink value="Add activity" action="pretty:add-activity"/>
                 </b:column>
                 <b:column span="1">
                     <b:navCommandLink value="Activities" action="pretty:list-activities" />

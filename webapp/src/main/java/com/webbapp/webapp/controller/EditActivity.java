@@ -12,12 +12,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named(value="editActivity")
-@ViewScoped
 /**
  * @author Gustav
  * This class is the responsible controller for handling editing activities.
  */
+@Named(value="editActivity")
+@ViewScoped
 public class EditActivity implements Serializable {
 
     @Inject
@@ -62,26 +62,35 @@ public class EditActivity implements Serializable {
     public void edit(){
 
         //Do the editing
-        if(current != null && title != null && description != null && type != null && lat != null && lng != null) {
-            current.setTitle(title);
-            current.setType(type.name());
-            current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
-            current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
+        if(isOwner() && current != null && title != null && description != null && type != null && lat != null && lng != null) {
+            try{
+                current.setTitle(title);
+                current.setType(type.name());
 
-            HttpRequest req = HttpRequestFactory.getHttpRequest();
-            String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
-            //Save the changes
+                current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
+                current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
 
-            current.getLocationByLocationId().setCity(city.toLowerCase());
 
-            locationFacade.edit(current.getLocationByLocationId());
-            activityFacade.edit(current);
+                HttpRequest req = HttpRequestFactory.getHttpRequest();
+                String city = req.getCity(Double.parseDouble(lat), Double.parseDouble(lng));
+                //Save the changes
+
+                current.getLocationByLocationId().setCity(city.toLowerCase());
+
+                locationFacade.edit(current.getLocationByLocationId());
+                activityFacade.edit(current);
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
+    /**
+     * Initial setup when page is loaded
+     * */
     public String onLoad() {
         current = activityFacade.find(Integer.parseInt(id));
-        if(current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser())){
+        if(isOwner()){
             title = current.getTitle();
             lat = current.getLocationByLocationId().getLatitude()+"";
             lng = current.getLocationByLocationId().getLongitude()+"";
@@ -91,5 +100,9 @@ public class EditActivity implements Serializable {
         } else{
             return "index.xhtml";
         }
+    }
+
+    private boolean isOwner(){
+        return current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser());
     }
 }
