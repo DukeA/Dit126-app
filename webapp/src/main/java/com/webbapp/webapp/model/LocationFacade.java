@@ -1,13 +1,12 @@
 package com.webbapp.webapp.model;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * This class is responsible for handling interactions with the database regarding the LocationEntity class
+ * */
 @Stateless
 public class LocationFacade extends AbstractFacade<LocationEntity> {
 

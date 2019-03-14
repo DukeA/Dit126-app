@@ -1,5 +1,8 @@
 package com.webbapp.webapp.util.HttpRequest;
 
-public class ApiKey {
-    public static final String MAPSKEY = "";
+/**
+ * This class contains the Google Maps API key needed to make requests
+ * */
+class ApiKey {
+    static final String MAPSKEY = "";
 }
