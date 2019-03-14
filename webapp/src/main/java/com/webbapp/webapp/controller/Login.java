@@ -59,7 +59,7 @@ public class Login implements Serializable {
      * Adds an error message to login.xhtml depending on  Exception was caught
      * during a failed login.
      */
-    public void addErrorMessage(String message) {
+    private void addErrorMessage(String message) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(loginButton.getClientId(context),
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));

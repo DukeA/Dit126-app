@@ -19,7 +19,7 @@ public class LoginFacade {
     @Inject
     private AppUserFacade userFacade;
 
-    public List<AppUserEntity> findUsername(String username) {
+    private List<AppUserEntity> findUsername(String username) {
         TypedQuery<AppUserEntity> q = userFacade.getEntityManager().createNamedQuery("app_user.findUsername", AppUserEntity.class);
         q.setParameter("userName", username);
         return q.getResultList();
