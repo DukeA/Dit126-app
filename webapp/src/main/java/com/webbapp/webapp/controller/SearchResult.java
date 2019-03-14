@@ -1,7 +1,7 @@
 package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.entity.ActivityEntity;
-import com.webbapp.webapp.model.facade.ActivityFacade;
+import com.webbapp.webapp.model.facade.SearchFacade;
 import com.webbapp.webapp.util.SearchEnum;
 import lombok.Getter;
 
@@ -33,7 +33,7 @@ public class SearchResult implements Serializable {
     private SearchEnum searchEnum;
 
     @Inject
-    private ActivityFacade activityFacade;
+    private SearchFacade searchFacade;
 
     @Inject
     private Search searchBean;
@@ -57,11 +57,11 @@ public class SearchResult implements Serializable {
     }
 
     private void findByType(String type) {
-        activityEntities = activityFacade.findByType(type);
+        activityEntities = searchFacade.findByType(type);
     }
 
     private void findByCity(String city) {
-        activityEntities = activityFacade.findByCity(city);
+        activityEntities = searchFacade.findByCity(city);
     }
 
 }

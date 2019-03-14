@@ -24,16 +24,4 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         return em;
     }
 
-    public List<ActivityEntity> findByType(String type) {
-        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByType", ActivityEntity.class);
-        query.setParameter("type", type);
-        return query.getResultList();
-    }
-
-    public List<ActivityEntity> findByCity(String city) {
-        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByCity", ActivityEntity.class);
-        query.setParameter("city", city);
-        return query.getResultList();
-    }
-
 }
