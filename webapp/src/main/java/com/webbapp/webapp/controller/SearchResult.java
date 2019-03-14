@@ -40,16 +40,16 @@ public class SearchResult implements Serializable {
 
     @PostConstruct
     private void post() {
-        text = searchBean.getText().trim().toLowerCase();;
+        text = searchBean.getText().trim();
         searchEnum = searchBean.getSearchEnum();
     }
 
     public void search() {
 
         if (searchEnum == SearchEnum.TYPE) {
-            this.findByType(text);
+            this.findByType(text.toUpperCase());
         } else if (searchEnum == SearchEnum.CITY) {
-            this.findByCity(text);
+            this.findByCity(text.toLowerCase());
         }
 
         size = activityEntities.size();
