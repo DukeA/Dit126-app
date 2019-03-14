@@ -1,14 +1,13 @@
 package com.webbapp.webapp.controller;
 
 
-//import com.webbapp.webapp.model.showActivity;
 
 import com.webbapp.webapp.model.*;
 import com.webbapp.webapp.util.AppUserSession;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.enterprise.context.RequestScoped;
+
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,6 +15,9 @@ import java.io.Serializable;
 
 /**
  * @author Adam Grandén
+ *  The class is resbonsible for the  showing an more detail
+ *  version of the activity, this is done by taking the activity id
+ *  and getting the infromation  from the model class.
  */
 
 @Named(value = "showBean")
@@ -99,6 +101,7 @@ public class ShowActivitys implements Serializable {
         }
 
     }
+
 
     public String onload() {
         Integer value = activityid;

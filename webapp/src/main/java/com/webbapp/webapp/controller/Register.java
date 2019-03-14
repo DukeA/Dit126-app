@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -36,14 +35,11 @@ public class Register implements Serializable {
     @Inject
     private AppUserSession userSession;
 
-    private AppUserEntity appUsersEntity;
-
     /***
-     *  The parameters are  returned from the input fields on the webbpage.
+     *  The parameters are  returned from the input fields on the web page.
      *  It is checked if a user already exists in the database by checking the
      *  username in the database. If the Username exist then the new user would not be created.
-     * @param  username, password
-     * @return String for the new webpage.
+     * @return String for the new web page.
      */
 
     public String onRegister() {
@@ -51,7 +47,7 @@ public class Register implements Serializable {
         if(list.size() <= 0) {
             System.out.println("Create User");
             PasswordEncoder encoder = new BCryptPasswordEncoder();
-            appUsersEntity = new AppUserEntity();
+            AppUserEntity appUsersEntity = new AppUserEntity();
             appUsersEntity.setUserName(username);
             appUsersEntity.setUserPassword(encoder.encode(password));
             registerFacade.create(appUsersEntity);
@@ -60,7 +56,6 @@ public class Register implements Serializable {
             return "register";
         }
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -74,6 +69,12 @@ public class Register implements Serializable {
         return this.password;
     }
 
+    /***
+     *   A Method to load the User value from the User if
+     *   the user could not be found then it would be set to  null,
+     *   if not then the value would be of index
+     * @return String Website index
+     */
     public String onLoad() {
         if (userSession.getUser() != null) {
             return "index";
