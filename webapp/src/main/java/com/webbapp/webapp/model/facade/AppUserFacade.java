@@ -20,7 +20,7 @@ public class AppUserFacade extends AbstractFacade<AppUserEntity> {
     }
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 

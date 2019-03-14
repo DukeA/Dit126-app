@@ -20,7 +20,7 @@ public class LocationFacade extends AbstractFacade<LocationEntity> {
     }
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 
