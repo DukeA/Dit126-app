@@ -57,7 +57,7 @@ public class ShowActivitys implements Serializable {
     private double lng =0.0;
 
     @Inject
-    ShowActivityFacade activityFacade;
+    ActivityFacade activityFacade;
 
     @Inject
     LocationFacade locationFacade;
@@ -68,7 +68,7 @@ public class ShowActivitys implements Serializable {
 
     private ActivityEntity activity;
 
-    public String findActivityById() {
+    /*public String findActivityById() {
         Integer value = activityid;
         activity = activityFacade.findActivityById(String.valueOf(value));
         if(activity != null) {
@@ -100,7 +100,7 @@ public class ShowActivitys implements Serializable {
             return "index";
         }
 
-    }
+    }*/
 
 
     public String onload() {

@@ -16,7 +16,7 @@
             <script type="text/javascript" src="display-activities.js"></script>
             <b:form horizontal="true">
                 <b:selectMultiMenu id="selectActivities"
-                                   value="#{activityList.types}">
+                                   value="#{listActivity.types}">
                     <f:selectItems value="#{type.types}"
                                    var="t"
                                    itemValue="#{t.name()}"/>
@@ -32,8 +32,8 @@
             <h:panelGroup id="outputActivities">
                 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
                 <ui:repeat id="outputActivitiesList"
-                           rendered="${activityList.types != null}"
-                           value="#{activityList.list}"
+                           rendered="${listActivity.types != null}"
+                           value="#{listActivity.list}"
                            var="activity">
                         <b:column span="3">
                             <b:panel styleClass="panel" title="#{activity.title}" collapsible="false">
@@ -47,7 +47,7 @@
                         addMarker({lat, lng});
                     </script>
                 </ui:repeat>
-                <script jsf:rendered="#{activityList.types !=null}" type="text/javascript">setMapPosition()</script>
+                <script jsf:rendered="#{listActivity.types !=null}" type="text/javascript">setMapPosition()</script>
             </h:panelGroup>
         </ui:define>
 

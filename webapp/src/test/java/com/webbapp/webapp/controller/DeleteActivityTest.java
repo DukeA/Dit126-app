@@ -29,7 +29,7 @@ public class DeleteActivityTest {
     private AppUserSession userSession;
 
     @Mock
-    private ShowActivityFacade showActivityFacade;
+    private ActivityFacade activityFacade;
 
     @Mock
     private LocationFacade locationFacade;
@@ -51,7 +51,7 @@ public class DeleteActivityTest {
 
         Assert.assertEquals(result, expected);
 
-        verify(showActivityFacade, never()).remove(activityEntity);
+        verify(activityFacade, never()).remove(activityEntity);
     }
 
 
@@ -73,7 +73,7 @@ public class DeleteActivityTest {
 
         Assert.assertEquals(result, expected);
 
-        verify(showActivityFacade, never()).remove(activityEntity);
+        verify(activityFacade, never()).remove(activityEntity);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class DeleteActivityTest {
         user.setUserPassword("alicePassword");
 
         showActivitys.setActivityid(0);
-        when(showActivityFacade.find(0)).thenReturn(null);
+        when(activityFacade.find(0)).thenReturn(null);
 
         showActivitys.onload();
         String result = showActivitys.delete();
@@ -91,7 +91,7 @@ public class DeleteActivityTest {
 
         Assert.assertEquals(result, expected);
 
-        verify(showActivityFacade, never()).remove(any());
+        verify(activityFacade, never()).remove(any());
     }
 
     @Test
@@ -109,7 +109,7 @@ public class DeleteActivityTest {
         activityEntity.setLocationByLocationId(locationEntity);
 
         showActivitys.setActivityid(0);
-        when(showActivityFacade.find(0)).thenReturn(activityEntity);
+        when(activityFacade.find(0)).thenReturn(activityEntity);
 
         doNothing().when(locationFacade).remove(locationEntity);
         showActivitys.onload();
@@ -118,7 +118,7 @@ public class DeleteActivityTest {
 
         Assert.assertEquals(result, expected);
 
-        verify(showActivityFacade).remove(argThat(ae -> ae.equals(activityEntity)));
+        verify(activityFacade).remove(argThat(ae -> ae.equals(activityEntity)));
     }
 
 

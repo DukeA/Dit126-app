@@ -14,7 +14,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class ActivityList implements Serializable {
+public class ListActivity implements Serializable {
     @Getter
     @Setter
     private String types;
