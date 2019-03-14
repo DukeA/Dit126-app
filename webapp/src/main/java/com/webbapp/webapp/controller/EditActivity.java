@@ -2,7 +2,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.*;
 import com.webbapp.webapp.model.entity.ActivityEntity;
-import com.webbapp.webapp.model.facade.AddActivityFacade;
+import com.webbapp.webapp.model.facade.ActivityFacade;
 import com.webbapp.webapp.model.facade.LocationFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.HttpRequest.HttpRequest;
@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class EditActivity implements Serializable {
 
     @Inject
-    AddActivityFacade activityFacade;
+    ActivityFacade activityFacade;
 
     @Inject
     LocationFacade locationFacade;

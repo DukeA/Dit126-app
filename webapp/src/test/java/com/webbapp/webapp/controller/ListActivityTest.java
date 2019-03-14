@@ -2,6 +2,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.facade.ActivityFacade;
+import com.webbapp.webapp.model.facade.ListActivityFacade;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class ListActivityTest {
     private ListActivity listActivity;
 
     @Mock
-    private ActivityFacade activityFacade;
+    private ListActivityFacade activityFacade;
 
     @Test
     public void testGetListEmpty() {

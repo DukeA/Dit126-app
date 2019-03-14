@@ -36,10 +36,4 @@ public class ActivityFacade extends AbstractFacade<ActivityEntity> {
         return query.getResultList();
     }
 
-    public List<ActivityEntity> findByTypes(List<String> types) {
-        TypedQuery<ActivityEntity> query = em.createNamedQuery("ActivityEntity.findByTypes", ActivityEntity.class);
-        query.setParameter("types", types);
-        return query.getResultList();
-     }
-
 }

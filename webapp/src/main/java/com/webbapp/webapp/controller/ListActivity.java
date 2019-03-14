@@ -2,6 +2,7 @@ package com.webbapp.webapp.controller;
 
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.facade.ActivityFacade;
+import com.webbapp.webapp.model.facade.ListActivityFacade;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class ListActivity implements Serializable {
     private String types;
 
     @Inject
-    ActivityFacade activityFacade;
+    ListActivityFacade activityFacade;
 
 
     public List<ActivityEntity> getList() {

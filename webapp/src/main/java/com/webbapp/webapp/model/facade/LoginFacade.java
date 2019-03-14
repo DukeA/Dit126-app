@@ -15,18 +15,13 @@ import java.util.List;
  * are correct.
  */
 @Stateless
-public class LoginFacade extends AbstractFacade<AppUserEntity> {
+public class LoginFacade extends AppUserFacade {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
     public LoginFacade() {
-        super(AppUserEntity.class);
+        super();
     }
 
     public List<AppUserEntity> findUsername(String username) {

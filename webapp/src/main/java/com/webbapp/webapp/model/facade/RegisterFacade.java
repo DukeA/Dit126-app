@@ -15,18 +15,13 @@ import java.util.List;
  *
  */
 @Stateless
-public class RegisterFacade extends AbstractFacade<AppUserEntity> {
+public class RegisterFacade extends AppUserFacade {
 
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
     public RegisterFacade() {
-        super(AppUserEntity.class);
+        super();
     }
 
     /***
