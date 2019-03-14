@@ -22,8 +22,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * @Author: Adam Grandén
- * @Class The  test should test the info from getting
+ * @author Adam Grandén
+ * The  test should test the info from getting
  * input from the Model class to the DataBase
  */
 
