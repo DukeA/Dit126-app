@@ -24,13 +24,16 @@
                 value="#{searchResult.searchEnum}: Found #{searchResult.size} results for '#{searchResult.text}'"
             />
 
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
             <ui:repeat value="#{searchResult.activityEntities}" var="result">
 
                 <b:panel title="#{result.title}" collapsible="false">
                     <h:outputText value="#{result.description}"/>
+                    <b:row style="text-align: right; padding-right: 10px">
+                        <b:button value="Details" look="primary" outcome="showAct?id=#{result.activityId}"/>
+                    </b:row>
                 </b:panel>
 
-                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
                 <script type="text/javascript">
                     lat = '#{result.locationByLocationId.latitude}';
                     lng = '#{result.locationByLocationId.longitude}';

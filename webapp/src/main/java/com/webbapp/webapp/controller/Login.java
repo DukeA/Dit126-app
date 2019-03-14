@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.webbapp.webapp.controller;
 
 import java.io.Serializable;
@@ -13,11 +8,16 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.webbapp.webapp.model.AppUserFacade;
+import com.webbapp.webapp.model.LoginFacade;
 import com.webbapp.webapp.util.*;
+import com.webbapp.webapp.util.exception.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * RequestScoped bean that requires three other beans to perform
+ * a successful login.
+ */
 @Named(value="login")
 @RequestScoped
 public class Login implements Serializable {
@@ -26,7 +26,7 @@ public class Login implements Serializable {
     private Credentials credentials;
 
     @Inject
-    private AppUserFacade userFacade;
+    private LoginFacade loginFacade;
 
     @Inject
     private AppUserSession userSession;
@@ -39,29 +39,30 @@ public class Login implements Serializable {
         String username = credentials.getUsername();
         String password = credentials.getPassword();
 
-        FacesContext context = FacesContext.getCurrentInstance();
-
         try {
-           userSession.setUser(userFacade.login(username, password));
-        } catch (UserNotFoundException e) {
-            String message = "User not found";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (MultipleUsersFoundException e) {
-            String message = "Found multiple users with the same name";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-        } catch (IncorrectPasswordException e) {
-            String message = "Incorrect password";
-            context.addMessage(loginButton.getClientId(context),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+           userSession.setUser(loginFacade.login(username, password));
+        }
+        catch (UserNotFoundException e) {
+            this.addErrorMessage("User not found");
+        }
+        catch (MultipleUsersFoundException e) {
+            this.addErrorMessage("Found multiple users with the same name");
+        }
+        catch (IncorrectPasswordException e) {
+            this.addErrorMessage("Incorrect password");
         }
 
-        if (userSession.getUser() != null) {
-            return "index";
-        } else {
-            return null;
-        }
+        return this.onLoad();
+    }
+
+    /**
+     * Adds an error message to login.xhtml depending on  Exception was caught
+     * during a failed login.
+     */
+    public void addErrorMessage(String message) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(loginButton.getClientId(context),
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
     
     public String logout(){
