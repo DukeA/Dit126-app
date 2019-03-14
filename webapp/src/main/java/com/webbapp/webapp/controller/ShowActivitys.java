@@ -90,7 +90,7 @@ public class ShowActivitys implements Serializable {
         return null;
     }
 
-    private boolean isOwnActivity() {
+    public boolean isOwnActivity() {
         return activityEntity != null && userSession.getUser() != null && activityEntity.getAppUsersByUserId().equals(userSession.getUser());
     }
 
