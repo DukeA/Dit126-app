@@ -18,12 +18,12 @@ import java.util.stream.Stream;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.argThat;
 
-public class ActivityListTest {
+public class ListActivityTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
     @InjectMocks
-    private ActivityList activityList;
+    private ListActivity listActivity;
 
     @Mock
     private ActivityFacade activityFacade;
@@ -38,9 +38,9 @@ public class ActivityListTest {
 
     @Test
     public void testGetList() {
-        activityList.setTypes("JOGGING");
+        listActivity.setTypes("JOGGING");
 
-        activityList.getList();
+        listActivity.getList();
 
         verify(activityFacade).findByTypes(argThat(types -> types.equals(Stream.of("JOGGING").collect(Collectors.toList()))));
     }
