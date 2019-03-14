@@ -12,12 +12,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named(value="editActivity")
-@ViewScoped
 /**
  * @author Gustav
  * This class is the responsible controller for handling editing activities.
  */
+@Named(value="editActivity")
+@ViewScoped
 public class EditActivity implements Serializable {
 
     @Inject
@@ -79,6 +79,9 @@ public class EditActivity implements Serializable {
         }
     }
 
+    /**
+     * Initial setup when page is loaded
+     * */
     public String onLoad() {
         current = activityFacade.find(Integer.parseInt(id));
         if(current != null && userSession.getUser() != null && current.getAppUsersByUserId().equals(userSession.getUser())){

@@ -11,6 +11,7 @@ import java.net.URLConnection;
 
 /**
  * @author Gustav
+ * Class that handles HTTP requests to the Google maps API
  * */
 class UrlConnectionHttpRequest implements HttpRequest{
 
@@ -57,11 +58,7 @@ class UrlConnectionHttpRequest implements HttpRequest{
 
             return "";
 
-        }catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {;
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

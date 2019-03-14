@@ -12,12 +12,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named(value="addActivity")
-@ViewScoped
 /**
  * @author Gustav
  * This class is the responsible controller for handling adding new activities to the database.
  */
+@Named(value="addActivity")
+@ViewScoped
 public class AddActivity implements Serializable {
 
     @Inject
@@ -73,6 +73,9 @@ public class AddActivity implements Serializable {
         }
     }
 
+    /**
+     * Initial setup when page is loaded
+     * */
     public String onLoad() {
         if(userSession.getUser() != null){
             return null;
