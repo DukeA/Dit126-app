@@ -24,6 +24,7 @@
                 value="#{searchResult.searchEnum}: Found #{searchResult.size} results for '#{searchResult.text}'"
             />
 
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" p:async="true"></script>
             <ui:repeat value="#{searchResult.activityEntities}" var="result">
 
                 <b:panel title="#{result.title}" collapsible="false">
