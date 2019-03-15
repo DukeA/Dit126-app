@@ -52,7 +52,7 @@ public class AddActivity implements Serializable {
      * Adds a new activity to the activity facade
      * Uses the lat, lng, title, type, description instance variables as input for the activity and location
      * */
-    public void add(){
+    public String add(){
         if(userSession.getUser() != null && title != null && description != null && type != null && lat != null && lng != null){
 
             try{
@@ -73,12 +73,16 @@ public class AddActivity implements Serializable {
                     activity.setLocationByLocationId(loc);
 
                     activityFacade.create(activity);
+                    return "showAct?id="+ activity.getActivityId() +"&faces-redirect=true";
                 }
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
 
+
         }
+        
+        return null;
     }
 
     /**

@@ -61,7 +61,7 @@ public class EditActivity implements Serializable {
      * Adds a new activity to the activity facade
      * Uses the lat, lng, title, type, description instance variables as input for the activity and location
      * */
-    public void edit(){
+    public String edit(){
 
         //Do the editing
         if(isOwner() && current != null && title != null && description != null && type != null && lat != null && lng != null) {
@@ -81,10 +81,14 @@ public class EditActivity implements Serializable {
 
                 locationFacade.edit(current.getLocationByLocationId());
                 activityFacade.edit(current);
+
+                return "showAct?id="+ current.getActivityId() +"&faces-redirect=true";
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
         }
+
+        return null;
     }
 
     /**
