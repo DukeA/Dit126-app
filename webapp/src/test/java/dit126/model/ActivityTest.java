@@ -1,4 +1,4 @@
-package com.webbapp.webapp.test;
+package dit126.model;
 
 //import dit126.model.Actvity;
 import dit126.model.entity.ActivityEntity;
