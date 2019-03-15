@@ -1,9 +1,9 @@
 package com.webbapp.webapp.test;
 
-//import com.webbapp.webapp.model.Actvity;
-import com.webbapp.webapp.model.entity.ActivityEntity;
-import com.webbapp.webapp.model.entity.AppUserEntity;
-import com.webbapp.webapp.model.entity.LocationEntity;
+//import dit126.model.Actvity;
+import dit126.model.entity.ActivityEntity;
+import dit126.model.entity.AppUserEntity;
+import dit126.model.entity.LocationEntity;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
