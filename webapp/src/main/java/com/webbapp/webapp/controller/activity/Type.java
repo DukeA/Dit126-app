@@ -1,6 +1,4 @@
-package com.webbapp.webapp.controller;
-
-import com.webbapp.webapp.model.ActivityType;
+package com.webbapp.webapp.controller.activity;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

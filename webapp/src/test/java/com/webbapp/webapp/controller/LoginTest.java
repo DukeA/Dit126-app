@@ -1,9 +1,10 @@
 package com.webbapp.webapp.controller;
 
+import com.webbapp.webapp.controller.login.AppUserSession;
+import com.webbapp.webapp.controller.login.Credentials;
+import com.webbapp.webapp.controller.login.Login;
 import com.webbapp.webapp.model.entity.AppUserEntity;
 import com.webbapp.webapp.model.facade.LoginFacade;
-import com.webbapp.webapp.util.AppUserSession;
-import com.webbapp.webapp.util.Credentials;
 import com.webbapp.webapp.util.exception.IncorrectPasswordException;
 import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
 import com.webbapp.webapp.util.exception.UserNotFoundException;

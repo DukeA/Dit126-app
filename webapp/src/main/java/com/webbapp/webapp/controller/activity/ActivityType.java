@@ -1,4 +1,4 @@
-package com.webbapp.webapp.model;
+package com.webbapp.webapp.controller.activity;
 
 
 /**

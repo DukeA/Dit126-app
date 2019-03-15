@@ -1,5 +1,6 @@
 package com.webbapp.webapp.controller;
 
+import com.webbapp.webapp.controller.login.Register;
 import com.webbapp.webapp.model.entity.AppUserEntity;
 import com.webbapp.webapp.model.facade.RegisterFacade;
 import org.junit.Assert;
