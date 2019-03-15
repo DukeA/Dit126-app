@@ -31,7 +31,7 @@ This database has to have a schema called `dit126` and a user `admin` and passwo
 To setup the database the contents of `webapp/src/main/DatabaseCode/databaseSql.sql` has to be ran in order to create the correct tables and setup some sample data.
 
 The project was developed and tested on Payara version 5.184,
-To run the project Payara version 5.184 is needed, however it might be possible to run it on later releases however this has not been tested
+To run the project Payara version 5.184 is needed, however it might be possible to run it on later releases but this has not been tested
 
 ## Running the project
 The project is a maven project so maven needs to be installed in order to run the project. 
