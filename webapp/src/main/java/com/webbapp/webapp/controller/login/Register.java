@@ -61,7 +61,7 @@ public class Register implements Serializable {
         }
         appUsersEntity.setUserName(username);
         if (password == null || password.equals("")) {
-            this.addErrorMessage("Username password can't be empty");
+            this.addErrorMessage("Password can't be empty");
             return "register";
         }
         appUsersEntity.setUserPassword(encoder.encode(password));
