@@ -1,5 +1,29 @@
 # Dit126-app
 
+## Group members
+<table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>GitHub</th> 
+    </tr>
+    <tr>
+      <td> Adam Grandén </td>
+      <td> DukeA </td>
+    </tr>
+    <tr>
+      <td> Gustav Albertsson </td>
+      <td> galbertsson </td>
+    </tr>
+    <tr>
+      <td> Robin Hekmatara </td>
+      <td> robinhekmatara </td>
+    </tr>
+    <tr>
+      <td> Johan Svennungsson  </td>
+      <td> knya </td>
+    </tr>
+</table>
+
 ## Requirements
 This application requires PostgreSQL to be installed and running on `localhost:5432`
 This database has to have a schema called `dit126` and a user `admin` and password `3wYTiwSN112M` has to have access to it. 
