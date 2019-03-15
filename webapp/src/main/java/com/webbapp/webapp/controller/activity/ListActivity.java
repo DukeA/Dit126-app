@@ -1,4 +1,4 @@
-package com.webbapp.webapp.controller;
+package com.webbapp.webapp.controller.activity;
 
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.facade.ListActivityFacade;

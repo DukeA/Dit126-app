@@ -1,12 +1,13 @@
 
 package com.webbapp.webapp.controller;
 
+import com.webbapp.webapp.controller.activity.ShowActivitys;
+import com.webbapp.webapp.controller.login.AppUserSession;
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.entity.AppUserEntity;
 import com.webbapp.webapp.model.entity.LocationEntity;
 import com.webbapp.webapp.model.facade.ActivityFacade;
 import com.webbapp.webapp.model.facade.LocationFacade;
-import com.webbapp.webapp.util.AppUserSession;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

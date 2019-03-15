@@ -1,7 +1,8 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.AppUserEntity;
-import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.controller.login.Register;
+import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.model.facade.RegisterFacade;
 import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -186,7 +187,7 @@ public class RegisterFacadeTest {
     /***
      * Check for the on register if the user  can't be created from the Register class.
      */
-    
+
     @Test()
     @DisplayName("Check if there already exist user")
     public void checkUserExist() {

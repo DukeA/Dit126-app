@@ -1,4 +1,4 @@
-package com.webbapp.webapp.util;
+package com.webbapp.webapp.controller.login;
 
 import com.webbapp.webapp.model.entity.AppUserEntity;
 import lombok.Getter;

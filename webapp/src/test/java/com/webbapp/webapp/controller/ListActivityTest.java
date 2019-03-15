@@ -1,5 +1,6 @@
 package com.webbapp.webapp.controller;
 
+import com.webbapp.webapp.controller.activity.ListActivity;
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.facade.ListActivityFacade;
 import org.junit.Assert;

@@ -1,8 +1,7 @@
-package com.webbapp.webapp.controller;
+package com.webbapp.webapp.controller.search;
 
 import com.webbapp.webapp.model.entity.ActivityEntity;
 import com.webbapp.webapp.model.facade.SearchFacade;
-import com.webbapp.webapp.util.SearchEnum;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;

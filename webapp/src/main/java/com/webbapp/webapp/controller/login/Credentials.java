@@ -1,4 +1,4 @@
-package com.webbapp.webapp.util;
+package com.webbapp.webapp.controller.login;
 
 import lombok.Getter;
 import lombok.Setter;

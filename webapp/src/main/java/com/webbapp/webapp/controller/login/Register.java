@@ -1,8 +1,7 @@
-package com.webbapp.webapp.controller;
+package com.webbapp.webapp.controller.login;
 
 import com.webbapp.webapp.model.entity.AppUserEntity;
 import com.webbapp.webapp.model.facade.RegisterFacade;
-import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
 import lombok.Getter;
 import lombok.Setter;

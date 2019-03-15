@@ -1,4 +1,4 @@
-package com.webbapp.webapp.controller;
+package com.webbapp.webapp.controller.login;
 
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.webbapp.webapp.model.facade.LoginFacade;
-import com.webbapp.webapp.util.*;
 import com.webbapp.webapp.util.exception.*;
 import lombok.Getter;
 import lombok.Setter;

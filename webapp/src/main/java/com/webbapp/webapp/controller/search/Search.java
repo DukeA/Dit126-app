@@ -1,6 +1,5 @@
-package com.webbapp.webapp.controller;
+package com.webbapp.webapp.controller.search;
 
-import com.webbapp.webapp.util.SearchEnum;
 import lombok.Getter;
 import lombok.Setter;
 

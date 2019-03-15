@@ -1,5 +1,6 @@
 package com.webbapp.webapp.controller;
 
+import com.webbapp.webapp.controller.search.Search;
 import org.junit.Before;
 import org.junit.Test;
 
