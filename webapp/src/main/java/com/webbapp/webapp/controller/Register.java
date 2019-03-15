@@ -53,7 +53,7 @@ public class Register implements Serializable {
      * @return String for the new web page.
      */
 
-    public String register() {
+    public String register()  {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         AppUserEntity appUsersEntity = new AppUserEntity();
         if (username == null || username.equals("")) {

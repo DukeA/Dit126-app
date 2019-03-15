@@ -101,9 +101,9 @@ public class RegisterFacadeTest {
      *  Test for the checker RegisterFacade will return the User in the ArrayList
      */
 
-    @Test(expected = MultipleUsersFoundException.class)
+    @Test()
     @DisplayName("On Register Test")
-    public void testRegisterFacadeQuery() throws MultipleUsersFoundException {
+    public void testRegisterFacadeQuery() {
 
         String userName = "Alice1234";
         String password ="123456";
@@ -118,7 +118,12 @@ public class RegisterFacadeTest {
 
 
         RegisterFacade registerFacade = mock(RegisterFacade.class);
-        doThrow(new MultipleUsersFoundException()).when(registerFacade).checkUserName(userName);
+        try {
+            doThrow(new MultipleUsersFoundException()).when(registerFacade).checkUserName(userName);
+            registerFacade.checkUserName(userName);
+        } catch (MultipleUsersFoundException e) {
+            System.out.println("Users exist");
+        }
 
         Assert.assertTrue(list.size()<=1);
 
@@ -129,9 +134,9 @@ public class RegisterFacadeTest {
      * Check for the on register if the user is then created by the method
      */
 
-    @Test(expected = MultipleUsersFoundException.class)
+    @Test()
     @DisplayName("On check user exist")
-    public void testAddUser() {
+    public void testAddUser()  {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -144,16 +149,13 @@ public class RegisterFacadeTest {
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUserEntity> list = new ArrayList<>();
-
         registerFacade = mock(RegisterFacade.class);
 
         try {
-            doThrow(new MultipleUsersFoundException()).when(registerFacade).checkUserName(userName);
+            doThrow(MultipleUsersFoundException.class).when(registerFacade).checkUserName(userName);
         } catch (MultipleUsersFoundException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue(list.size()<=0);
 
         register =mock(Register.class);
 
@@ -171,22 +173,21 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-            when(register.register()).thenReturn("index?faces-redirect=true");
+        when(register.register()).thenReturn("index");
 
 
         String on_Register = register.register();
             verify(register,times(1)).register();
 
-        Assert.assertEquals("index?faces-redirect=true", on_Register);
+        Assert.assertEquals("index", on_Register);
 
     }
 
     /***
      * Check for the on register if the user  can't be created from the Register class.
      */
-
-
-    @Test(expected = MultipleUsersFoundException.class)
+    
+    @Test()
     @DisplayName("Check if there already exist user")
     public void checkUserExist() {
 
