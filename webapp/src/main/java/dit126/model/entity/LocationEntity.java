@@ -7,6 +7,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+/***
+ * The class is an entity class which is
+ * would be the data value for an location in this case.
+ * The parameter which it has is in the form of latitude
+ * and longitude of the City where it is located.
+ */
+
 @Entity
 @Table(name = "location", schema = "public", catalog = "dit126")
 public class LocationEntity {
@@ -39,7 +46,12 @@ public class LocationEntity {
     @Setter
     private Collection<ActivityEntity> activitiesByLocationId;
 
-
+    /***
+     * This method is for checking if two different Locations
+     * are the Same  value  if they are then it will return true
+     * @param o object in the form of  another class
+     * @return boolean value
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -56,6 +68,10 @@ public class LocationEntity {
         return true;
     }
 
+    /***
+     *  The method is for creating an hashcode value for the  object.
+     * @return hashcode value
+     */
     @Override
     public int hashCode() {
         int result;

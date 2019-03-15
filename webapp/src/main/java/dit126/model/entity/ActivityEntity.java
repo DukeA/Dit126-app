@@ -6,6 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/***
+ * The class is  an representation of the Activity class.
+ * Which have a locationEntity and a User which  have created it.
+ */
 @Entity
 @Table(name = "activity", schema = "public", catalog = "dit126")
 @NamedQueries({
@@ -65,7 +69,12 @@ public class ActivityEntity {
     private AppUserEntity appUsersByUserId;
 
 
-
+    /***
+     * An Method for checking if two classes are equal to each other ,
+     * this is done by checking the  different values which the two classes have
+     * @param o another object in this case
+     * @return boolean value of true/false
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -82,6 +91,10 @@ public class ActivityEntity {
         return true;
     }
 
+    /***
+     * An method for creating an hashcode value for the class
+     * @return int value
+     */
     @Override
     public int hashCode() {
         int result = activityId != null ? activityId.hashCode() : 0;

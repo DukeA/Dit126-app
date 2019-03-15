@@ -7,6 +7,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+/***
+ * The class is an representation of the value for the AppUsersEntity
+ * in the database. This would be the entity of an User in the program.
+ */
+
 @Entity
 @NamedQueries({
         @NamedQuery(name="app_user.findall", query = "SELECT u FROM AppUserEntity u ")
@@ -43,7 +48,12 @@ public class AppUserEntity {
     private Collection<ActivityEntity> activitiesByUserId;
 
 
-
+    /***
+     * The equals method iis for checking if two other class
+     * would be the same method in this case.
+     * @param o another entity
+     * @return boolean value
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,6 +68,10 @@ public class AppUserEntity {
         return true;
     }
 
+    /***
+     * The class for creating an hashcode for a object.
+     * @return int Hashcode
+     */
     @Override
     public int hashCode() {
         int result = userId;
