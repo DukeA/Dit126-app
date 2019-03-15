@@ -7,6 +7,7 @@ function initMap() {
         zoom: 15
     });
 
+    // When map changes bounds, zoom is set to current zoom level or 15 if current zoom level is larger than 15 to avoid excessive zooming
     google.maps.event.addListenerOnce(map, 'bounds_changed', () => map.setZoom(Math.min(map.getZoom(), 15)));
 }
 
@@ -23,6 +24,9 @@ function deleteMarkers() {
   markers = [];
 }
 
+/*
+    Centers the map around the markers in markers variable
+ */
 function setMapPosition() {
     const bounds = new google.maps.LatLngBounds();
     markers.forEach(marker => bounds.extend(marker.getPosition()));
