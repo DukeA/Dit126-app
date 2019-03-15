@@ -6,6 +6,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * This class is responsible for handling interactions with the database regarding the ActivityEntity class
+ * */
 @Stateless
 public class ActivityFacade extends AbstractFacade<ActivityEntity> {
 

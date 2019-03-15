@@ -12,9 +12,13 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is responsible for handling request to list activities
+ */
 @Named
 @ViewScoped
 public class ListActivity implements Serializable {
+    // Comma separated string containing types
     @Getter
     @Setter
     private String types;
@@ -22,10 +26,11 @@ public class ListActivity implements Serializable {
     @Inject
     ListActivityFacade activityFacade;
 
-
+    /**
+     *
+     * @return a list containing activities with types contained in getTypes()
+     */
     public List<ActivityEntity> getList() {
-        List<ActivityEntity> activities = activityFacade.findByTypes(Arrays.asList(types.split(",")));
-
-        return activities;
+        return activityFacade.findByTypes(Arrays.asList(types.split(",")));
     }
 }

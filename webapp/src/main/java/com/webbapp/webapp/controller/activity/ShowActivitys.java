@@ -76,7 +76,7 @@ public class ShowActivitys implements Serializable {
         if(activityEntity != null) {
             return null;
         } else {
-            return "index";
+            return "index?faces-redirect=true";
         }
     }
 
@@ -85,7 +85,7 @@ public class ShowActivitys implements Serializable {
             LocationEntity loc = activityEntity.getLocationByLocationId();
             activityFacade.remove(activityEntity);
             locationFacade.remove(loc);
-            return "index";
+            return "index?faces-redirect=true";
         }
         return null;
     }
