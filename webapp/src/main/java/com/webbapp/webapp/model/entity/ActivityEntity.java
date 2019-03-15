@@ -29,18 +29,7 @@ import javax.validation.constraints.NotNull;
             query = "SELECT a FROM ActivityEntity a WHERE a.type IN :types")
 })
 public class ActivityEntity {
-
-    public ActivityEntity() {
-
-    }
-
-    public ActivityEntity(String title, String type, String description, LocationEntity entity) {
-        this.title = title;
-        this.type = type;
-        this.description = description;
-        this.locationByLocationId = entity;
-    }
-
+    
     @Id
     @SequenceGenerator(name="activity_activity_id_seq", sequenceName="activity_activity_id_seq", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="activity_activity_id_seq")
