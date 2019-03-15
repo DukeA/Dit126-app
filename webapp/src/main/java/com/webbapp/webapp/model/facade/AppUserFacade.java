@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * This class is responsible for handling interactions with the database regarding the LocationEntity class
+ * This class is responsible for handling interactions with the database regarding the AppUserEntity class
  * */
 @Stateless
 public class AppUserFacade extends AbstractFacade<AppUserEntity> {
