@@ -24,8 +24,6 @@ public class ListActivity implements Serializable {
 
 
     public List<ActivityEntity> getList() {
-        List<ActivityEntity> activities = activityFacade.findByTypes(Arrays.asList(types.split(",")));
-
-        return activities;
+        return activityFacade.findByTypes(Arrays.asList(types.split(",")));
     }
 }
