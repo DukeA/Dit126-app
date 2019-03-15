@@ -15,13 +15,10 @@
 
     <h:body>
 
-        <b:navBar brand="DIT126" stlye="position: sticky; top:0">
+        <b:navBar brand="ActiviFy" brandHref="#{request.contextPath}" stlye="position: sticky; top:0">
             <b:form style="padding-top:15px">
                 <b:column span="1" rendered="#{userSession.user != null}">
                     <b:navCommandLink value="Add activity" action="pretty:add-activity"/>
-                </b:column>
-                <b:column span="1">
-                    <b:navCommandLink value="Activities" action="pretty:list-activities" />
                 </b:column>
             </b:form>
             <b:form>
