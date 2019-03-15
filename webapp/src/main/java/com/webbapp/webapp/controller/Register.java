@@ -4,8 +4,6 @@ import com.webbapp.webapp.model.AppUserEntity;
 import com.webbapp.webapp.model.RegisterFacade;
 import com.webbapp.webapp.util.AppUserSession;
 import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
-import com.webbapp.webapp.util.exception.UserNameNullOrEmptyException;
-import com.webbapp.webapp.util.exception.UserPasswordNullOrEmptyException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.List;
+
 
 
 /***
@@ -64,7 +62,7 @@ public class Register implements Serializable {
         }
         appUsersEntity.setUserName(username);
         if (password == null || password.equals("")) {
-            this.addErrorMessage("Username_password can't be empty");
+            this.addErrorMessage("Username password can't be empty");
             return "register";
         }
         appUsersEntity.setUserPassword(encoder.encode(password));
