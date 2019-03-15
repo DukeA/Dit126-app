@@ -2,6 +2,7 @@ package com.webbapp.webapp.model.facade;
 
 
 import com.webbapp.webapp.model.entity.AppUserEntity;
+import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -23,11 +24,13 @@ public class RegisterFacade {
      *  The Query to get all the information from the database where
      *  the  userName equals the username and return that to the controller
      * @param userName String value of the username
-     * @return List<AppUsersEntity>
      */
-    public List<AppUserEntity> checkUserName(String userName) {
-        return userFacade.getEntityManager().createNamedQuery("app_user.register", AppUserEntity.class).
+    public void checkUserName(String userName) throws MultipleUsersFoundException {
+        List<AppUserEntity> valueList = userFacade.getEntityManager().createNamedQuery("app_user.register", AppUserEntity.class).
                 setParameter("userName",userName).getResultList();
+        if (valueList.size()>0) {
+            throw  new MultipleUsersFoundException();
+        }
     }
 
     public void create(AppUserEntity user) {

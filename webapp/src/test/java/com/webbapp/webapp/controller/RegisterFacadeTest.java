@@ -1,11 +1,13 @@
 package com.webbapp.webapp.controller;
 
-import com.webbapp.webapp.model.entity.AppUserEntity;
-import com.webbapp.webapp.model.facade.RegisterFacade;
+import com.webbapp.webapp.model.AppUserEntity;
+import com.webbapp.webapp.model.RegisterFacade;
+import com.webbapp.webapp.util.exception.MultipleUsersFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
@@ -49,6 +51,7 @@ public class RegisterFacadeTest {
     /***
      * The method initializes all the mock values for the test case before it starts
      */
+    public ExpectedException exceptionRule = ExpectedException.none();
 
     @Before
     public  void setup() {
@@ -98,7 +101,7 @@ public class RegisterFacadeTest {
      *  Test for the checker RegisterFacade will return the User in the ArrayList
      */
 
-    @Test
+    @Test()
     @DisplayName("On Register Test")
     public void testRegisterFacadeQuery() {
 
@@ -115,11 +118,12 @@ public class RegisterFacadeTest {
 
 
         RegisterFacade registerFacade = mock(RegisterFacade.class);
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
-
-        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
-        verify(registerFacade,times(1)).checkUserName(userName);
-
+        try {
+            doThrow(new MultipleUsersFoundException()).when(registerFacade).checkUserName(userName);
+            registerFacade.checkUserName(userName);
+        } catch (MultipleUsersFoundException e) {
+            System.out.println("Users exist");
+        }
 
         Assert.assertTrue(list.size()<=1);
 
@@ -130,9 +134,9 @@ public class RegisterFacadeTest {
      * Check for the on register if the user is then created by the method
      */
 
-    @Test
+    @Test()
     @DisplayName("On check user exist")
-    public void testAddUser() {
+    public void testAddUser()  {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -145,12 +149,13 @@ public class RegisterFacadeTest {
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUserEntity> list = new ArrayList<>();
-
         registerFacade = mock(RegisterFacade.class);
 
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
-        Assert.assertTrue(list.size()<=0);
+        try {
+            doThrow(MultipleUsersFoundException.class).when(registerFacade).checkUserName(userName);
+        } catch (MultipleUsersFoundException e) {
+            e.printStackTrace();
+        }
 
         register =mock(Register.class);
 
@@ -168,21 +173,21 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-        when(register.onRegister()).thenReturn("index?faces-redirect=true");
+        when(register.register()).thenReturn("index");
 
-        String on_Register = register.onRegister();
-        verify(register,times(1)).onRegister();
 
-        Assert.assertEquals("index?faces-redirect=true", on_Register);
+        String on_Register = register.register();
+            verify(register,times(1)).register();
+
+        Assert.assertEquals("index", on_Register);
 
     }
 
     /***
      * Check for the on register if the user  can't be created from the Register class.
      */
-
-
-    @Test
+    
+    @Test()
     @DisplayName("Check if there already exist user")
     public void checkUserExist() {
 
@@ -197,16 +202,17 @@ public class RegisterFacadeTest {
         appUsersEntity.setUserName(userName);
         appUsersEntity.setUserPassword(password);
 
-        ArrayList<AppUserEntity> list = new ArrayList<>();
-        list.add(appUsersEntity);
+
 
         registerFacade = mock(RegisterFacade.class);
 
-        when(registerFacade.checkUserName(userName)).thenReturn(list);
-        list = (ArrayList<AppUserEntity>) registerFacade.checkUserName(userName);
-        verify(registerFacade,times(1)).checkUserName(userName);
 
-        Assert.assertTrue(list.size()==1);
+        try {
+            doThrow(new MultipleUsersFoundException()).when(registerFacade).checkUserName(userName);
+        } catch (MultipleUsersFoundException e) {
+            e.printStackTrace();
+        }
+
 
         register =mock(Register.class);
 
@@ -222,9 +228,9 @@ public class RegisterFacadeTest {
 
         Assert.assertSame(encoder.matches(password, registerPassword), true);
 
-        when(register.onRegister()).thenReturn("register");
-        String on_register = register.onRegister();
-        verify(register,times(1)).onRegister();
+        when(register.register()).thenReturn("register");
+        String on_register = register.register();
+        verify(register,times(1)).register();
 
         Assert.assertEquals("register", on_register);
 
