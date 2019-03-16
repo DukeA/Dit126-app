@@ -5,6 +5,7 @@ import dit126.model.facade.ListActivityFacade;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,6 +26,11 @@ public class ListActivity implements Serializable {
 
     @Inject
     ListActivityFacade activityFacade;
+
+    @PostConstruct
+    public void init(){
+        types = "";
+    }
 
     /**
      *
