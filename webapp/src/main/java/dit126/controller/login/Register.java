@@ -68,7 +68,7 @@ public class Register implements Serializable {
         try {
             registerFacade.checkUserName(username);
             registerFacade.create(appUsersEntity);
-            return "index";
+            return "login";
         } catch (MultipleUsersFoundException e) {
             this.addErrorMessage("Found multiple users with the same name");
             return "register";
