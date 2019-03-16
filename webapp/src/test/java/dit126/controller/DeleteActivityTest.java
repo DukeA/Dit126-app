@@ -119,7 +119,7 @@ public class DeleteActivityTest {
         doNothing().when(locationFacade).remove(locationEntity);
         showActivitys.onload();
         String result = showActivitys.delete();
-        String expected = "index";
+        String expected = "index?faces-redirect=true";
 
         Assert.assertEquals(result, expected);
 
