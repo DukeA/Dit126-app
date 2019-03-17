@@ -90,7 +90,7 @@ public class EditActivityTest {
     }
 
     @Test
-    @DisplayName("Add Test")
+    @DisplayName("Edit Test")
     public void testActivity(){
         AppUserEntity user = new AppUserEntity();
         user.setUserName("Alice");
@@ -112,13 +112,18 @@ public class EditActivityTest {
 
         ac.onLoad();
 
+        ac.setTitle("New Test");
+        ac.setDescription("New Desc");
+        ac.setLat("3.0");
+        ac.setLng("4.0");
+
         ac.edit();
 
-        verify(activityFacade).edit(argThat((ActivityEntity ac) -> ac.getTitle().equals("Test")
-                                                                                && ac.getDescription().equals("Desc")
+        verify(activityFacade).edit(argThat((ActivityEntity ac) -> ac.getTitle().equals("New Test")
+                                                                                && ac.getDescription().equals("New Desc")
                                                                                 && ac.getType().equals(ActivityType.CYCLING.name())
-                                                                                && ac.getLocationByLocationId().getLatitude() == 1.0
-                                                                                && ac.getLocationByLocationId().getLongitude() == 2.0
+                                                                                && ac.getLocationByLocationId().getLatitude() == 3.0
+                                                                                && ac.getLocationByLocationId().getLongitude() == 4.0
                                                                                 && ac.getAppUsersByUserId().getUserName().equals("Alice")));
 
     }
@@ -282,19 +287,23 @@ public class EditActivityTest {
         activity.setAppUsersByUserId(user);
 
         ac.setId("1");
+
         when(activityFacade.find(1)).thenReturn(activity);
 
         ac.onLoad();
+
+        ac.setLat("58.348519");
+        ac.setLng("11.929594");
 
         ac.edit();
 
         verify(activityFacade).edit(argThat((ActivityEntity ac) -> ac.getTitle().equals("Test")
                 && ac.getDescription().equals("Desc")
                 && ac.getType().equals(ActivityType.RUNNING.name())
-                && ac.getLocationByLocationId().getLatitude() == 57.710532072641925
-                && ac.getLocationByLocationId().getLongitude() == 11.958837619599421
+                && ac.getLocationByLocationId().getLatitude() == 58.348519
+                && ac.getLocationByLocationId().getLongitude() == 11.929594
                 && ac.getAppUsersByUserId().getUserName().equals("Alice")
-                && ac.getLocationByLocationId().getCity().equals("gothenburg")));
+                && ac.getLocationByLocationId().getCity().equals("uddevalla")));
 
     }
 }
