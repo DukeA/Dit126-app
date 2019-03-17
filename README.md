@@ -1,4 +1,4 @@
-# Dit126-app
+# Dit126-app Group 12
 
 ## Group members
 <table style="width:100%">
