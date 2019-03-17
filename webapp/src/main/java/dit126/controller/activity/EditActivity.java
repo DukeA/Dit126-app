@@ -68,6 +68,7 @@ public class EditActivity implements Serializable {
             try{
                 current.setTitle(title);
                 current.setType(type.name());
+                current.setDescription(description);
 
                 current.getLocationByLocationId().setLongitude(Double.parseDouble(lng));
                 current.getLocationByLocationId().setLatitude(Double.parseDouble(lat));
